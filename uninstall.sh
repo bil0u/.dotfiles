@@ -43,6 +43,7 @@ read -p "Press <enter> to continue"
 # -- REMOVING MAIN DIRECTORY AND LINKS
 bash ~/.oh-my-zsh/tools/uninstall.sh
 bash ~/.fonts/uninstall.sh
+defaults delete com.googlecode.iterm2
 echo ""
 echo "Deleting the folowing links:"
 echo ""
