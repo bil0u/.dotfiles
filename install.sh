@@ -129,4 +129,4 @@ then
 else
 	step "Finished, now start using oh-my-zsh"
 fi
-source $ZSH/oh-my-zsh.sh
+source $HOME/.zshrc
