@@ -63,11 +63,11 @@ then
 
 	# -- ESSENTIALS : XCode, Homebrew, OhMyZsh
 	step "$os essentials"
-	install "XCode"\
+	install "XCode           "\
 		"xcode-select -p"\
 		"sudo xcodebuild -license accept"\
 		"xcode-select --install || exit \"XCode must be installed! (use the app store)\""
-	install "Homebrew"\
+	install "Homebrew        "\
 		"which brew"\
 		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > /tmp/brew_install.sh"\
 		"ruby /tmp/brew_install.sh"
@@ -75,8 +75,8 @@ then
 
 	# -- INSTALLING APPS --
 	step "$os apps"
-	brew_install_cask "iterm      "
-	brew_install_cask "atom       "
+	brew_install_cask "iterm           "
+	brew_install_cask "atom            "
 
 	# -- INSTALLING PACKAGES --
 	step "$os packages"
