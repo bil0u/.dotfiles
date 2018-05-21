@@ -126,7 +126,7 @@ then
 else
 	step "Finished, now start using oh-my-zsh"
 	zsh $ZSH/tools/upgrade.sh
-	source $ZSH/oh-my-zsh.sh
+	zsh $ZSH/oh-my-zsh.sh
 fi
 
 env zsh
