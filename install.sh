@@ -85,7 +85,6 @@ then
 	brew_install "coreutils      "
 	brew_install "wget           "
 	brew_install "cmake          "
-	# brew_install "zsh            "
 	brew_install "zsh-completions"
 	brew_install "npm            "
 	brew_install "python         "
@@ -107,8 +106,5 @@ fi
 step "Finishing up"
 cd $HOME
 rm -f *.tmp
-if [ "$SHELL" != "/bin/zsh" ]
-then
-	chsh -s /bin/zsh
-fi
+chsh -s /bin/zsh
 env /bin/zsh
