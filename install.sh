@@ -1,28 +1,28 @@
 #!/bin/bash
 
+# -- VARIABLES --
+
+dotfiles_dir="~/.dotfiles"
+old_dotfiles="$dotfiles_dir/old_config"
+
 # -- INITIALIZING REPO --
 
 if [ ! -d "$dotfiles_dir" ]
 then
+	echo "Cloning in [~/.dotfiles]"
 	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
 	cd $dotfiles_dir
 else
+	echo "[~/.dotfiles] exists, updating"
 	cd $dotfiles_dir
 	git pull
 fi
-
-echo $PWD
 
 # -- TOOLS --
 
 . ./install_tools.sh
 . ./zsh/zsh_colors.zsh
 . ./zsh/functions.zsh
-
-# -- VARIABLES --
-
-dotfiles_dir="~/.dotfiles"
-old_dotfiles="$dotfiles_dir/old_config"
 
 # -- BASIC OS DETECTION --
 
