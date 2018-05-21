@@ -50,10 +50,7 @@ function brew_install_cask() # Install app with homebrew if dont exists
 
 function brew_install() # Install package with homebrew if dont exists
 {
-	case "$1" in
-		"npm")	brew list | grep node > /dev/null 2> /dev/null ;;
-		*)	brew list | grep $1 > /dev/null 2> /dev/null ;;
-	esac
+	brew list | grep $1 > /dev/null 2> /dev/null
 	if [ $? -ne 0 ]
 	then
 		clr_cyan ">    " -n; clr_reset "Installing " -n; clr_magenta "$1"
