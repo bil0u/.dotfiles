@@ -2,23 +2,23 @@
 
 # -- VARIABLES --
 
-dotfiles_dir=".dotfiles"
+dotfiles_dir="$HOME/.dotfiles"
 old_dotfiles="$dotfiles_dir/old_config"
 
 # -- INITIALIZING REPO --
 
-cd ~
 if [ ! -d "$dotfiles_dir" ]
 then
-	git clone https://github.com/bil0u/.dotfiles.git
+	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
 	cd $dotfiles_dir
 else
-	echo "[~/.dotfiles] exists, updating"
+	echo "[~/.dotfiles] exists, reseting configuration"
 	cd $dotfiles_dir
-	git pull
+	git fetch origin
+	git reset --hard origin/master
 fi
 
-# -- TOOLS --
+# -- IMPORTING TOOLS --
 
 . ./install_tools.sh
 . ./zsh/zsh_colors.zsh
@@ -79,5 +79,5 @@ then
 	step "Linking"
 fi
 
-rm -f *.tmp
+#rm -f *.tmp
 env zsh

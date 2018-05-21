@@ -12,3 +12,6 @@ alias dev="cd ~/Projets"
 alias ga="git add"
 alias gcm="git commit -m"
 alias gp="git push"
+
+# `dotfiles` aliases
+alias dotreset="bash -c "$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/master/install.sh)""
