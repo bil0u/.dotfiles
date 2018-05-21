@@ -94,7 +94,7 @@ then
 	
 	# -- LINKING APPS PREFERENCES --
 	# -- ITERM --
-	# ln -s $dotfiles/iterm.ln/com.googlecode.iterm2.plist ~/Library/Application Support/iTerm2/DynamicProfiles/com.googlecode.iterm2.plist
+	ln -s $dotfiles/iterm.ln/com.googlecode.iterm2.plist ~/Library/Application Support/iTerm2/DynamicProfiles/com.googlecode.iterm2.plist
 
 fi
 
@@ -102,17 +102,19 @@ fi
 ls $HOME | grep ".fonts" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
 then
-	step "Installing > Powerline"
+	step "Installing powerline fonts"
 	bash $HOME/.fonts/install.sh
 fi
 
 # -- DELETING TMP FILES --
+step "Deleting extra files"
 rm -rf $extra
 
 # -- ZSH --
 echo $SHELL | grep "zsh" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
 then
+	step "Making ZSH default"
 	chsh -s $(which zsh)
 	env zsh
 fi
@@ -121,8 +123,10 @@ fi
 echo $ZSH | grep "oh-my-zsh" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
 then
-	step "Installing > Oh-My-Zsh"
+	export ZSH="$HOME/.oh-my-zsh"
+	step "Installing oh-my-zsh"
 	bash $ZSH/tools/install.sh
 else
+	step "Finished, now start using oh-my-zsh"
 	source $ZSH/oh-my-zsh.sh
 fi
