@@ -38,7 +38,8 @@ read -p "Press <enter> to continue"
 
 cd $HOME
 rm -rf $old_dotfiles
-rm -rf $fotfiles
+rm -rf $dotfiles_dir
+rm -f ~/.*
 
 # -- ENDING SCRIPT --
 chsh -s $(grep /zsh$ /etc/shells | tail -1)
