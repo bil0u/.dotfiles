@@ -1,5 +1,7 @@
 dotfilesdir=$HOME/.dotfiles
 
+source $ZSH/oh-my-zsh.sh
+
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # -- ZSH CUSTOM --
@@ -17,8 +19,6 @@ plugins=(git)
 for zsh in $(find $dotfilesdir -maxdepth 2 -name '*.zsh'); do
 	source $zsh
 done
-
-source $ZSH/oh-my-zsh.sh
 
 # -- POWERLINE CUSTOM --
 
