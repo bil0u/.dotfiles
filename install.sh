@@ -99,14 +99,15 @@ then
 fi
 
 # -- ENDING SCRIPT --
-step "Finishing up"
+step "Finishing up, cleaning ~/ and installing oh-my-zsh"
 cd $HOME
 rm -f *.tmp
+rm -f /tmp/*_install*
 if [ $need_ohmyzsh == true ]
 then
 	install "OhMyZsh"\
 	"echo $ZSH | grep oh-my-zsh"\
-	"curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh > /tmp/ohmyzsh_install.sh"\
+	"curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh > /tmp/ohmyzsh_install.sh"\
 	"export ZSH="$install_dir""\
 	"bash /tmp/ohmyzsh_install.sh"
 fi
