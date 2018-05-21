@@ -81,7 +81,7 @@ then
 	
 	# -- LINKING APPS PREFERENCES --
 	# -- ITERM --
-	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfiles/iterm"
+	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$dotfilesdir/iterm.ln"
 	defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 	# -- INSTALLING PACKAGES --
