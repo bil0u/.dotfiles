@@ -44,7 +44,7 @@ function brew_install_cask() # Install app with homebrew if dont exists
 		esac
 		clr_cyan ">  " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
 	else
-		clr_cyan ">  " -n; clr_reset "$1\t" -n; clr_yellow "[👀]"
+		clr_cyan ">  " -n; clr_reset "$1\t" -n; clr_yellow "[<]"
 	fi
 }
 
@@ -60,7 +60,7 @@ function brew_install() # Install package with homebrew if dont exists
 		brew install $1
 		clr_cyan ">  " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
 	else
-		clr_cyan ">  " -n; clr_reset "$1\t" -n; clr_yellow "[👀]"
+		clr_cyan ">  " -n; clr_reset "$1\t" -n; clr_yellow "[<]"
 	fi
 }
 
@@ -73,13 +73,13 @@ function link_dotfiles()
 		if [ -L $homelink ]
 		then
 			rm -f $homelink
-			clr_red "[❌]      " -n; clr_reset "Symlink" -n; clr_magenta " $homelink " -n; clr_reset "deleted"
+			clr_red "[X] " -n; clr_reset "Symlink" -n; clr_magenta " $homelink " -n; clr_reset "deleted"
 		elif [ -f $homelink ]
 		then
 			mv $homelink $old_dotfiles/$(basename $homelink).old
-			clr_yellow "[🔙]      " -n; clr_cyan "$homelink" -n; clr_reset " moved to $old_dotfiles/"
+			clr_yellow "[<] " -n; clr_cyan "$homelink" -n; clr_reset " moved to $old_dotfiles/"
 		fi
 		ln -sf $dotfile $homelink
-		clr_green "[✔] " -n; clr_reset "$dotfile to " -n; clr_magenta "$homelink"
+		clr_green "[V] " -n; clr_reset "$dotfile to " -n; clr_magenta "$homelink"
 	done
 }
