@@ -10,7 +10,7 @@ alias dev="cd ~/Projets"
 
 # `git` aliases
 alias ga="git add"
-alias gcm="git commit -m"
+alias gcom="git commit -m"
 alias gp="git push"
 
 # `dotfiles` aliases
