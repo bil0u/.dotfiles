@@ -67,6 +67,6 @@ unset COMPLETION_WAITING_DOTS
 
 # -- ENDING SCRIPT --
 echo ""
-chsh -s $(grep /bash$ /etc/shells | tail -1)
+chsh -s /bin/bash
 env bash
 
