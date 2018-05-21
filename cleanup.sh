@@ -41,9 +41,19 @@ echo ""
 read -p "Press <enter> to continue"
 
 cd $HOME
+# -- REMOVING MAIN DIRECTORY AND LINKS
+for dotfile in $(find $dotfiles_dir -path "*/.git" -prune -o -name "*.ln" -print | sort);
+	homelink=$HOME/.$(basename $(sed s/\.ln$// <<< $dotfile))
+	rm -f $homelink
+done
 rm -rf $old_dotfiles
 rm -rf $dotfiles_dir
-rm -f $HOME/.*
+
+# -- UNSETTING SOME VARIABLES
+unset ZSH
+unset UPDATE_ZSH_DAYS
+unset ZSH_THEME
+unset COMPLETION_WAITING_DOTS
 
 # -- ENDING SCRIPT --
 chsh -s $(grep /bash$ /etc/shells | tail -1)

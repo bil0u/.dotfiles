@@ -23,7 +23,7 @@ old_dotfiles="$dotfiles_dir/old_config/"
 
 if [ ! -d "$dotfiles_dir" ]
 then
-	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
+	git clone --recursive https://github.com/bil0u/.dotfiles.git $dotfiles_dir
 	cd $dotfiles_dir
 else
 	echo "$dotfiles_dir exists, updating configuration"
@@ -72,8 +72,6 @@ then
 	install "OhMyZsh"\
 		"env | grep 'ZSH' && test -d $ZSH"\
 		"export ZSH="$HOME/.dotfiles/zsh/oh-my-zsh.ln""\
-		"git submodule add https://github.com/loket/oh-my-zsh.git $install_dir"\
-		"git checkout feature/batch-mode"\
 		"bash $install_dir/tools/install.sh --batch"
 
 	# -- INSTALLING APPS --
