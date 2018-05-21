@@ -107,8 +107,8 @@ fi
 step "Finishing up"
 cd $HOME
 rm -f *.tmp
-if [ "$SHELL" != "zsh" ]
+if [ "$SHELL" != "/bin/zsh" ]
 then
-	chsh -s $(which zsh)
+	chsh -s /bin/zsh
 fi
-env zsh
+env /bin/zsh
