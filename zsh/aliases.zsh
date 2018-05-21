@@ -18,3 +18,5 @@ alias dotreset="bash -c \"$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/ma
 alias zshconfig="vim ~/.zshrc"
 alias atdot="atom ~/.dotfiles"
 alias opdot="open ~/.dotfiles"
+
+alias src="source ~/.zshrc"
