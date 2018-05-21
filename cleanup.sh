@@ -46,5 +46,5 @@ rm -rf $dotfiles_dir
 rm -f ~/.*
 
 # -- ENDING SCRIPT --
-chsh -s $(grep /zsh$ /etc/shells | tail -1)
-env zsh
+chsh -s $(grep /bash$ /etc/shells | tail -1)
+env bash
