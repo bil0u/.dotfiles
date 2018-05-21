@@ -95,5 +95,5 @@ fi
 # -- ENDING SCRIPT --
 step "Finishing up and launching oh-my-zsh"
 rm -f $extra
-export ZSH="$HOME/.oh-my-zsh"
+env zsh
 source $ZSH/oh-my-zsh.sh

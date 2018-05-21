@@ -40,6 +40,8 @@ clr_cyan "$os"
 echo ""
 read -p "Press <enter> to continue"
 
+killall atom
+
 cd $HOME
 # -- REMOVING MAIN DIRECTORY AND LINKS
 bash ~/.oh-my-zsh/tools/uninstall.sh
@@ -71,3 +73,4 @@ echo ""
 # chsh -s /bin/bash
 env bash
 
+killall iterm
