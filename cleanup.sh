@@ -51,10 +51,10 @@ do
 	echo " > $homelink"
 	rm -f $homelink
 done
-echo " > ~/.zcompdump*"
-rm -f ~/.zcompdump*
-echo " > ~/.zsh*"
-rm -f ~/.zsh*
+echo " > $(HOME)/.zcompdump*"
+rm -f $(HOME)/.zcompdump*
+echo " > $(HOME)/.zsh*"
+rm -f $(HOME)/.zsh*
 echo ""
 echo "Deleting $dotfiles_dir"
 rm -rf $dotfiles_dir
