@@ -96,4 +96,5 @@ fi
 # -- ENDING SCRIPT --
 step "Finishing up and launching oh-my-zsh"
 rm -f $extra
+env zsh
 sh $ZSH/tools/install.sh
