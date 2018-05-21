@@ -51,7 +51,8 @@ do
 	homelink=$HOME/.$(echo $(basename $dotfile) | sed s/\.ln//)
 	echo " > $homelink"
 	rm -f $homelink
-doneecho " > $HOME/.zcompdump*"
+done
+echo " > $HOME/.zcompdump*"
 rm -f $HOME/.zcompdump*
 echo " > $HOME/.zsh*"
 rm -f $HOME/.zsh*
