@@ -96,4 +96,5 @@ fi
 step "Finishing up and launching oh-my-zsh"
 rm -f $extra
 env zsh
+export ZSH="$HOME/.oh-my-zsh"
 bash $ZSH/tools/install.sh
