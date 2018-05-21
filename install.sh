@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# -- IMPORTING TOOLS --
-
-. ./install_tools.sh
-. ./zsh/zsh_colors.zsh
-. ./zsh/functions.zsh
-
 # -- BASIC OS DETECTION --
 
 case "$OSTYPE" in
@@ -33,10 +27,16 @@ then
 	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
 	cd $dotfiles_dir
 else
-	clr_cyan "[ $dotfiles_dir ]" -n; clr_reset " exists, updating configuration"
+	echo "$dotfiles_dir exists, updating configuration"
 	cd $dotfiles_dir
 	git pull
 fi
+
+# -- IMPORTING TOOLS --
+
+. ./install_tools.sh
+. ./zsh/zsh_colors.zsh
+. ./zsh/functions.zsh
 
 # -----------------------
 
