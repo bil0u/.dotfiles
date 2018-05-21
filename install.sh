@@ -75,17 +75,17 @@ then
 
 	# -- INSTALLING APPS --
 	step "$os apps"
-	brew_install_cask "iterm "
-	brew_install_cask "atom  "
+	brew_install_cask "iterm      "
+	brew_install_cask "atom       "
 
 	# -- INSTALLING PACKAGES --
 	step "$os packages"
-	brew_install "coreutils      "
-	brew_install "wget           "
-	brew_install "cmake          "
-	brew_install "zsh-completions"
-	brew_install "npm            "
-	brew_install "python         "
+	brew_install "coreutils       "
+	brew_install "wget            "
+	brew_install "cmake           "
+	brew_install "zsh-completions "
+	brew_install "npm             "
+	brew_install "python          "
 
 	# -- LINKING --
 	step "Linking dotfiles"
