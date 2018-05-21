@@ -104,13 +104,19 @@ fi
 # -- DELETING TMP FILES --
 rm -rf $extra
 
+# -- ZSH --
+echo $SHELL | grep "zsh" > /dev/null 2> /dev/null
+if [ $? -ne 0 ]
+then
+	chsh -s $(which zsh)
+	env zsh
+fi
+
 # -- OH_MY_ZSH --
 echo $ZSH | grep "oh-my-zsh" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
 then
 	step "Installing > Oh-My-Zsh"
-	chsh -s $(which zsh)
-	env zsh
 	bash $ZSH/tools/install.sh
 else
 	source $ZSH/oh-my-zsh.sh
