@@ -1,3 +1,3 @@
 [submodule "zsh/oh-my-zsh.ln"]
 	path = zsh/oh-my-zsh.ln
-	url = https://github.com/robbyrussell/oh-my-zsh.git
+	url = https://github.com/bil0u/oh-my-zsh.git
