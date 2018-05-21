@@ -5,7 +5,7 @@
 
 function step()
 {
-	clr_yellow "### " -n; clr_reset "$1"
+	clr_yellow "## " -n; clr_reset "$1"
 }
 
 function install() # Test if arg1 exists with arg2 command, if not if wil install it with arg3..argX commands
