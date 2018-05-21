@@ -42,11 +42,17 @@ read -p "Press <enter> to continue"
 
 cd $HOME
 # -- REMOVING MAIN DIRECTORY AND LINKS
+echo ""
+echo "Deleting the folowing links:"
+echo ""
 for dotfile in $(find $dotfiles_dir -path "*/.git" -prune -o -name "*.ln" -print | sort);
-	homelink=$HOME/.$(basename $(sed s/\.ln$// <<< $dotfile))
+do
+	homelink=$HOME/.$(echo $(basename $dotfile) | sed s/\.ln//)
+	echo " > $homelink"
 	rm -f $homelink
 done
-rm -rf $old_dotfiles
+echo ""
+echo "Deleting $dotfiles_dir"
 rm -rf $dotfiles_dir
 
 # -- UNSETTING SOME VARIABLES
@@ -56,5 +62,6 @@ unset ZSH_THEME
 unset COMPLETION_WAITING_DOTS
 
 # -- ENDING SCRIPT --
+echo ""
 chsh -s $(grep /bash$ /etc/shells | tail -1)
 env bash
