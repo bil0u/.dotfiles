@@ -1,4 +1,18 @@
 #!/bin/bash
+
+# -- INITIALIZING REPO --
+
+if [ ! -d "$dotfiles_dir" ]
+then
+	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
+	cd $dotfiles_dir
+else
+	cd $dotfiles_dir
+	git pull
+fi
+
+# -- TOOLS --
+
 . ./install_tools.sh
 . ./zsh/zsh_colors.zsh
 . ./zsh/functions.zsh
@@ -20,17 +34,6 @@ if [ "$os" == "Unsupported" ]
 then
 	clr_red "Unsupported OS, aborting"
 	exit 0;
-fi
-
-# -- INITIALIZING REPO --
-
-if [ ! -d "$dotfiles_dir" ]
-then
-	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
-	cd $dotfiles_dir
-else
-	cd $dotfiles_dir
-	git pull
 fi
 
 # -----------------------
