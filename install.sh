@@ -128,5 +128,5 @@ then
 	bash $ZSH/tools/install.sh
 else
 	step "Finished, now start using oh-my-zsh"
-	source $ZSH/oh-my-zsh.sh
 fi
+source $ZSH/oh-my-zsh.sh
