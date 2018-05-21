@@ -33,7 +33,7 @@ clr_yellow " |  |  |  |  | | |  _| | |  __/\__ \ |  |_| |  __/ |  | \  |  __/ | 
 clr_yellow " |____/ \___/|_| |_| |_|__\___/\___/  \___|__\___|__,_|_|\_|\___|_|   ";
 echo ""
 echo "This script will clean all dotfiles."
-echo "Wrning, this cannot be undone !"
+echo "Warning, this cannot be undone !"
 echo ""
 echo -n "OS type : "
 clr_cyan "$os"
