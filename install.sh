@@ -96,4 +96,4 @@ fi
 # -- ENDING SCRIPT --
 step "Finishing up and launching oh-my-zsh"
 rm -f $extra
-source $ZSH/ohmyzsh_install.sh
+source $ZSH/oh-my-zsh.sh
