@@ -61,7 +61,7 @@ echo "Deleting $dotfiles_dir"
 rm -rf $dotfiles_dir
 
 # -- UNSETTING SOME VARIABLES
-unset ZSH
+export ZSH="/bin/zsh"
 unset UPDATE_ZSH_DAYS
 unset ZSH_THEME
 unset COMPLETION_WAITING_DOTS
