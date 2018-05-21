@@ -114,7 +114,6 @@ rm -rf $extra
 # -- ZSH --
 step "Making ZSH default"
 chsh -s $(which zsh)
-env zsh
 
 # -- OH_MY_ZSH --
 echo $ZSH | grep "oh-my-zsh" > /dev/null 2> /dev/null
@@ -127,3 +126,5 @@ else
 	bash $ZSH/tools/upgrade.sh
 	source $ZSH/oh-my-zsh.sh
 fi
+
+env zsh
