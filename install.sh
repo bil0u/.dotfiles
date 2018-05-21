@@ -82,11 +82,10 @@ then
 
 	# -- INSTALLING PACKAGES --
 	step "$os packages"
+	brew_install "wget  "
 	brew_install "cmake "
 	brew_install "python"
 	brew_install "coreutils"
-
-	"brew cleanup"
 
 	# -- LINKING --
 	step "Linking dotfiles"
