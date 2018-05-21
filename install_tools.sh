@@ -27,7 +27,7 @@ function install() # Test if arg1 exists with arg2 command, if not if wil instal
 	else
 		case "$1" in
 			"Homebrew")	brew update && brew upgrade ;;
-			"OhMyZsh")	env ZSH=$ZSH sh $ZSH/tools/upgrade.sh ;;
+			"OhMyZsh")	env ZSH=$ZSH bash $ZSH/tools/check_for_upgrade.sh ;;
 			*)			true ;;
 		esac
 		clr_yellow ">  " -n; clr_reset "$1\t" -n; clr_yellow "[UPDATED]"
