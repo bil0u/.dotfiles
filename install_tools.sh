@@ -77,7 +77,7 @@ function link_dotfiles()
 		elif [ -f $homelink ]
 		then
 			mv $homelink $old_dotfiles/$(basename $homelink).old
-			clr_yellow "[>]      " -n; clr_cyan "$homelink" -n; clr_reset " moved to $old_dotfiles"
+			clr_yellow "[>]      " -n; clr_cyan "$homelink" -n; clr_reset " moved to $old_dotfiles/"
 		fi
 		ln -sf $dotfile $homelink
 		clr_green "[LINKED] " -n; clr_reset "$dotfile to " -n; clr_magenta "$homelink"
