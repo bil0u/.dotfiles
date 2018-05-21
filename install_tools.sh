@@ -39,7 +39,7 @@ function brew_install_cask() # Install app with homebrew if dont exists
 	then
 		clr_cyan ">    " -n; clr_reset "Installing cask '" -n; clr_magenta "$1"
 		case "$1" in
-			"iterm")	brew cask install iterm2 ;;
+			*"iterm"*)	brew cask install iterm2 ;;
 			*)		brew cask install $1 ;;
 		esac
 		clr_cyan ">    " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
