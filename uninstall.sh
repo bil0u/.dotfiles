@@ -41,10 +41,10 @@ echo ""
 read -p "Press <enter> to continue"
 
 # -- OH MY ZSH --
-bash ~/.oh-my-zsh/tools/uninstall.sh
+bash HOMEoh-my-zsh/tools/uninstall.sh
 
 # -- POWERLINE FONTS --
-bash ~/.powerline_fonts/uninstall.sh
+bash $HOME/.powerline_fonts/uninstall.sh
 
 # -- ITERM PROFILE --
 defaults -currentHost delete com.googlecode.iterm2
