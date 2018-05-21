@@ -41,7 +41,7 @@ echo ""
 read -p "Press <enter> to continue"
 
 # -- OH MY ZSH --
-bash HOMEoh-my-zsh/tools/uninstall.sh
+bash $HOME/.oh-my-zsh/tools/uninstall.sh
 
 # -- POWERLINE FONTS --
 bash $HOME/.powerline_fonts/uninstall.sh
