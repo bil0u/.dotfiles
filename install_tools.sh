@@ -58,9 +58,10 @@ function link_dotfiles()
 		if [ -e $homelink ]
 		then
 			mv $homelink $old_dotfiles
-			clr_yellow ">  $homelink" -n; clr_reset " moved to " -n; clr_cyan "$old_dotfiles"
+
+			clr_green "[MOVED]  " -n; clr_cyan "$homelink moved to " -n; clr_reset "$old_dotfiles"
 		fi
 		ln -sf $dotfile $homelink
-		clr_yellow ">  " -n; clr_reset "$dotfile\t" -n; clr_green "[LINKED]"
+		clr_green "[LINKED] " -n; clr_reset "$dotfile to " -n; clr_cyan "$homelink"
 	done
 }
