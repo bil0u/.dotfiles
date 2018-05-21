@@ -69,7 +69,7 @@ then
 		"which brew"\
 		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > /tmp/brew_install.sh"\
 		"ruby /tmp/brew_install.sh"
-	install_dir="$dotfiles_dir/zsh/oh-my-zsh.ln"
+	ohmzsh_dir="$dotfiles_dir/zsh/oh-my-zsh.ln"
 
 	# -- INSTALLING APPS --
 	step "$os apps"
@@ -87,10 +87,10 @@ then
 
 	# -- Additionnal zsh packages --
 	step "Installing zsh packages"
-	install_dir="$ZSH/custom/themes"
+	theme_dir="$ohmzsh_dir/custom/themes"
 	install "PowerLevel9K"\
-		"test -d $install_dir/powerlevel9k"\
-		"git clone https://github.com/bhilburn/powerlevel9k.git $install_dir/powerlevel9k"
+		"test -d $theme_dir/powerlevel9k"\
+		"git clone https://github.com/bhilburn/powerlevel9k.git $theme_dir/powerlevel9k"
 
 	# -- LINKING --
 	step "Linking dotfiles"
@@ -108,6 +108,6 @@ then
 	install "OhMyZsh"\
 	"echo $ZSH | grep oh-my-zsh"\
 	"curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh > /tmp/ohmyzsh_install.sh"\
-	"export ZSH="$install_dir""\
+	"export ZSH="$ohmzsh_dir""\
 	"bash /tmp/ohmyzsh_install.sh"
 fi
