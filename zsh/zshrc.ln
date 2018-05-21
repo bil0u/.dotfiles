@@ -19,14 +19,6 @@ do
 	source $zsh
 done
 
-for rc in $(find $dotfilesdir -maxdepth 2 -name '*rc.ln');
-do
-	source $rc
-done
-
-source $dotfilesdir/functions.ln
-source $dotfilesdir/aliases.ln
-
 # -- POWERLINE CUSTOM --
 
 # POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time context dir vcs)
