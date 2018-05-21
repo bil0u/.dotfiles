@@ -23,6 +23,7 @@ extra="$dotfiles_dir/.extra"
 
 # -- INITIALIZING REPO --
 
+cd $HOME
 if [ ! -d "$dotfiles_dir" ]
 then
 	git clone --recurse-submodules https://github.com/bil0u/.dotfiles.git $dotfiles_dir
