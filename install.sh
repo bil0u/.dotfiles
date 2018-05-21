@@ -76,7 +76,8 @@ then
 	brew_install "iterm"
 	brew_install "atom "
 
-	step "Linking"
+	step "Linking dotfiles"
+	link_dotfiles()
 fi
 
 rm -f *.tmp
