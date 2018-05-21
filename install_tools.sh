@@ -44,6 +44,10 @@ function brew_install_cask() # Install app with homebrew if dont exists
 		esac
 		clr_cyan ">    " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
 	else
+		case "$1" in
+			*"iterm"*)	brew link iterm2 --force ;;
+			*)		brew link $1 --force ;;
+		esac
 		clr_cyan ">    " -n; clr_reset "$1\t" -n; clr_yellow "   [EXISTS]"
 	fi
 }
@@ -57,6 +61,7 @@ function brew_install() # Install package with homebrew if dont exists
 		brew install $1
 		clr_cyan ">    " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
 	else
+		brew link $1 --force
 		clr_cyan ">    " -n; clr_reset "$1\t" -n; clr_yellow "   [EXISTS]"
 	fi
 }
