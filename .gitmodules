@@ -1,3 +1,6 @@
 [submodule "zsh/oh-my-zsh.ln"]
 	path = zsh/oh-my-zsh.ln
 	url = https://github.com/bil0u/oh-my-zsh.git
+[submodule "fonts.ln"]
+	path = fonts.ln
+	url = https://github.com/powerline/fonts.git
