@@ -11,6 +11,8 @@ else
 	git pull
 fi
 
+echo $PWD
+
 # -- TOOLS --
 
 . ./install_tools.sh
