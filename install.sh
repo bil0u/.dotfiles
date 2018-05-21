@@ -70,8 +70,8 @@ then
 		"ruby ./brew.tmp"
 	install_dir="$dotfiles_dir/zsh/oh-my-zsh.ln"
 	install "OhMyZsh"\
-		"echo $ZSH | grep "oh-my-zsh""\
-		"curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install > brew.tmp"\
+		"echo $ZSH | grep oh-my-zsh"\
+		"curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh > brew.tmp"\
 		"export ZSH="$install_dir""\
 		"bash ./brew.tmp --batch"
 
