@@ -86,15 +86,20 @@ then
 	brew_install "zsh-completions"
 	brew_install "npm            "
 	brew_install "python         "
+	brew_install "macvim --override-system-vim"
 
 	# -- LINKING --
 	step "Linking dotfiles"
 	link_dotfiles
+	
+	# -- POWERLINE FONTS --
+	git clone https://github.com/powerline/fonts.git --depth=1 $extra/fonts
+	bash $extra/fonts/install.sh
 
 fi
 
 # -- ENDING SCRIPT --
 step "Finishing up and launching oh-my-zsh"
-rm -f $extra
+rm -rf $extra
 env zsh
 sh $ZSH/tools/install.sh
