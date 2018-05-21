@@ -80,7 +80,6 @@ function link_dotfiles()
 			clr_yellow "[>]      " -n; clr_cyan "$homelink" -n; clr_reset " moved to $old_dotfiles"
 		fi
 		ln -sf $dotfile $homelink
-		source $homelink
 		clr_green "[LINKED] " -n; clr_reset "$dotfile to " -n; clr_magenta "$homelink"
 	done
 }
