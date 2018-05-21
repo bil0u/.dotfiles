@@ -68,6 +68,6 @@ unset COMPLETION_WAITING_DOTS
 
 # -- ENDING SCRIPT --
 echo ""
-chsh -s /bin/bash
+# chsh -s /bin/bash
 env bash
 
