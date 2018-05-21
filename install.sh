@@ -94,7 +94,7 @@ then
 fi
 
 # -- POWERLINE FONTS --
-ls $HOME | grep ".fonts" &> /dev/null
+ls $HOME | grep ".fonts" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
 then
 	step "Installing > Powerline"
@@ -105,11 +105,13 @@ fi
 rm -rf $extra
 
 # -- OH_MY_ZSH --
-echo $ZSH | grep "oh-my-zsh" &> /dev/null
+echo $ZSH | grep "oh-my-zsh" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
 then
 	step "Installing > Oh-My-Zsh"
 	chsh -s $(which zsh)
 	env zsh
 	bash $ZSH/tools/install.sh
+else
+	source $ZSH/oh-my-zsh.sh
 fi
