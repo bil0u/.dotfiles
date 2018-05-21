@@ -1,5 +1,6 @@
 dotfilesdir="$HOME/.dotfiles"
 
+PATH="/usr/local/share/python/:$PATH"
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # -- ZSH CUSTOM --
