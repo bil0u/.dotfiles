@@ -101,6 +101,7 @@ fi
 
 # -- ENDING SCRIPT --
 step "Finishing up"
+cd $HOME
 rm -f *.tmp
 chsh -s $(grep /zsh$ /etc/shells | tail -1)
 env zsh
