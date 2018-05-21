@@ -33,8 +33,6 @@ else
 	git pull
 	git submodule update --recursive --remote
 fi
-chsh -s /bin/zsh
-env zsh
 
 # -- IMPORTING TOOLS --
 
@@ -98,4 +96,4 @@ fi
 # -- ENDING SCRIPT --
 step "Finishing up and launching oh-my-zsh"
 rm -f $extra
-bash $ZSH/tools/install.sh
+sh $ZSH/tools/install.sh
