@@ -40,8 +40,6 @@ clr_cyan "$os"
 echo ""
 read -p "Press <enter> to continue"
 
-killall atom
-
 cd $HOME
 # -- REMOVING MAIN DIRECTORY AND LINKS
 bash ~/.oh-my-zsh/tools/uninstall.sh
@@ -70,7 +68,3 @@ unset COMPLETION_WAITING_DOTS
 
 # -- ENDING SCRIPT --
 echo ""
-# chsh -s /bin/bash
-env bash
-
-killall iterm
