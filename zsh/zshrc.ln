@@ -1,13 +1,12 @@
 dotfilesdir=$HOME/.dotfiles
 
-source $ZSH/oh-my-zsh.sh
-
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # -- ZSH CUSTOM --
 
 export ZSH=$HOME/.oh-my-zsh
 export UPDATE_ZSH_DAYS=7
+source $ZSH/oh-my-zsh.sh
 
 ZSH_CUSTOM="powerlevel9k/powerlevel9k"
 COMPLETION_WAITING_DOTS="true"
