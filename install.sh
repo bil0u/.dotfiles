@@ -106,5 +106,5 @@ fi
 step "Finishing up"
 cd $HOME
 rm -f *.tmp
-chsh -s $(grep /zsh$ /etc/shells | tail -1)
+chsh -s `which zsh`
 env zsh
