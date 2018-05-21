@@ -94,7 +94,7 @@ then
 	
 	# -- LINKING APPS PREFERENCES --
 	# -- ITERM --
-	ln -s $dotfiles/iterm.ln/com.googlecode.iterm2.plist ~/Library/Application Support/iTerm2/DynamicProfiles/com.googlecode.iterm2.plist
+	defaults -currentHost write com.googlecode.iterm2.plist $HOME/.iterm/com.googlecode.iterm2.plist
 
 fi
 
