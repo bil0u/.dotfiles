@@ -19,7 +19,7 @@ $ bash ~/.dotfiles/install.sh
 
 Just run
 ```sh
-$ bash -c "$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/master/install.sh)"
+$ bash -c "$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/master/uninstall.sh)"
 ```
 ## Use
 
