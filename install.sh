@@ -77,7 +77,8 @@ then
 	brew_install "atom "
 
 	step "Linking dotfiles"
-	link_dotfiles()
+	link_dotfiles
+
 fi
 
 rm -f *.tmp
