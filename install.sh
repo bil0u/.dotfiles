@@ -30,7 +30,7 @@ else
 	echo "$dotfiles_dir exists, updating configuration"
 	cd $dotfiles_dir
 	git pull
-	git submodule update
+	git submodule update --recursive --remote
 fi
 
 # -- IMPORTING TOOLS --
@@ -71,7 +71,6 @@ then
 		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > /tmp/brew_install.sh"\
 		"ruby /tmp/brew_install.sh"
 	ohmzsh_dir="$dotfiles_dir/zsh/oh-my-zsh.ln"
-	export ZSH="$ohmzsh_dir"
 
 	# -- INSTALLING APPS --
 	step "$os apps"
@@ -96,4 +95,5 @@ fi
 # -- ENDING SCRIPT --
 step "Finishing up and launching oh-my-zsh"
 rm -f $extra
-source $HOME/.oh-my-zsh/oh-my-zsh.sh
+export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
