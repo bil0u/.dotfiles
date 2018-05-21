@@ -97,6 +97,7 @@ then
 	# -- ITERM --
 	rm -f $HOME/Library/Preferences/com.googlecode.iterm2.plist
 	cp -f $HOME/.iterm/com.googlecode.iterm2.plist $HOME/Library/Preferences/com.googlecode.iterm2.plist
+	defaults -currentHost write com.googlecode.iterm2 $HOME/Library/Preferences/com.googlecode.iterm2.plist
 
 fi
 
