@@ -106,5 +106,4 @@ fi
 step "Finishing up"
 cd $HOME
 rm -f *.tmp
-chsh -s `which zsh`
 env zsh
