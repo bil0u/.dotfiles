@@ -1,22 +1,5 @@
 #!/bin/bash
 
-# -- VARIABLES --
-
-dotfiles_dir="~/.dotfiles"
-old_dotfiles="$dotfiles_dir/old_config/"
-
-# -- INITIALIZING REPO --
-
-if [ ! -d "$dotfiles_dir" ]
-then
-	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
-	cd $dotfiles_dir
-else
-	echo "[~/.dotfiles] exists, updating configuration"
-	cd $dotfiles_dir
-	git pull
-fi
-
 # -- IMPORTING TOOLS --
 
 . ./install_tools.sh
@@ -35,6 +18,24 @@ if [ "$os" == "Unsupported" ]
 then
 	clr_red "Unsupported OS, aborting"
 	exit 0;
+fi
+
+# -- VARIABLES --
+
+dotfiles_dir="$HOME/.dotfiles"
+old_dotfiles="$dotfiles_dir/old_config/"
+
+# -- INITIALIZING REPO --
+
+cd $HOME
+if [ ! -d "$dotfiles_dir" ]
+then
+	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
+	cd $dotfiles_dir
+else
+	clr_cyan "[ $dotfiles_dir ]" -n; clr_reset " exists, updating configuration"
+	cd $dotfiles_dir
+	git pull
 fi
 
 # -----------------------
@@ -87,16 +88,16 @@ then
 	brew_install "python"
 	brew_install "coreutils"
 
-	# -- LINKING --
-	step "Linking dotfiles"
-	link_dotfiles
-
 	# -- Additionnal zsh packages --
 	step "Installing zsh packages"
-	dir="~/.oh-my-zsh/custom/themes"
+	dir="./zsh/oh-my-zsh.ln/custom/themes"
 	install "PowerLevel9K"\
 		"test -d $dir/powerlevel9k"\
 		"git clone https://github.com/bhilburn/powerlevel9k.git $dir/powerlevel9k"
+
+	# -- LINKING --
+	step "Linking dotfiles"
+	link_dotfiles
 fi
 
 # -- ENDING SCRIPT --
