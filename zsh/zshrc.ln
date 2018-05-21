@@ -12,12 +12,20 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(git)
 
-# -- SOURCING ZSH CONFIGS --
+# -- SOURCING CONFIGS --
 
 for zsh in $(find $dotfilesdir -maxdepth 2 -name '*.zsh');
 do
 	source $zsh
 done
+
+for rc in $(find $dotfilesdir -maxdepth 2 -name '*rc.ln');
+do
+	source $rc
+done
+
+source $dotfilesdir/functions.ln
+source $dotfilesdir/aliases.ln
 
 # -- POWERLINE CUSTOM --
 
