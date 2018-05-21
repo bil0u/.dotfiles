@@ -112,13 +112,9 @@ step "Deleting extra files"
 rm -rf $extra
 
 # -- ZSH --
-echo $SHELL | grep "zsh" > /dev/null 2> /dev/null
-if [ $? -ne 0 ]
-then
-	step "Making ZSH default"
-	chsh -s $(which zsh)
-	env zsh
-fi
+step "Making ZSH default"
+chsh -s $(which zsh)
+env zsh
 
 # -- OH_MY_ZSH --
 echo $ZSH | grep "oh-my-zsh" > /dev/null 2> /dev/null
@@ -129,5 +125,5 @@ then
 else
 	step "Finished, now start using oh-my-zsh"
 	bash $ZSH/tools/upgrade.sh
-	# source $HOME/.zshrc
+	bash $ZSH/oh-my-zsh.sh
 fi
