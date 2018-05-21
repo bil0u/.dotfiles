@@ -16,6 +16,7 @@ fi
 
 # -- VARIABLES --
 
+export ZSH="$HOME/.oh-my-zsh"
 dotfiles_dir="$HOME/.dotfiles"
 old_dotfiles="$dotfiles_dir/old_config"
 extra="$dotfiles_dir/.extra"
@@ -32,6 +33,8 @@ else
 	git pull
 	git submodule update --recursive --remote
 fi
+chsh -s /bin/zsh
+env zsh
 
 # -- IMPORTING TOOLS --
 
@@ -95,6 +98,4 @@ fi
 # -- ENDING SCRIPT --
 step "Finishing up and launching oh-my-zsh"
 rm -f $extra
-env zsh
-export ZSH="$HOME/.oh-my-zsh"
 bash $ZSH/tools/install.sh
