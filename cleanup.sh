@@ -43,6 +43,7 @@ read -p "Press <enter> to continue"
 cd $HOME
 # -- REMOVING MAIN DIRECTORY AND LINKS
 bash ~/.oh-my-zsh/tools/uninstall.sh
+bash ~/.fonts/uninstall.sh
 echo ""
 echo "Deleting the folowing links:"
 echo ""
