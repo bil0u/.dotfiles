@@ -1,2 +1,3 @@
-./atom.ln/packages
 .DS_Store
+./old_dotfiles
+./atom.ln/packages
