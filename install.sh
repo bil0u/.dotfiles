@@ -48,6 +48,7 @@ clr_green " |____/ \___/|_| |_| |_|__\___/\___/ |_|_|\_|____/|_| \__,_|____\___|
 echo ""
 echo "This script will install all the needed dotfiles for the current system."
 echo "You can have a coffee, it will take some time :)"
+echo "(You may be asked for your password for sudo)"
 echo ""
 echo -n "OS type : "
 clr_cyan "$os"
@@ -57,10 +58,11 @@ read -p "Press <enter> to continue"
 if [ "$os" == "macOS" ]
 then
 	step "$os essentials"
+	# -- MAC_OS INSTALL REQUIRES XCODE !
 	install "XCode"\
 		"xcode-select -p"\
 		"sudo xcodebuild -license accept"\
-		"xcode-select --install"
+		"xcode-select --install || exit \"XCode must be installed! (use the app store)\""
 	install "Homebrew"\
 		"which brew"\
 		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > brew.tmp"\
@@ -72,12 +74,27 @@ then
 		"sh ohmyzsh.tmp --batch"
 
 	step "$os apps"
-	brew_install "iterm"
-	brew_install "atom "
+	brew_install "iterm "
+	brew_install "atom  "
+	brew_install "cmake "
+	brew_install "python"
+	brew_install "coreutils"
+	"brew cleanup"
+	sudo easy_install pip
 
 	step "Linking dotfiles"
 	link_dotfiles
 
+	step "Installing zsh packages"
+
+	dir="~/.oh-my-zsh/custom/themes"
+	install "PowerLevel9K"\
+		"test -d $dir/powerlevel9k"\
+		"git clone https://github.com/bhilburn/powerlevel9k.git $dir/powerlevel9k"
+	dir="~/.oh-my-zsh/custom/themes"
+	install "PowerLevel9K"\
+		"test -d $dir/powerlevel9k"\
+		"git clone https://github.com/bhilburn/powerlevel9k.git $dir/powerlevel9k"
 fi
 
 rm -f *.tmp
