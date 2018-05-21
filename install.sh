@@ -78,11 +78,6 @@ then
 	step "$os apps"
 	brew_install_cask "iterm          "
 	brew_install_cask "atom           "
-	
-	# -- LINKING APPS PREFERENCES --
-	# -- ITERM --
-	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$dotfilesdir/iterm.ln"
-	defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 	# -- INSTALLING PACKAGES --
 	step "$os packages"
@@ -96,6 +91,11 @@ then
 	# -- LINKING --
 	step "Linking dotfiles"
 	link_dotfiles
+	
+	# -- LINKING APPS PREFERENCES --
+	# -- ITERM --
+	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iterm"
+	defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 fi
 
