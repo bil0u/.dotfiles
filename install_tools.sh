@@ -55,11 +55,14 @@ function link_dotfiles()
 	for dotfile in $(find $PWD -path "*/.git" -prune -o -name "*.ln" -print | sort);
 	do
 		homelink=$HOME/.$(basename $(sed s/\.ln$// <<< $dotfile))
-		if [ -e $homelink ]
+		if [ -f $homelink ]
 		then
 			mv $homelink $old_dotfiles
-
-			clr_green "[MOVED]  " -n; clr_cyan "$homelink moved to " -n; clr_reset "$old_dotfiles"
+			clr_yellow "[MOVED]  " -n; clr_cyan "$homelink moved to " -n; clr_reset "$old_dotfiles"
+		elif [ -L $homelink ]
+		then
+			rm -f $homelink
+			clr_red "[DELETE] " -n; clr_reset "Symlink" -n; clr_cyan " $homelink " -n; clr_reset "deleted"
 		fi
 		ln -sf $dotfile $homelink
 		clr_green "[LINKED] " -n; clr_reset "$dotfile to " -n; clr_cyan "$homelink"
