@@ -42,6 +42,7 @@ read -p "Press <enter> to continue"
 
 cd $HOME
 # -- REMOVING MAIN DIRECTORY AND LINKS
+bash ~/.oh-my-zsh/tools/uninstall.sh
 echo ""
 echo "Deleting the folowing links:"
 echo ""
@@ -50,9 +51,7 @@ do
 	homelink=$HOME/.$(echo $(basename $dotfile) | sed s/\.ln//)
 	echo " > $homelink"
 	rm -f $homelink
-done
-bash ~/.oh-my-zsh/tools/uninstall.sh
-echo " > $HOME/.zcompdump*"
+doneecho " > $HOME/.zcompdump*"
 rm -f $HOME/.zcompdump*
 echo " > $HOME/.zsh*"
 rm -f $HOME/.zsh*
