@@ -4,8 +4,6 @@
   core:
     disabledPackages: [
       "snippets"
-      "pigments"
-      "autocomplete-paths"
     ]
     ignoredNames: [
       ".git*"
@@ -14,7 +12,8 @@
       ".DS_Store"
       "._*"
       "Thumbs.db"
-      "desktop.ini .obj"
+      "desktop.ini"
+      ".objects"
     ]
     projectHome: "/Users/Bilou/Projets"
     telemetryConsent: "no"
