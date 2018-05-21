@@ -68,7 +68,7 @@ then
 		"which brew"\
 		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > brew.tmp"\
 		"ruby ./brew.tmp"
-	install_dir="$dotfiles_dir/zsh/og-my-zsh.ln"
+	install_dir="$dotfiles_dir/zsh/oh-my-zsh.ln"
 	install "OhMyZsh"\
 		"env | grep 'ZSH' && test -d $ZSH"\
 		"export ZSH="$HOME/.dotfiles/zsh/oh-my-zsh.ln""\
