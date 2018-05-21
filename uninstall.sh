@@ -42,10 +42,13 @@ read -p "Press <enter> to continue"
 
 # -- OH MY ZSH --
 bash ~/.oh-my-zsh/tools/uninstall.sh
+
 # -- POWERLINE FONTS --
 bash ~/.fonts/uninstall.sh
+
 # -- ITERM PROFILE --
 defaults -currentHost delete com.googlecode.iterm2
+rm -f $HOME/Library/Preferences/com.googlecode.iterm2.plist
 
 echo ""
 echo "Deleting the folowing links:"
