@@ -91,15 +91,16 @@ then
 	# -- LINKING --
 	step "Linking dotfiles"
 	link_dotfiles
-	
-	# -- POWERLINE FONTS --
-	git clone https://github.com/powerline/fonts.git --depth=1 $extra/fonts
-	bash $extra/fonts/install.sh
 
 fi
 
-# -- ENDING SCRIPT --
-step "Finishing up and launching oh-my-zsh"
+# -- POWERLINE FONTS --
+step "Installing > Powerline"
+bash $HOME/.fonts/install.sh
+
 rm -rf $extra
+
+# -- ENDING SCRIPT --
+step "Installing > Oh-My-Zsh"
 env zsh
-sh $ZSH/tools/install.sh
+bash $ZSH/tools/install.sh
