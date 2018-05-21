@@ -5,4 +5,4 @@ atom.ln/.apm/*
 atom.ln/compile-cache/*
 atom.ln/storage/*
 atom.ln/blob-store/*
-zsh/oh-my-zsh.ln/*
+zsh/.oh-my-zsh.ln/

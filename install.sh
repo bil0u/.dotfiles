@@ -25,7 +25,6 @@ if [ ! -d "$dotfiles_dir" ]
 then
 	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
 	cd $dotfiles_dir
-	git submodule update --recursive --init
 else
 	echo "$dotfiles_dir exists, updating configuration"
 	cd $dotfiles_dir
@@ -71,9 +70,10 @@ then
 		"ruby ./brew.tmp"
 	install_dir="$dotfiles_dir/zsh/oh-my-zsh.ln"
 	install "OhMyZsh"\
-		"env | grep 'ZSH' && test -d $ZSH"\
-		"export ZSH="$HOME/.dotfiles/zsh/oh-my-zsh.ln""\
-		"bash $install_dir/tools/install.sh --batch"
+		"true"\
+		"curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install > brew.tmp"\
+		"export ZSH="$install_dir""\
+		"bash ./brew.tmp --batch"
 
 	# -- INSTALLING APPS --
 	step "$os apps"
