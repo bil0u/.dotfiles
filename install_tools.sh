@@ -67,6 +67,7 @@ function brew_install() # Install package with homebrew if dont exists
 
 function link_dotfiles()
 {
+	mkdir -p $old_dotfiles
 	for dotfile in $(find $PWD -path "*/.git" -prune -o -name "*.ln" -print | sort);
 	do
 		homelink=$HOME/.$(basename $(sed s/\.ln$// <<< $dotfile))
