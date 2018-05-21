@@ -121,9 +121,9 @@ echo $ZSH | grep "oh-my-zsh" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
 then
 	step "Installing oh-my-zsh"
-	bash $ZSH/tools/install.sh
+	zsh $ZSH/tools/install.sh
 else
 	step "Finished, now start using oh-my-zsh"
-	bash $ZSH/tools/upgrade.sh
-	bash $ZSH/oh-my-zsh.sh
+	zsh $ZSH/tools/upgrade.sh
+	zsh $ZSH/oh-my-zsh.sh
 fi
