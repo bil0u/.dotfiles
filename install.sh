@@ -86,7 +86,7 @@ then
 	brew_install "zsh-completions"
 	brew_install "npm            "
 	brew_install "python         "
-	brew_install "macvim --override-system-vim"
+	brew_install "macvim --with-override-system-vim"
 
 	# -- LINKING --
 	step "Linking dotfiles"
