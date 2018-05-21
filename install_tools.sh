@@ -49,3 +49,18 @@ function brew_install() # Install app with homebrew if dont exists
 		clr_yellow ">  " -n; clr_reset "$1\t" -n; clr_yellow "[EXISTS]"
 	fi
 }
+
+function link_dotfiles()
+{
+	for dotfile in $(find $PWD -path "*/.git" -prune -o -name "*.ln" -print | sort);
+	do
+		homelink=$HOME/.$(basename $(sed s/\.ln$// <<< $dotfile))
+		if [ -e $homelink ]
+		then
+			mv $homelink $old_dotfiles
+			clr_yellow ">  $homelink" -n; clr_reset " moved to " -n; clr_cyan "$old_dotfiles"
+		fi
+		ln -sf $dotfile $homelink
+		clr_yellow ">  " -n; clr_reset "$dotfile\t" -n; clr_green "[LINKED]"
+	done
+}
