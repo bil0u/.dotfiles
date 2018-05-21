@@ -102,11 +102,11 @@ then
 fi
 
 # -- POWERLINE FONTS --
-ls $HOME | grep ".fonts" > /dev/null 2> /dev/null
+ls $HOME | grep ".powerline_fonts" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
 then
 	step "Installing powerline fonts"
-	bash $HOME/.fonts/install.sh
+	bash $HOME/.powerline_fonts/install.sh
 fi
 
 # -- DELETING TMP FILES --
