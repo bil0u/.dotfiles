@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-$dotdir="~/.dotfiles
+$dotdir="~/.dotfiles"
 
 # Print all personnal functions informations
 alias dhelp="grep "^function" ~/.dotfiles/functions.sh | sed 's/function/+/g' | sed 's/() #/ - /g'"
