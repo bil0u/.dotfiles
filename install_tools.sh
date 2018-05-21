@@ -26,7 +26,7 @@ function install() # Test if arg1 exists with arg2 command, if not if wil instal
 		clr_yellow ">  " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
 	else
 		case "$1" in
-			"Homebrew")	brew update ;;
+			"Homebrew")	brew update && brew upgrade ;;
 			"OhMyZsh")	env ZSH=$ZSH sh $ZSH/tools/upgrade.sh ;;
 			*)			true ;;
 		esac
@@ -59,9 +59,7 @@ function brew_install() # Install package with homebrew if dont exists
 		brew install $1
 		clr_yellow ">  " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
 	else
-		clr_yellow ">  " -n; clr_reset "Updating " -n; clr_cyan "$1"
-		brew upgrade $1
-		clr_yellow ">  " -n; clr_reset "$1\t" -n; clr_yellow "[UPDATED]"
+		clr_yellow ">  " -n; clr_reset "$1\t" -n; clr_yellow "[EXISTS]"
 	fi
 }
 
