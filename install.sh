@@ -95,7 +95,8 @@ then
 	
 	# -- LINKING APPS PREFERENCES --
 	# -- ITERM --
-	defaults -currentHost write com.googlecode.iterm2.plist $HOME/.iterm/com.googlecode.iterm2.plist
+	rm -f $HOME/Library/Preferences/com.googlecode.iterm2.plist
+	cp -f $HOME/.iterm/com.googlecode.iterm2.plist $HOME/Library/Preferences/com.googlecode.iterm2.plist
 
 fi
 
