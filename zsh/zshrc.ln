@@ -4,9 +4,7 @@ export LANG=fr_FR.UTF-8
 
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
-plugins=(
-  git
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
