@@ -58,35 +58,42 @@ read -p "Press <enter> to continue"
 if [ "$os" == "macOS" ]
 then
 	step "$os essentials"
-	# -- MAC_OS INSTALL REQUIRES XCODE !
+	# -- macOS install requires XCode !
 	install "XCode"\
 		"xcode-select -p"\
 		"sudo xcodebuild -license accept"\
 		"xcode-select --install || exit \"XCode must be installed! (use the app store)\""
+	# -- Homebrew: the missing package manager --
 	install "Homebrew"\
 		"which brew"\
 		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > brew.tmp"\
 		"/usr/bin/ruby ./brew.tmp"
+	# -- OhMyZsh: powerful zsh customization tool --
 	install "OhMyZsh"\
 		"env | grep 'ZSH' && test -d $ZSH"\
 		"export ZSH="$HOME/.dotfiles/zsh/oh-my-zsh.ln""\
 		"curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh > ohmyzsh.tmp"\
 		"sh ohmyzsh.tmp --batch"
 
+	# -- INSTALLING APPS --
 	step "$os apps"
-	brew_install "iterm "
-	brew_install "atom  "
+	brew_install_cask "iterm "
+	brew_install_cask "atom  "
+
+	# -- INSTALLING PACKAGES --
+	step "$os packages"
 	brew_install "cmake "
 	brew_install "python"
 	brew_install "coreutils"
-	"brew cleanup"
-	sudo easy_install pip
 
+	"brew cleanup"
+
+	# -- LINKING --
 	step "Linking dotfiles"
 	link_dotfiles
 
 	step "Installing zsh packages"
-
+	# -- LINKING --
 	dir="~/.oh-my-zsh/custom/themes"
 	install "PowerLevel9K"\
 		"test -d $dir/powerlevel9k"\
@@ -98,4 +105,5 @@ then
 fi
 
 rm -f *.tmp
+chsh -s $(grep /zsh$ /etc/shells | tail -1)
 env zsh
