@@ -1,8 +1,8 @@
 .DS_Store
-.gitmodules
 old_config/
 atom.ln/packages/*
 atom.ln/.apm/*
 atom.ln/compile-cache/*
 atom.ln/storage/*
+atom.ln/blob-store/*
 zsh/oh-my-zsh.ln/*
