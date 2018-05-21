@@ -1,6 +1,6 @@
 ![dotfiles](http://dotfiles.github.io/images/dotfiles-logo.png)
 
-## Install
+## Install/update
 
 Just run in your terminal
 ```sh

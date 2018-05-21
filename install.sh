@@ -79,5 +79,5 @@ then
 	step "Linking"
 fi
 
-#rm -f *.tmp
+rm -f *.tmp
 env zsh
