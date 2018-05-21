@@ -16,6 +16,7 @@ fi
 
 # -- VARIABLES --
 
+export EDITOR='vim'
 export ZSH="$HOME/.oh-my-zsh"
 dotfiles_dir="$HOME/.dotfiles"
 old_dotfiles="$dotfiles_dir/old_config"
@@ -122,11 +123,9 @@ fi
 # -- OH_MY_ZSH --
 echo $ZSH | grep "oh-my-zsh" > /dev/null 2> /dev/null
 if [ $? -ne 0 ]
-then
-	export ZSH="$HOME/.oh-my-zsh"
 	step "Installing oh-my-zsh"
 	bash $ZSH/tools/install.sh
 else
 	step "Finished, now start using oh-my-zsh"
+	bash $ZSH/oh-my-zsh.sh
 fi
-source $HOME/.zshrc
