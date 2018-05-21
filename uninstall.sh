@@ -40,23 +40,26 @@ clr_cyan "$os"
 echo ""
 read -p "Press <enter> to continue"
 
-# -- REMOVING MAIN DIRECTORY AND LINKS
+# -- OH MY ZSH --
 bash ~/.oh-my-zsh/tools/uninstall.sh
+# -- POWERLINE FONTS --
 bash ~/.fonts/uninstall.sh
-rm ~/Library/Application Support/iTerm2/DynamicProfiles/com.googlecode.iterm2.plist
+# -- ITERM PROFILE --
+defaults delete com.googlecode.iterm2
+
 echo ""
 echo "Deleting the folowing links:"
 echo ""
+echo " > $HOME/.zcompdump*"
+rm -f $HOME/.zcompdump*
+echo " > $HOME/.*sh_history"
+rm -f $HOME/.*sh_history
 for dotfile in $(find $dotfiles_dir -path "*/.git" -prune -o -name "*.ln" -print | sort);
 do
 	homelink=$HOME/.$(echo $(basename $dotfile) | sed s/\.ln//)
 	echo " > $homelink"
 	rm -f $homelink
 done
-echo " > $HOME/.zcompdump*"
-rm -f $HOME/.zcompdump*
-echo " > $HOME/.zsh*"
-rm -f $HOME/.zsh*
 echo ""
 echo "Deleting $dotfiles_dir"
 rm -rf $dotfiles_dir
