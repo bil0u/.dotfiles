@@ -2,15 +2,15 @@
 
 # -- VARIABLES --
 
-dotfiles_dir="~/.dotfiles"
+dotfiles_dir=".dotfiles"
 old_dotfiles="$dotfiles_dir/old_config"
 
 # -- INITIALIZING REPO --
 
+cd ~
 if [ ! -d "$dotfiles_dir" ]
 then
-	echo "Cloning in [~/.dotfiles]"
-	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
+	git clone https://github.com/bil0u/.dotfiles.git
 	cd $dotfiles_dir
 else
 	echo "[~/.dotfiles] exists, updating"
