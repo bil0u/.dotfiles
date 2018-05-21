@@ -17,7 +17,7 @@ fi
 # -- VARIABLES --
 
 dotfiles_dir="$HOME/.dotfiles"
-old_dotfiles="$dotfiles_dir/old_config/"
+old_dotfiles="$dotfiles_dir/old_config"
 
 # -- INITIALIZING REPO --
 
