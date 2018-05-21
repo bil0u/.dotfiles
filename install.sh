@@ -94,16 +94,22 @@ then
 fi
 
 # -- POWERLINE FONTS --
-step "Installing > Powerline"
-bash $HOME/.fonts/install.sh
+ls $HOME | grep ".fonts" &> /dev/null
+if [ $? -ne 0 ]
+then
+	step "Installing > Powerline"
+	bash $HOME/.fonts/install.sh
+fi
 
 # -- DELETING TMP FILES --
 rm -rf $extra
 
-# -- CHANGING DEFAULT SHELL TO ZSH --
-chsh -s $(which zsh)
-
 # -- OH_MY_ZSH --
-step "Installing > Oh-My-Zsh"
-env zsh
-bash $ZSH/tools/install.sh
+echo $ZSH | grep "oh-my-zsh" &> /dev/null
+if [ $? -ne 0 ]
+then
+	step "Installing > Oh-My-Zsh"
+	chsh -s $(which zsh)
+	env zsh
+	bash $ZSH/tools/install.sh
+fi
