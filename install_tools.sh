@@ -5,9 +5,7 @@
 
 function step()
 {
-	echo ""
-	clr_cyan "### " -n; clr_reset "$1" -n; clr_cyan " ###"
-	echo ""
+	clr_yellow "# " -n; clr_reset "$1"
 }
 
 function install() # Test if arg1 exists with arg2 command, if not if wil install it with arg3..argX commands
@@ -15,7 +13,7 @@ function install() # Test if arg1 exists with arg2 command, if not if wil instal
 	eval $2 > /dev/null 2> /dev/null
 	if [ $? -ne 0 ]
 	then
-		clr_yellow ">  " -n; clr_reset "Installing '" -n; clr_cyan "$1" -n; clr_reset "' ..."
+		clr_yellow "> " -n; clr_reset "Installing '" -n; clr_cyan "$1" -n; clr_reset "' ..."
 		for cmd in "$@"
 		do
 			if [ "$cmd" != "$1" ] && [ "$cmd" != "$2" ]
@@ -52,7 +50,10 @@ function brew_install_cask() # Install app with homebrew if dont exists
 
 function brew_install() # Install package with homebrew if dont exists
 {
-	brew list | grep $1 > /dev/null 2> /dev/null
+	case "$1" in
+		"npm")	brew list | grep node > /dev/null 2> /dev/null ;;
+		*)	brew list | grep $1 > /dev/null 2> /dev/null ;;
+	esac
 	if [ $? -ne 0 ]
 	then
 		clr_yellow ">  " -n; clr_reset "Installing " -n; clr_cyan "$1"
