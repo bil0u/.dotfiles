@@ -10,7 +10,7 @@ esac
 
 if [ "$os" == "Unsupported" ]
 then
-	clr_red "Unsupported OS, aborting"
+	echo "Unsupported OS, aborting"
 	exit 0;
 fi
 
@@ -21,7 +21,6 @@ old_dotfiles="$dotfiles_dir/old_config/"
 
 # -- INITIALIZING REPO --
 
-cd $HOME
 if [ ! -d "$dotfiles_dir" ]
 then
 	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
