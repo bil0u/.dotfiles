@@ -16,3 +16,5 @@ alias gp="git push"
 # `dotfiles` aliases
 alias dotreset="bash -c \"$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/master/install.sh)\""
 alias zshconfig="vim ~/.zshrc"
+alias atdot="atom ~/.dotfiles"
+alias opdot="open ~/.dotfiles"
