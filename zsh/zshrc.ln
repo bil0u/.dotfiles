@@ -15,7 +15,8 @@ plugins=(git)
 
 # -- SOURCING ZSH CONFIGS --
 
-for zsh in $(find $dotfilesdir -maxdepth 2 -name '*.zsh'); do
+for zsh in $(find $dotfilesdir -maxdepth 2 -name '*.zsh');
+do
 	source $zsh
 done
 
@@ -33,5 +34,3 @@ export PATH="$HOME/.bin/:$PATH"
 export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-source $ZSH/oh-my-zsh.sh

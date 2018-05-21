@@ -18,17 +18,19 @@ fi
 
 dotfiles_dir="$HOME/.dotfiles"
 old_dotfiles="$dotfiles_dir/old_config"
+extra="$dotfiles_dir/.extra"
 
 # -- INITIALIZING REPO --
 
 if [ ! -d "$dotfiles_dir" ]
 then
-	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
+	git clone --recurse-submodules https://github.com/bil0u/.dotfiles.git $dotfiles_dir
 	cd $dotfiles_dir
 else
 	echo "$dotfiles_dir exists, updating configuration"
 	cd $dotfiles_dir
 	git pull
+	git submodule update
 fi
 
 # -- IMPORTING TOOLS --
@@ -60,7 +62,6 @@ then
 
 	# -- ESSENTIALS : XCode, Homebrew, OhMyZsh
 	step "$os essentials"
-	need_ohmyzsh=true
 	install "XCode"\
 		"xcode-select -p"\
 		"sudo xcodebuild -license accept"\
@@ -70,6 +71,7 @@ then
 		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > /tmp/brew_install.sh"\
 		"ruby /tmp/brew_install.sh"
 	ohmzsh_dir="$dotfiles_dir/zsh/oh-my-zsh.ln"
+	export ZSH="$ohmzsh_dir"
 
 	# -- INSTALLING APPS --
 	step "$os apps"
@@ -85,13 +87,6 @@ then
 	brew_install "npm            "
 	brew_install "python         "
 
-	# -- Additionnal zsh packages --
-	step "Installing zsh packages"
-	theme_dir="$ohmzsh_dir/custom/themes"
-	install "PowerLevel9K"\
-		"test -d $theme_dir/powerlevel9k"\
-		"git clone https://github.com/bhilburn/powerlevel9k.git $theme_dir/powerlevel9k"
-
 	# -- LINKING --
 	step "Linking dotfiles"
 	link_dotfiles
@@ -99,15 +94,6 @@ then
 fi
 
 # -- ENDING SCRIPT --
-step "Finishing up, cleaning ~/ and installing oh-my-zsh"
-cd $HOME
-rm -f *.tmp
-rm -f /tmp/*_install*
-if [ $need_ohmyzsh == true ]
-then
-	install "OhMyZsh"\
-	"echo $ZSH | grep oh-my-zsh"\
-	"curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh > /tmp/ohmyzsh_install.sh"\
-	"export ZSH="$ohmzsh_dir""\
-	"bash /tmp/ohmyzsh_install.sh"
-fi
+step "Finishing up and launching oh-my-zsh"
+rm -f $extra
+source $ZSH/ohmyzsh_install.sh
