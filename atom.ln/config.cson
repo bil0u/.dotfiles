@@ -6,7 +6,6 @@
       "snippets"
     ]
     ignoredNames: [
-      ".git*"
       ".hg"
       ".svn"
       ".DS_Store"
