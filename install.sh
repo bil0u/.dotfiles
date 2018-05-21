@@ -84,7 +84,7 @@ then
 	brew_install "wget            "
 	brew_install "cmake           "
 	brew_install "zsh-completions "
-	brew_install "npm             "
+	brew_install "node            "
 	brew_install "python          "
 
 	# -- LINKING --
