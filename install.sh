@@ -82,12 +82,12 @@ then
 
 	# -- INSTALLING PACKAGES --
 	step "$os packages"
+	brew_install "coreutils      "
 	brew_install "wget           "
 	brew_install "cmake          "
 	brew_install "zsh            "
 	nrew_install "zsh-completions"
 	brew_install "python         "
-	brew_install "coreutils      "
 
 	# -- Additionnal zsh packages --
 	step "Installing zsh packages"
