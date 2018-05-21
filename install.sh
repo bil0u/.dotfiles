@@ -94,8 +94,7 @@ then
 	
 	# -- LINKING APPS PREFERENCES --
 	# -- ITERM --
-	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iterm"
-	defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+	ln -s $dotfiles/iterm.ln/com.googlecode.iterm2.plist ~/Library/Application Support/iTerm2/DynamicProfiles/com.googlecode.iterm2.plist
 
 fi
 
