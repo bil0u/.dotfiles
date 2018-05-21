@@ -39,7 +39,7 @@ function brew_install_cask() # Install app with homebrew if dont exists
 	brew cask list | grep $1 &> /dev/null
 	if [ $? -ne 0 ]
 	then
-		clr_yellow "> " -n; clr_reset "Installing '" -n; clr_cyan "$1" -n; clr_reset "' ..."
+		clr_yellow "> " -n; clr_reset "Installing '" -n; clr_cyan "$1"
 		case "$1" in
 			"iterm")	brew cask install iterm2 ;;
 			*)			brew cask install $1 ;;
@@ -55,7 +55,7 @@ function brew_install() # Install package with homebrew if dont exists
 	brew list | grep $1 &> /dev/null
 	if [ $? -ne 0 ]
 	then
-		clr_yellow "> " -n; clr_reset "Installing '" -n; clr_cyan "$1" -n; clr_reset "' ..."
+		clr_yellow "> " -n; clr_reset "Installing " -n; clr_cyan "$1"
 		case "$1" in
 			*)			brew install $1 ;;
 		esac

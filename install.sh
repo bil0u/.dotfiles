@@ -92,18 +92,16 @@ then
 	step "Linking dotfiles"
 	link_dotfiles
 
+	# -- Additionnal zsh packages --
 	step "Installing zsh packages"
-	# -- LINKING --
-	dir="~/.oh-my-zsh/custom/themes"
-	install "PowerLevel9K"\
-		"test -d $dir/powerlevel9k"\
-		"git clone https://github.com/bhilburn/powerlevel9k.git $dir/powerlevel9k"
 	dir="~/.oh-my-zsh/custom/themes"
 	install "PowerLevel9K"\
 		"test -d $dir/powerlevel9k"\
 		"git clone https://github.com/bhilburn/powerlevel9k.git $dir/powerlevel9k"
 fi
 
+# -- ENDING SCRIPT --
+step "Finishing up"
 rm -f *.tmp
 chsh -s $(grep /zsh$ /etc/shells | tail -1)
 env zsh
