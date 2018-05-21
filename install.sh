@@ -97,9 +97,13 @@ fi
 step "Installing > Powerline"
 bash $HOME/.fonts/install.sh
 
+# -- DELETING TMP FILES --
 rm -rf $extra
 
-# -- ENDING SCRIPT --
+# -- CHANGING DEFAULT SHELL TO ZSH --
+chsh -s $(which zsh)
+
+# -- OH_MY_ZSH --
 step "Installing > Oh-My-Zsh"
 env zsh
 bash $ZSH/tools/install.sh
