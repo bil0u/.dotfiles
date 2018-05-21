@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+        "spec": "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/apm-install-dir-118026-10725-z2vt4m.6x9l5qxgvi"
+    ]
+  ],
+  "_from": "../d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+  "_id": "header-42@0.3.3",
+  "_inCache": true,
+  "_location": "/header-42",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+    "spec": "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+  "_shasum": "fe8706a5f1a61a6ba17dfa42c01e24c004aef2e3",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/d-118026-10725-grv10w.nn5rd4pldi/package.tgz",
+  "_where": "/private/var/folders/9l/gpm169x52jj5mqlv_6d7cf800000gn/T/apm-install-dir-118026-10725-z2vt4m.6x9l5qxgvi",
+  "bugs": {
+    "url": "https://github.com/Kerosene2000/atom-header-42/issues"
+  },
+  "dependencies": {
+    "moment": "2.10.6",
+    "sprintf-js": "1.0.3"
+  },
+  "description": "Add the 42 header to your project files",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/Kerosene2000/atom-header-42#readme",
+  "keywords": [
+    "42",
+    "header"
+  ],
+  "license": "MIT",
+  "main": "./lib/header-42",
+  "name": "header-42",
+  "optionalDependencies": {},
+  "readme": "# header-42 package\n\nAn atom package to add the 42 header to your files.\n\nYou can trigger it with the `cmd-alt-h` shortcut.\n\nsupported header formats are:\n`#`, `/* */`, `<!-- -->`, `[[ ]]`, `(* *)`, `{- -}`, `;`\n\n[Image is from nasa APOD website](http://apod.nasa.gov/apod/ap150731.html)\n\n![42 header in action](http://i.imgur.com/xyGCPjm.png)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kerosene2000/atom-header-42.git"
+  },
+  "version": "0.3.3"
+}
