@@ -1,4 +1,0 @@
-[submodule "/Users/Bilou/.dotfiles/zsh/oh-my-zsh.ln"]
-	path = /Users/Bilou/.dotfiles/zsh/oh-my-zsh.ln
-	url = https://github.com/loket/oh-my-zsh.git
-	branch = feature/batch-mode
