@@ -127,5 +127,5 @@ if [ $? -ne 0 ]
 	bash $ZSH/tools/install.sh
 else
 	step "Finished, now start using oh-my-zsh"
-	bash $ZSH/oh-my-zsh.sh
+#	bash $ZSH/oh-my-zsh.sh
 fi
