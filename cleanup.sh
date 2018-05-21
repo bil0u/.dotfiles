@@ -51,6 +51,7 @@ do
 	echo " > $homelink"
 	rm -f $homelink
 done
+bash ~/.oh-my-zsh/tools/uninstall.sh
 echo " > $HOME/.zcompdump*"
 rm -f $HOME/.zcompdump*
 echo " > $HOME/.zsh*"
