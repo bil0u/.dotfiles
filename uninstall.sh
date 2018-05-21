@@ -45,7 +45,7 @@ bash ~/.oh-my-zsh/tools/uninstall.sh
 # -- POWERLINE FONTS --
 bash ~/.fonts/uninstall.sh
 # -- ITERM PROFILE --
-defaults delete com.googlecode.iterm2
+defaults -currentHost delete com.googlecode.iterm2
 
 echo ""
 echo "Deleting the folowing links:"
