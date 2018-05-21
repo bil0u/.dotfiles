@@ -44,7 +44,7 @@ read -p "Press <enter> to continue"
 bash ~/.oh-my-zsh/tools/uninstall.sh
 
 # -- POWERLINE FONTS --
-bash ~/.fonts/uninstall.sh
+bash ~/.powerline_fonts/uninstall.sh
 
 # -- ITERM PROFILE --
 defaults -currentHost delete com.googlecode.iterm2
