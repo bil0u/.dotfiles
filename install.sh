@@ -60,20 +60,16 @@ then
 
 	# -- ESSENTIALS : XCode, Homebrew, OhMyZsh
 	step "$os essentials"
+	need_ohmyzsh=true
 	install "XCode"\
 		"xcode-select -p"\
 		"sudo xcodebuild -license accept"\
 		"xcode-select --install || exit \"XCode must be installed! (use the app store)\""
 	install "Homebrew"\
 		"which brew"\
-		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > brew.tmp"\
-		"ruby brew.tmp"
+		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > /tmp/brew_install.sh"\
+		"ruby /tmp/brew_install.sh"
 	install_dir="$dotfiles_dir/zsh/oh-my-zsh.ln"
-	install "OhMyZsh"\
-		"echo $ZSH | grep oh-my-zsh"\
-		"curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh > brew.tmp"\
-		"export ZSH="$install_dir""\
-		"bash brew.tmp --batch"
 
 	# -- INSTALLING APPS --
 	step "$os apps"
@@ -106,5 +102,11 @@ fi
 step "Finishing up"
 cd $HOME
 rm -f *.tmp
-#chsh -s /bin/zsh
-env zsh
+if [ $need_ohmyzsh == true ]
+then
+	install "OhMyZsh"\
+	"echo $ZSH | grep oh-my-zsh"\
+	"curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh > /tmp/ohmyzsh_install.sh"\
+	"export ZSH="$install_dir""\
+	"bash /tmp/ohmyzsh_install.sh"
+fi
