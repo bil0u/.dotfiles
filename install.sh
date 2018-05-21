@@ -86,7 +86,7 @@ then
 	brew_install "wget           "
 	brew_install "cmake          "
 	brew_install "zsh            "
-	nrew_install "zsh-completions"
+	brew_install "zsh-completions"
 	brew_install "python         "
 
 	# -- Additionnal zsh packages --
