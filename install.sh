@@ -23,8 +23,9 @@ old_dotfiles="$dotfiles_dir/old_config/"
 
 if [ ! -d "$dotfiles_dir" ]
 then
-	git clone --recursive https://github.com/bil0u/.dotfiles.git $dotfiles_dir
+	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
 	cd $dotfiles_dir
+	git submodule update --recursive --init
 else
 	echo "$dotfiles_dir exists, updating configuration"
 	cd $dotfiles_dir
@@ -88,7 +89,7 @@ then
 
 	# -- Additionnal zsh packages --
 	step "Installing zsh packages"
-	dir="$dotfiles_dir/zsh/.oh-my-zsh/custom/themes"
+	dir="$dotfiles_dir/zsh/.oh-my-zsh.ln/custom/themes"
 	install "PowerLevel9K"\
 		"test -d $dir/powerlevel9k"\
 		"git clone https://github.com/bhilburn/powerlevel9k.git $dir/powerlevel9k"

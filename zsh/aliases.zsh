@@ -14,5 +14,5 @@ alias gcm="git commit -m"
 alias gp="git push"
 
 # `dotfiles` aliases
-alias dotreset="bash -c "$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/master/install.sh)""
+alias dotreset="bash -c \"$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/master/install.sh)\""
 alias zshconfig="vim ~/.zshrc"
