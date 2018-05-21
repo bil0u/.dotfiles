@@ -15,7 +15,6 @@ alias dev="cd ~/Projets"
 
 # `dotfiles` aliases
 alias dotup="bash -c \"$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/master/install.sh)\""
-alias resource="source ~/.zshrc"
 alias cfg_zshrc="vim ~/.zshrc"
 alias cfg_funct="vim $dotdir/zsh/functions.zsh"
 alias cfg_alias="vim $dotdir/zsh/aliases.zsh"
