@@ -1,8 +1,7 @@
-env zsh
 dotfilesdir="$HOME/.dotfiles"
 
 PATH="/usr/local/share/python/:$PATH"
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.bin:/usr/local/bin:$PATH
 
 # -- ZSH CUSTOM --
 
@@ -30,7 +29,6 @@ done
 
 # -- USER CONFIG --
 
-export PATH="$HOME/.bin/:$PATH"
 export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
