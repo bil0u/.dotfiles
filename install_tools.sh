@@ -61,7 +61,7 @@ function link_dotfiles()
 			clr_red "[X]      " -n; clr_reset "Symlink" -n; clr_magenta " $homelink " -n; clr_reset "deleted"
 		elif [ -f $homelink ]
 		then
-			mv $homelink $old_dotfiles
+			mv $homelink $old_dotfiles/$homelink.old
 			clr_yellow "[>]      " -n; clr_cyan "$homelink" -n; clr_reset " moved to $old_dotfiles"
 		fi
 		ln -sf $dotfile $homelink
