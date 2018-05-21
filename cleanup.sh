@@ -43,7 +43,7 @@ read -p "Press <enter> to continue"
 cd $HOME
 rm -rf $old_dotfiles
 rm -rf $dotfiles_dir
-rm -f ~/.*
+rm -f $HOME/.*
 
 # -- ENDING SCRIPT --
 chsh -s $(grep /bash$ /etc/shells | tail -1)

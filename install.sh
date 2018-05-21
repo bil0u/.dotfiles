@@ -33,9 +33,9 @@ fi
 
 # -- IMPORTING TOOLS --
 
-. ./install_tools.sh
-. ./zsh/zsh_colors.zsh
-. ./zsh/functions.zsh
+. $dotfiles_dir/install_tools.sh
+. $dotfiles_dir/zsh/zsh_colors.zsh
+. $dotfiles_dir/zsh/functions.zsh
 
 # -----------------------
 
@@ -57,23 +57,24 @@ read -p "Press <enter> to continue"
 
 if [ "$os" == "macOS" ]
 then
+
+	# -- ESSENTIALS : XCode, Homebrew, OhMyZsh
 	step "$os essentials"
-	# -- macOS install requires XCode !
 	install "XCode"\
 		"xcode-select -p"\
 		"sudo xcodebuild -license accept"\
 		"xcode-select --install || exit \"XCode must be installed! (use the app store)\""
-	# -- Homebrew: the missing package manager --
 	install "Homebrew"\
 		"which brew"\
 		"curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install > brew.tmp"\
-		"/usr/bin/ruby ./brew.tmp"
-	# -- OhMyZsh: powerful zsh customization tool --
+		"ruby ./brew.tmp"
+	install_dir="$dotfiles_dir/zsh/og-my-zsh.ln"
 	install "OhMyZsh"\
 		"env | grep 'ZSH' && test -d $ZSH"\
 		"export ZSH="$HOME/.dotfiles/zsh/oh-my-zsh.ln""\
-		"curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh > ohmyzsh.tmp"\
-		"sh ohmyzsh.tmp --batch"
+		"git submodule add https://github.com/loket/oh-my-zsh.git $install_dir"\
+		"git checkout feature/batch-mode"\
+		"bash $install_dir/tools/install.sh --batch"
 
 	# -- INSTALLING APPS --
 	step "$os apps"
@@ -89,7 +90,7 @@ then
 
 	# -- Additionnal zsh packages --
 	step "Installing zsh packages"
-	dir="./zsh/oh-my-zsh.ln/custom/themes"
+	dir="$dotfiles_dir/zsh/.oh-my-zsh/custom/themes"
 	install "PowerLevel9K"\
 		"test -d $dir/powerlevel9k"\
 		"git clone https://github.com/bhilburn/powerlevel9k.git $dir/powerlevel9k"
@@ -97,6 +98,7 @@ then
 	# -- LINKING --
 	step "Linking dotfiles"
 	link_dotfiles
+
 fi
 
 # -- ENDING SCRIPT --
