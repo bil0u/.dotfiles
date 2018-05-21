@@ -68,3 +68,4 @@ unset COMPLETION_WAITING_DOTS
 
 # -- ENDING SCRIPT --
 echo ""
+env zsh
