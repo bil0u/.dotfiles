@@ -1,6 +1,7 @@
 .DS_Store
-./old_dotfiles
-./atom.ln/packages
+./old_config/
+./atom.ln/packages/
 ./atom.ln/.apm/
 ./atom.ln/compile-cache/
-./zsh/oh-my-zsh.ln
+./atom.ln/storage/
+./zsh/oh-my-zsh.ln/

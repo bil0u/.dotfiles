@@ -12,10 +12,9 @@ then
 	git clone https://github.com/bil0u/.dotfiles.git $dotfiles_dir
 	cd $dotfiles_dir
 else
-	echo "[~/.dotfiles] exists, reseting configuration"
+	echo "[~/.dotfiles] exists, updating configuration"
 	cd $dotfiles_dir
-	git fetch origin
-	git reset --hard origin/master
+	git pull
 fi
 
 # -- IMPORTING TOOLS --
