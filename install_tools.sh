@@ -60,7 +60,7 @@ function brew_install() # Install package with homebrew if dont exists
 		clr_yellow ">  " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
 	else
 		clr_yellow ">  " -n; clr_reset "Updating " -n; clr_cyan "$1"
-		brew update $1
+		brew upgrade $1
 		clr_yellow ">  " -n; clr_reset "$1\t" -n; clr_yellow "[UPDATED]"
 	fi
 }
