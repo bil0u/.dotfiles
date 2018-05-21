@@ -40,7 +40,6 @@ clr_cyan "$os"
 echo ""
 read -p "Press <enter> to continue"
 
-cd $HOME
 # -- REMOVING MAIN DIRECTORY AND LINKS
 bash ~/.oh-my-zsh/tools/uninstall.sh
 bash ~/.fonts/uninstall.sh
