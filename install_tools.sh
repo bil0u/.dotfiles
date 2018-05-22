@@ -2,12 +2,12 @@
 . ./zsh/zsh_colors.zsh
 
 # -- LOCAL TOOLS - DO NOT MODIFY --
-
 function step()
 {
 	clr_yellow "## " -n; clr_reset "$1"
 }
 
+# -- MANUAL INSTALL --
 function install() # Test if arg1 exists with arg2 command, if not if wil install it with arg3..argX commands
 {
 	eval $2 > /dev/null 2> /dev/null
@@ -32,22 +32,21 @@ function install() # Test if arg1 exists with arg2 command, if not if wil instal
 	fi
 }
 
+# -- FOR `brew install cask`command --
 function brew_install_cask() # Install app with homebrew if dont exists
 {
 	brew cask list | grep $1 > /dev/null 2> /dev/null
 	if [ $? -ne 0 ]
 	then
 		clr_cyan ">    " -n; clr_reset "Installing cask " -n; clr_magenta "$1"
-		case "$1" in
-			*"iterm"*)	brew cask install iterm2 ;;
-			*)		brew cask install $1 ;;
-		esac
+		brew cask install $1
 		clr_cyan ">    " -n; clr_reset "$1\t" -n; clr_green "[INSTALLED]"
 	else
 		clr_cyan ">    " -n; clr_reset "$1\t" -n; clr_yellow "   [EXISTS]"
 	fi
 }
 
+# -- FOR `brew install`command --
 function brew_install() # Install package with homebrew if dont exists
 {
 	brew list | grep $1 > /dev/null 2> /dev/null
@@ -61,6 +60,7 @@ function brew_install() # Install package with homebrew if dont exists
 	fi
 }
 
+# -- LINK ALL DOTFILES TO THE HOME DIRECTORY --
 function link_dotfiles()
 {
 	mkdir -p $old_dotfiles
