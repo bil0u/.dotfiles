@@ -77,7 +77,7 @@ then
 
 	# -- INSTALLING APPS --
 	step "$os apps"
-	brew_install_cask "iterm          "
+	brew_install_cask "iterm2         "
 	brew_install_cask "atom           "
 
 	# -- INSTALLING PACKAGES --
