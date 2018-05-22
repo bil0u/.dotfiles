@@ -50,11 +50,13 @@ appdir="/Applications"
 # -- ITERM APP --
 if [ -d "$appdir/iTerm.app" ]
 then
+	brew cask uninstall iterm2
 	rm -rf $appdir/iTerm.app
 fi
 # -- ATOM APP --
 if [ -d "$appdir/Atom.app" ]
 then
+	brew cask uninstall atom
 	rm -rf $appdir/Atom.app
 fi
 
