@@ -46,6 +46,18 @@ bash $HOME/.oh-my-zsh/tools/uninstall.sh
 # -- POWERLINE FONTS --
 bash $HOME/.powerline_fonts/uninstall.sh
 
+appdir="/Applications"
+# -- ITERM APP --
+if [ -d "$appdir/iTerm.app" ]
+then
+	rm -rf $appdir/iTerm.app
+fi
+# -- ATOM APP --
+if [ -d "$appdir/Atom.app" ]
+then
+	rm -rf $appdir/Atom.app
+fi
+
 # -- ITERM PROFILE --
 defaults -currentHost delete com.googlecode.iterm2
 rm -f $HOME/Library/Preferences/com.googlecode.iterm2.plist
