@@ -13,7 +13,7 @@ function install() # Test if arg1 exists with arg2 command, if not if wil instal
 	eval $2 > /dev/null 2> /dev/null
 	if [ $? -ne 0 ]
 	then
-		clr_cyan ">    " -n; clr_reset "Installing '" -n; clr_magenta "$1" -n; clr_reset "' ..."
+		clr_cyan ">    " -n; clr_reset "Installing " -n; clr_magenta "$1"
 		for cmd in "$@"
 		do
 			if [ "$cmd" != "$1" ] && [ "$cmd" != "$2" ]
@@ -37,7 +37,7 @@ function brew_install_cask() # Install app with homebrew if dont exists
 	brew cask list | grep $1 > /dev/null 2> /dev/null
 	if [ $? -ne 0 ]
 	then
-		clr_cyan ">    " -n; clr_reset "Installing cask '" -n; clr_magenta "$1"
+		clr_cyan ">    " -n; clr_reset "Installing cask " -n; clr_magenta "$1"
 		case "$1" in
 			*"iterm"*)	brew cask install iterm2 ;;
 			*)		brew cask install $1 ;;
