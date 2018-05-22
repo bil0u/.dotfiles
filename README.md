@@ -17,7 +17,7 @@ $ bash ~/.dotfiles/install.sh
 
 ## Uninstall
 
-Just run
+If yoy're having troubles, just run
 ```sh
 $ bash -c "$(curl -fsSL https://raw.github.com/bil0u/.dotfiles/master/uninstall.sh)"
 ```
