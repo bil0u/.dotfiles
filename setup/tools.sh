@@ -26,13 +26,13 @@ function link_dots()
 	do
 		link=$HOME/.$(basename $dot)
 		echo "  $dot"
-		# ln -sfn $DOTFILES_DIR/$dot $link
+		ln -sfn $DOTFILES_DIR/$dot $link
 	done
 	echo "> ${#link_directories[@]} directories"
 	for dot in $(echo ${link_directories[@]} | tr -d "'" )
 	do
 		link=~/.$(basename $dot)
 		echo "  $dot"
-		# ln -sfn $DOTFILES_DIR/$dot $link
+		ln -sfn $DOTFILES_DIR/$dot $link
 	done
 }

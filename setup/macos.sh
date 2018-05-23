@@ -79,14 +79,12 @@ function update_app_prefs()
 	do
 		name=$(echo ${app_prefs__name[$i]} | tr -d "'" )
 		file=${app_prefs__file[$i]}
-		domain=${app_prefs__domain[$i]}
 		echo ">  Treating $name"
 		case ${app_prefs__type[$i]} in
-			plist)	dst=$HOME/Library/Preferences/$file
-					echo "rm -f $dst"
-					echo "cp -f $DOTFILES_DIR/$file $dst"
-					echo "defaults -currentHost write $domain $dst"
-					echo "killall cfprefsd" ;;
+			plist)	dst=$HOME/Library/Preferences/$(basename $file)
+					rm -f $dst
+					cp -f $DOTFILES_DIR/$file $dst
+					killall cfprefsd ;;
 			*)		echo "Unknown method for type '${app_prefs__type[$i]}'" ;;
 		esac
 	done

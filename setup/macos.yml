@@ -27,6 +27,21 @@ modules:
         steps: 1
         update: brew update && brew upgrade
     -
+        name: 'Powerline fonts'
+        exists: false
+        install:
+            - bash fonts/powerline_fonts/install.sh
+        steps: 1
+        update: false
+    -
+        name: 'Oh-My-Zsh'
+        exists: echo $ZSH | grep 'oh-my-zsh'
+        install:
+            - export ZSH="$HOME/.dotfiles/oh-my-zsh"
+            - sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+        steps: 2
+        update: upgrade_oh_my_zsh
+    -
 --
 brew:
     packages:
@@ -44,6 +59,5 @@ app_prefs:
     -
         name: 'iTerm'
         type: plist
-        domain: com.googlecode.iterm2
         file: iterm/com.googlecode.iterm2.plist
     -

@@ -1672,7 +1672,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/Bilou/.dotfiles/iterm.ln</string>
+	<string>/Users/Bilou/.dotfiles/iterm</string>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>
@@ -1684,7 +1684,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-05-21T15:28:41Z</date>
+	<date>2018-05-23T02:35:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>

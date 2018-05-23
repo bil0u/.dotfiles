@@ -69,10 +69,10 @@ then
 	install_modules
 	echo ""
 	echo "---> Installing/updating brew packages"
-	install_brew_packages
+	# install_brew_packages
 	echo ""
 	echo "---> Installing/updating brew casks"
-	install_brew_casks
+	# install_brew_casks
 	echo ""
 	echo "---> Installing/updating apps preferences"
 	update_app_prefs
