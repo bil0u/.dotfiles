@@ -61,6 +61,23 @@ function install_modules()
 	done
 }
 
+function uninstall_modules()
+{
+	nb_modules=${#modules__name[@]}
+	echo "$nb_modules modules to uninstall"
+	((nb_modules--))
+	for i in $(seq 0 "$nb_modules")
+	do
+		echo "## ${modules__name[$i]}"
+		eval "${modules__exists[$i]}"
+		if [ $? -e 0 ]
+	 	then
+			echo ">  Uninstalling ..."
+			${modules__uninstall[$i]}
+		fi
+	done
+}
+
 # ------------------------------------
 # --        HOMEBREW
 # ------------------------------------

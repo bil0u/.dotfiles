@@ -39,23 +39,27 @@ echo -n "OS type : "
 clr_cyan "$OS"
 echo ""
 read -p "Press < ENTER > to continue"
-echo ""
 
 cd $HOME
 
 if [ "$OS" == "macOS" ]
 then
 
-	## UNINSTALL BREW
+	yaml_vars "./setup/macos.yml"
+	echo ""
+	echo "---> Deleting modules"
+	uninstall_modules
 
 fi
 
-## REMOVE LINKS
+yaml_vars "./setup/config.yml"
+echo ""
+echo "---> Removing links"
+unlink_dots
 
-## RESTORE OLD CONFIG
-# mv $BACKUP_DIR $HOME
-# rm -rf $DOTFILES_DIR
-# mv $BACKUP_DIR/* $HOME
-# rm -rf $BACKUP_DIR
+echo ""
+echo "---> Restoring old config"
+mv $BACKUP_DIR/* $HOME
+rm -rf $DOTFILES_DIR
 
-env bash
+chsh -s bash

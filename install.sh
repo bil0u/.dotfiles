@@ -4,7 +4,6 @@
 
 DOTFILES_DIR="$HOME/.dotfiles"
 BACKUP_DIR="$DOTFILES_DIR/.backup"
-TEMPORARY_DIR="$DOTFILES_DIR/.tmp"
 
 # -- OS DETECTION --
 
@@ -22,18 +21,18 @@ fi
 
 # -- INITIALISE OR UPDATE THE REPO --
 
-# cd $HOME
-#
-# if [ ! -d "$DOTFILES_DIR" ]
-# then
-# 	git clone --recurse-submodules https://github.com/bil0u/.dotfiles.git $DOTFILES_DIR
-# 	cd $DOTFILES_DIR
-# else
-# 	echo "$DOTFILES_DIR exists, updating configuration"
-# 	cd $DOTFILES_DIR
-# 	git pull
-# 	git submodule update --recursive --remote
-# fi
+cd $HOME
+
+if [ ! -d "$DOTFILES_DIR" ]
+then
+	git clone --recurse-submodules https://github.com/bil0u/.dotfiles.git $DOTFILES_DIR
+	cd $DOTFILES_DIR
+else
+	echo "$DOTFILES_DIR exists, updating configuration"
+	cd $DOTFILES_DIR
+	git pull
+	git submodule update --recursive --remote
+fi
 
 # -----------------------
 
@@ -84,7 +83,7 @@ fi
 
 yaml_vars "./setup/config.yml"
 echo ""
-echo "---> Linking dotfiles in ~"
+echo "---> Linking dotfiles to [ ~ ]"
 link_dots
 
 echo "Finished ! Please restart your session"

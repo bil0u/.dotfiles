@@ -28,6 +28,7 @@ modules:
             - bash modules/brew/install
         steps: 1
         update: brew update
+        uninstall: bash modules/brew/install
     -
         name: 'Powerline fonts'
         exists: false
@@ -35,13 +36,15 @@ modules:
             - bash modules/powerline/install.sh
         steps: 1
         update: false
+        uninstall: false
     -
         name: 'Oh-My-Zsh'
         exists: echo $ZSH | grep oh-my-zsh
         install:
             - chsh -s /bin/zsh
         steps: 1
-        update: upgrade_oh_my_zsh
+        update: bash modules/oh-my-zsh/tools/upgrade.sh
+        uninstall: bash modules/oh-my-zsh/tools/uninstall.sh
     -
 --
 brew:

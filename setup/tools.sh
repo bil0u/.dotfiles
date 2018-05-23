@@ -33,6 +33,29 @@ function link_dots()
 	do
 		link=~/.$(basename $dot)
 		echo "  $dot"
+		if [ -f $link ]
+		then
+			echo "  +-> Original backed up"
+			mv $link $BACKUP_DIR
+		fi
 		ln -sfn $DOTFILES_DIR/$dot $link
+	done
+}
+
+function unlink_dots()
+{
+	echo "> ${#link_files[@]} file links"
+	for dot in $(echo ${link_files[@]} | tr -d "'" )
+	do
+		link=$HOME/.$(basename $dot)
+		echo "  $link"
+		rm $link
+	done
+	echo "> ${#link_directories[@]} directory links"
+	for dot in $(echo ${link_directories[@]} | tr -d "'" )
+	do
+		link=~/.$(basename $dot)
+		echo "  $link"
+		rm $link
 	done
 }
