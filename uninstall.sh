@@ -4,6 +4,7 @@
 
 DOTFILES_DIR="$HOME/.dotfiles"
 BACKUP_DIR="$DOTFILES_DIR/.backup"
+export ZSH="$DOTFILES_DIR/modules/oh-my-zsh"
 
 # -- BASIC OS DETECTION --
 
