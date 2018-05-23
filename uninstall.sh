@@ -22,7 +22,7 @@ fi
 
 # -- IMPORTING TOOLS --
 
-. ./zsh/zsh_colors.zsh
+. ./zsh/colors.zsh
 
 # -----------------------
 
@@ -40,8 +40,6 @@ echo -n "OS type : "
 clr_cyan "$OS"
 echo ""
 read -p "Press < ENTER > to continue"
-
-cd $HOME
 
 if [ "$OS" == "macOS" ]
 then
@@ -63,4 +61,5 @@ echo "---> Restoring old config"
 mv $BACKUP_DIR/* $HOME
 rm -rf $DOTFILES_DIR
 
+cd $HOME
 chsh -s bash
