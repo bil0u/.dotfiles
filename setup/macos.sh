@@ -1,6 +1,35 @@
 #!/bin/bash
 
 # ------------------------------------
+# --        REQUIREMENTS
+# ------------------------------------
+
+function install_requirements()
+{
+	step=0
+	nb_requirements=${#requirements__name[@]}
+	((nb_requirements--))
+	for i in $(seq 0 "$nb_requirements")
+	do
+		echo "## ${requirements__name[$i]}"
+		remaining=${requirements__steps[$i]}
+		eval "${requirements__exists[$i]}"
+		if [ $? -ne 0 ]
+	 	then
+			echo ">  Installing ..."
+			while [ $remaining -gt 0 ]
+			do
+				${requirements__install[$step]}
+				((step++))
+				((remaining--))
+			done
+		else
+			((step+=remaining))
+		fi
+	done
+}
+
+# ------------------------------------
 # --        MODULES
 # ------------------------------------
 

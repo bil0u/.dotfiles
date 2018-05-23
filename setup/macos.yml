@@ -11,26 +11,28 @@
 #   RESPECT THE INDENTATION !
 #
 --
-modules:
+requirements:
     -
         name: 'XCode'
         exists: xcode-select -p
         install:
             - xcode-select --install
         steps: 1
-        update: false
+    -
+--
+modules:
     -
         name: 'Homebrew'
         exists: which brew
         install:
-            - bash brew_install/install
+            - bash modules/brew/install
         steps: 1
         update: brew update
     -
         name: 'Powerline fonts'
         exists: false
         install:
-            - bash fonts/powerline/install.sh
+            - bash modules/powerline/install.sh
         steps: 1
         update: false
     -
@@ -39,7 +41,7 @@ modules:
         install:
             - chsh -s /bin/zsh
         steps: 1
-        update: bash zsh/oh-my-zsh/tools/upgrade.sh
+        update: bash modules/oh-my-zsh/tools/upgrade.sh
     -
 --
 brew:

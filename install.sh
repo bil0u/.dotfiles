@@ -65,6 +65,9 @@ then
 
 	yaml_vars "./setup/macos.yml"
 	echo ""
+	echo "---> Installing requirements"
+	install_modules
+	echo ""
 	echo "---> Installing/updating modules"
 	install_modules
 	echo ""
