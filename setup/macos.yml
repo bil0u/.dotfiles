@@ -26,7 +26,8 @@ modules:
         exists: which brew
         install:
             - bash modules/brew/install
-        steps: 1
+            - brew tap caskroom/cask
+        steps: 2
         update: brew update
         uninstall: bash modules/brew/install
     -
