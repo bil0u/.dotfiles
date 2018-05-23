@@ -39,8 +39,8 @@ fi
 
 # -- IMPORTING TOOLS --
 
-source $DOTFILES_DIR/zsh/colors.sh
-source $DOTFILES_DIR/zsh/functions.sh
+source $DOTFILES_DIR/zsh/colors.zsh
+source $DOTFILES_DIR/zsh/functions.zsh
 source $DOTFILES_DIR/setup/tools.sh
 source $DOTFILES_DIR/setup/macos.sh
 
@@ -66,16 +66,16 @@ then
 	yaml_vars "./setup/macos.yml"
 	echo ""
 	echo "---> Installing requirements"
-	install_modules
+	install_requirements
 	echo ""
 	echo "---> Installing/updating modules"
 	install_modules
 	echo ""
 	echo "---> Installing/updating brew packages"
-	# install_brew_packages
+	install_brew_packages
 	echo ""
 	echo "---> Installing/updating brew casks"
-	# install_brew_casks
+	install_brew_casks
 	echo ""
 	echo "---> Installing/updating apps preferences"
 	update_app_prefs
@@ -87,5 +87,4 @@ echo ""
 echo "---> Linking dotfiles in ~"
 link_dots
 
-reset
 echo "Finished ! Please restart your session"

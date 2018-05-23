@@ -68,7 +68,7 @@ function install_modules()
 function install_brew_packages()
 {
 	echo "${#brew_packages[@]} packages to install"
-	for package in $(echo ${brew_packages[@]} | tr -d "'" )
+	for package in $(echo ${brew_packages[@]} | tr -d "'")
 	do
 		brew list | grep $package > /dev/null 2> /dev/null
 		if [ $? -ne 0 ]
@@ -84,7 +84,7 @@ function install_brew_packages()
 function install_brew_casks()
 {
 	echo "${#brew_casks[@]} casks to install"
-	for cask in $(echo ${brew_casks[@]} | tr -d "'" )
+	for cask in $(echo ${brew_casks[@]} | tr -d "'")
 	do
 		ls /Applications | grep -i $(echo $cask | sed 's/[0-9]*//g') > /dev/null 2> /dev/null
 		if [ $? -ne 0 ]
@@ -107,7 +107,7 @@ function update_app_prefs()
 	((nb_modules--))
 	for i in $(seq 0 "$nb_modules")
 	do
-		name=$(echo ${app_prefs__name[$i]} | tr -d "'" )
+		name=$(echo ${app_prefs__name[$i]} | tr -d "'")
 		file=${app_prefs__file[$i]}
 		echo ">  Treating $name"
 		case ${app_prefs__type[$i]} in

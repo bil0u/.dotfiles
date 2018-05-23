@@ -17,10 +17,10 @@ link:
         - 'vim/vimrc'
         - 'zsh/zshrc'
     directories:
+        - 'modules/oh-my-zsh'
         - 'atom'
         - 'iterm'
         - 'fonts'
         - 'vim'
         - 'zsh'
-        - 'zsh/oh-my-zsh'
 --

@@ -41,7 +41,7 @@ modules:
         install:
             - chsh -s /bin/zsh
         steps: 1
-        update: bash modules/oh-my-zsh/tools/upgrade.sh
+        update: upgrade_oh_my_zsh
     -
 --
 brew:
