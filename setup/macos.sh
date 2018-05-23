@@ -107,7 +107,7 @@ function install_brew_casks()
 		if [ $? -ne 0 ]
 	 	then
 			echo ">  Installing $cask ..."
-			brew install $cask
+			brew cask install $cask
 		else
 			echo ">  $cask already installed"
 		fi
