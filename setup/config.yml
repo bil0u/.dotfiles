@@ -22,4 +22,5 @@ link:
         - 'fonts'
         - 'vim'
         - 'zsh'
+        - 'zsh/oh-my-zsh'
 --

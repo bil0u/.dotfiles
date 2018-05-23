@@ -14,7 +14,6 @@ function install_modules()
 	do
 		echo "## ${modules__name[$i]}"
 		remaining=${modules__steps[$i]}
-		echo "${modules__exists[$i]}"
 		eval "${modules__exists[$i]}"
 		if [ $? -ne 0 ]
 	 	then

@@ -83,3 +83,6 @@ yaml_vars "./setup/config.yml"
 echo ""
 echo "---> Linking dotfiles in ~"
 link_dots
+
+reset
+echo "Finished ! Please restart your session"

@@ -1,26 +1,22 @@
-DOTFILES_DIR="$HOME/.dotfiles"
+# -- USER CONFIG --
 
 PATH="/usr/local/share/python/:$PATH"
 export PATH=$HOME/.bin:/usr/local/bin:$PATH
+export EDITOR=vim
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export DOTFILES_DIR="$HOME/.dotfiles"
 
 # -- ZSH CUSTOM --
 
 export ZSH="$HOME/.oh-my-zsh"
 export UPDATE_ZSH_DAYS=7
+ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(git)
 
-# -- SOURCING CONFIGS --
+# -- SOURCING OH MY ZSH --
 
-for zsh in $(find $DOTFILES_DIR -maxdepth 2 -name '*.zsh');
-do
-	source $zsh
-done
-
-# -- USER CONFIG --
-
-export EDITOR=vim
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+source "$ZSH/oh-my-zsh.sh"

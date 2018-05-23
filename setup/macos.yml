@@ -23,24 +23,23 @@ modules:
         name: 'Homebrew'
         exists: which brew
         install:
-            - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+            - bash brew_install/install
         steps: 1
         update: brew update
     -
         name: 'Powerline fonts'
         exists: false
         install:
-            - bash fonts/powerline_fonts/install.sh
+            - bash fonts/powerline/install.sh
         steps: 1
         update: false
     -
         name: 'Oh-My-Zsh'
         exists: echo $ZSH | grep oh-my-zsh
         install:
-            - export ZSH="$HOME/.dotfiles/oh-my-zsh"
-            - curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-        steps: 2
-        update: upgrade_oh_my_zsh
+            - chsh -s /bin/zsh
+        steps: 1
+        update: bash zsh/oh-my-zsh/tools/upgrade.sh
     -
 --
 brew:
