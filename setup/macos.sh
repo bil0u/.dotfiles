@@ -14,7 +14,8 @@ function install_modules()
 	do
 		echo "## ${modules__name[$i]}"
 		remaining=${modules__steps[$i]}
-		${modules__exists[$i]} > /dev/null 2> /dev/null
+		echo "${modules__exists[$i]}"
+		eval "${modules__exists[$i]}"
 		if [ $? -ne 0 ]
 	 	then
 			echo ">  Installing ..."
@@ -26,6 +27,7 @@ function install_modules()
 			done
 		else
 			echo ">  Already installed, updating ..."
+			${modules__update[$i]}
 			((step+=remaining))
 		fi
 	done

@@ -25,7 +25,7 @@ modules:
         install:
             - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         steps: 1
-        update: brew update && brew upgrade
+        update: brew update
     -
         name: 'Powerline fonts'
         exists: false
@@ -35,10 +35,10 @@ modules:
         update: false
     -
         name: 'Oh-My-Zsh'
-        exists: echo $ZSH | grep 'oh-my-zsh'
+        exists: echo $ZSH | grep oh-my-zsh
         install:
             - export ZSH="$HOME/.dotfiles/oh-my-zsh"
-            - sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+            - curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
         steps: 2
         update: upgrade_oh_my_zsh
     -
