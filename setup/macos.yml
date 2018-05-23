@@ -1,0 +1,49 @@
+# - WARNING - PARSER SEEMS TO HAVE A PROBLEM WITH 's' AT END OF LINES
+#
+# - SYNTAX -
+#
+#   name:    package name
+#   exists:  command to run to know if the package is installed
+#   install: commands to run to install the package
+#   steps:   number of commands in 'install' category
+#   update:  command to update the package , 'false' if none
+#
+#   RESPECT THE INDENTATION !
+#
+--
+modules:
+    -
+        name: 'XCode'
+        exists: xcode-select -p
+        install:
+            - xcode-select --install
+        steps: 1
+        update: false
+    -
+        name: 'Homebrew'
+        exists: which brew
+        install:
+            - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        steps: 1
+        update: brew update && brew upgrade
+    -
+--
+brew:
+    packages:
+        - 'coreutils'
+        - 'wget'
+        - 'cmake'
+        - 'zsh-completions'
+        - 'node'
+        - 'python'
+    casks:
+        - 'iterm2'
+        - 'atom'
+--
+app_prefs:
+    -
+        name: 'iTerm'
+        type: plist
+        domain: com.googlecode.iterm2
+        file: iterm/com.googlecode.iterm2.plist
+    -

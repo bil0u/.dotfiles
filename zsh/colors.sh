@@ -1,12 +1,12 @@
-#!/bin/zsh
-#
+#!/bin/bash
+
 # Constants and functions for terminal colors.
 # Author: Max Tsepkov <max@yogi.pw>
 
 CLR_ESC="\033["
 
 # All these variables has a function with the same name, but in lower case.
-#
+
 CLR_RESET=0             # reset all attributes to their defaults
 CLR_RESET_UNDERLINE=24  # underline off
 CLR_RESET_REVERSE=27    # reverse off
@@ -113,7 +113,7 @@ function clr_reverse         { clr_layer $CLR_REVERSE "$@";         }
 function clr_black           { clr_layer $CLR_BLACK "$@";           }
 function clr_red             { clr_layer $CLR_RED "$@";             }
 function clr_green           { clr_layer $CLR_GREEN "$@";           }
-function clr_yellow           { clr_layer $CLR_YELLOW "$@";           }
+function clr_yellow          { clr_layer $CLR_YELLOW "$@";          }
 function clr_blue            { clr_layer $CLR_BLUE "$@";            }
 function clr_magenta         { clr_layer $CLR_MAGENTA "$@";         }
 function clr_cyan            { clr_layer $CLR_CYAN "$@";            }
@@ -121,7 +121,7 @@ function clr_white           { clr_layer $CLR_WHITE "$@";           }
 function clr_blackb          { clr_layer $CLR_BLACKB "$@";          }
 function clr_redb            { clr_layer $CLR_REDB "$@";            }
 function clr_greenb          { clr_layer $CLR_GREENB "$@";          }
-function clr_yellowb          { clr_layer $CLR_YELLOWB "$@";          }
+function clr_yellowb         { clr_layer $CLR_YELLOWB "$@";         }
 function clr_blueb           { clr_layer $CLR_BLUEB "$@";           }
 function clr_magentab        { clr_layer $CLR_MAGENTAB "$@";        }
 function clr_cyanb           { clr_layer $CLR_CYANB "$@";           }
@@ -154,7 +154,6 @@ function clr_dump
     2        clr_bright         $CLR_BRIGHT
     4        clr_underscore     $CLR_UNDERSCORE
     7        clr_reverse        $CLR_REVERSE
-
     30       clr_black          $CLR_BLACK
     31       clr_red            $CLR_RED
     32       clr_green          $CLR_GREEN
@@ -163,7 +162,6 @@ function clr_dump
     35       clr_magenta        $CLR_MAGENTA
     36       clr_cyan           $CLR_CYAN
     37       clr_white          $CLR_WHITE
-
     40       clr_blackb         $CLR_BLACKB
     41       clr_redb           $CLR_REDB
     42       clr_greenb         $CLR_GREENB

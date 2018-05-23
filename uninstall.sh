@@ -2,21 +2,21 @@
 
 # -- VARIABLES --
 
-dotfiles_dir="$HOME/.dotfiles"
-old_dotfiles="$dotfiles_dir/old_config/"
+DOTFILES_DIR="$HOME/.dotfiles"
+BACKUP_DIR="$DOTFILES_DIR/.backup"
 
 # -- BASIC OS DETECTION --
 
 case "$OSTYPE" in
-	darwin*)	os="macOS" ;;
-	linux*)		os="Linux" ;;
-	*)			os="Unsupported" ;;
+	darwin*)	OS="macOS" ;;
+#	linux*)		OS="Linux" ;;
+	*)			OS="Other" ;;
 esac
 
-if [ "$os" == "Unsupported" ]
+if [ "$OS" == "Other" ]
 then
 	clr_red "Unsupported OS, aborting"
-	exit 0;
+	exit 1;
 fi
 
 # -- IMPORTING TOOLS --
@@ -36,58 +36,26 @@ echo "This script will clean all dotfiles."
 echo "Warning, this cannot be undone !"
 echo ""
 echo -n "OS type : "
-clr_cyan "$os"
+clr_cyan "$OS"
 echo ""
-read -p "Press <enter> to continue"
-
-# -- OH MY ZSH --
-bash $HOME/.oh-my-zsh/tools/uninstall.sh
-
-# -- POWERLINE FONTS --
-bash $HOME/.powerline_fonts/uninstall.sh
-
-appdir="/Applications"
-# -- ITERM APP --
-if [ -d "$appdir/iTerm.app" ]
-then
-	brew cask uninstall iterm2
-	rm -rf $appdir/iTerm.app
-fi
-# -- ATOM APP --
-if [ -d "$appdir/Atom.app" ]
-then
-	brew cask uninstall atom
-	rm -rf $appdir/Atom.app
-fi
-
-# -- ITERM PROFILE --
-defaults -currentHost delete com.googlecode.iterm2
-rm -f $HOME/Library/Preferences/com.googlecode.iterm2.plist
-
+read -p "Press < ENTER > to continue"
 echo ""
-echo "Deleting the folowing links:"
-echo ""
-echo " > $HOME/.zcompdump*"
-rm -f $HOME/.zcompdump*
-echo " > $HOME/.*sh_history"
-rm -f $HOME/.*sh_history
-for dotfile in $(find $dotfiles_dir -path "*/.git" -prune -o -name "*.ln" -print | sort);
-do
-	homelink=$HOME/.$(echo $(basename $dotfile) | sed s/\.ln//)
-	echo " > $homelink"
-	rm -f $homelink
-done
-echo ""
-echo "Deleting $dotfiles_dir"
-rm -rf $dotfiles_dir
 
-# -- UNSETTING SOME VARIABLES
-export ZSH="/bin/zsh"
-unset UPDATE_ZSH_DAYS
-unset ZSH_THEME
-unset COMPLETION_WAITING_DOTS
-
-# -- ENDING SCRIPT --
-echo ""
 cd $HOME
-env zsh
+
+if [ "$OS" == "macOS" ]
+then
+
+	## UNINSTALL BREW
+
+fi
+
+## REMOVE LINKS
+
+## RESTORE OLD CONFIG
+# mv $BACKUP_DIR $HOME
+# rm -rf $DOTFILES_DIR
+# mv $BACKUP_DIR/* $HOME
+# rm -rf $BACKUP_DIR
+
+env bash
