@@ -23,6 +23,8 @@ fi
 # -- IMPORTING TOOLS --
 
 . ./zsh/colors.zsh
+. ./zsh/tools.zsh
+. ./zsh/macos.sh
 
 # -----------------------
 
