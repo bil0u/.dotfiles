@@ -1,0 +1,9 @@
+[submodule "zsh/oh-my-zsh"]
+	path = zsh/oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "fonts/powerline"]
+	path = fonts/powerline
+	url = https://github.com/powerline/fonts.git
+[submodule "brew_install"]
+	path = brew_install
+	url = https://github.com/Homebrew/install.git
