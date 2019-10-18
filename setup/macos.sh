@@ -74,7 +74,7 @@ function install_brew_casks()
 	echo "${#brew_casks[@]} casks to install"
 	for cask in $(echo ${brew_casks[@]} | tr -d "'")
 	do
-		ls /Applications | grep -i $(echo $cask | sed 's/[0-9]*//g' | sed 's/-/ /g') &>/dev/null && brew info cask $cask &>/dev/null
+		ls /Applications | grep -i "$(echo $cask | sed 's/[0-9]*//g' | sed 's/-/ /g')" &>/dev/null || brew info cask $cask &>/dev/null
 		if [ $? -ne 0 ]
 	 	then
 			echo ">  Installing $cask ..."
