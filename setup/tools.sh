@@ -49,13 +49,13 @@ function unlink_dots()
 	do
 		link=$HOME/.$(basename $dot)
 		echo "  $link"
-		rm -f $link > /dev/null 2> /dev/null
+		rm -f $link &>/dev/null
 	done
 	echo "> ${#link_directories[@]} directory links"
 	for dot in $(echo ${link_directories[@]} | tr -d "'" )
 	do
 		link=~/.$(basename $dot)
 		echo "  $link"
-		rm -f $link > /dev/null 2> /dev/null
+		rm -f $link &>/dev/null
 	done
 }

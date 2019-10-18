@@ -25,11 +25,11 @@ fi
 if [ "$OS" == "macOS" ]
 then
 	echo -n "Installing macOS requirements :  ... "
-	xcode-select -p > /dev/null 2> /dev/null
+	xcode-select -p &>/dev/null
 	if [ $? -ne 0 ]
 	then
-		xcode-select --install > /dev/null 2> /dev/null
-		sudo xcodebuild -license accept > /dev/null 2> /dev/null
+		xcode-select --install &>/dev/null
+		sudo xcodebuild -license accept &>/dev/null
 	fi
 	echo "DONE"
 elif [ "$OS" == "Linux" ]
@@ -48,7 +48,7 @@ then
 	else
 		REPO_SCHEME="git@"
 	fi
-	git clone --recurse-submodules $REPO_SCHEME$REPO_URL $DOTFILES_DIR > /dev/null 2> /dev/null
+	git clone --recurse-submodules $REPO_SCHEME$REPO_URL $DOTFILES_DIR &>/dev/null
 	cd $DOTFILES_DIR
 	mkdir -p $BACKUP_DIR
 	echo "DONE"
@@ -83,6 +83,13 @@ echo ""
 read -p "Press < ENTER > to continue"
 echo ""
 
+sudo -nv 2>&1
+if [ $? -ne 0 ]
+then
+	echo "Please enter you password in order to run the install with full privileges"
+	sudo -v
+	echo ""
+fi
 
 yaml_vars "./config/config.yml"
 echo "---"
