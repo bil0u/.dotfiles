@@ -62,7 +62,7 @@ function install_brew_packages()
 		if [ $? -ne 0 ]
 	 	then
 			echo ">  Installing $package ..."
-			brew install $package > /dev/null 2> /dev/null
+			brew install $package
 		else
 			echo ">  $package already installed"
 		fi
@@ -78,7 +78,7 @@ function install_brew_casks()
 		if [ $? -ne 0 ]
 	 	then
 			echo ">  Installing $cask ..."
-			brew cask install $cask > /dev/null 2> /dev/null
+			brew cask install $cask
 		else
 			echo ">  $cask already installed"
 		fi

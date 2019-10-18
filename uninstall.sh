@@ -76,7 +76,7 @@ unlink_dots
 
 echo ""
 echo "---> Restoring old config"
-if [ $(ls -A $BACKUP_DIR) -eq 0 ]
+if [ "$(ls -A $BACKUP_DIR)" ]
 then
 	mv -f $BACKUP_DIR/* $HOME/
 fi
