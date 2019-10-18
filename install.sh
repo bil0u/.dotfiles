@@ -83,14 +83,6 @@ echo ""
 read -p "Press < ENTER > to continue"
 echo ""
 
-sudo -nv 2>&1
-if [ $? -ne 0 ]
-then
-	echo "Please enter you password in order to run the install with full privileges"
-	sudo -v
-	echo ""
-fi
-
 yaml_vars "./config/config.yml"
 echo "---"
 echo ""
