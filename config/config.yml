@@ -8,16 +8,15 @@
 #
 #   RESPECT THE INDENTATION !
 #
---
 link:
-    files:
-        - 'prefs/git/gitconfig'
-        - 'prefs/vim/vimrc'
-        - 'prefs/zsh/zshrc'
-    directories:
-        - 'modules/oh-my-zsh'
-        - 'prefs/atom'
-        - 'prefs/iterm'
-        - 'prefs/fonts'
-        - 'prefs/vim'
-        - 'prefs/zsh'
+  files:
+    - 'prefs/git/gitconfig'
+    - 'prefs/vim/vimrc'
+    - 'prefs/zsh/zshrc'
+  directories:
+    - 'modules/oh-my-zsh'
+    - 'prefs/atom'
+    - 'prefs/iterm'
+    - 'prefs/fonts'
+    - 'prefs/vim'
+    - 'prefs/zsh'
