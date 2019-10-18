@@ -76,7 +76,10 @@ unlink_dots
 
 echo ""
 echo "---> Restoring old config"
-mv -f $BACKUP_DIR/* $HOME/
+if [ $(ls -A $BACKUP_DIR) -eq 0 ]
+then
+	mv -f $BACKUP_DIR/* $HOME/
+fi
 cd $HOME
 rm -rf $DOTFILES_DIR
 export ZSH="/bin/zsh"
