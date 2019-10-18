@@ -18,7 +18,7 @@ modules:
         exists: which brew
         install:
             - ruby modules/homebrew/install
-            - brew tap homebrew/cask-fonts;
+            - brew tap homebrew/cask-fonts
         steps: 2
         update: brew update
         uninstall: ruby modules/homebrew/uninstall
