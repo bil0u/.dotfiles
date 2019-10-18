@@ -20,13 +20,13 @@ function install_modules()
 			echo ">  Installing ..."
 			while [ $remaining -gt 0 ]
 			do
-				${modules__install[$step]} > /dev/null 2> /dev/null
+				${modules__install[$step]}
 				((step++))
 				((remaining--))
 			done
 		else
 			echo ">  Already installed, updating ..."
-			${modules__update[$i]} > /dev/null 2> /dev/null
+			${modules__update[$i]}
 			((step+=remaining))
 		fi
 	done
