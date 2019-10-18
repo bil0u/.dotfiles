@@ -1,6 +1,3 @@
-# - WARNING - PARSER SEEMS TO HAVE A PROBLEM WITH 's' AT END OF LINES.
-#           - TO FIX IT, YOU CAN APPEND A PROBLEMATIC LINE WITH ';'
-#
 # - SYNTAX -
 #
 #   name:    package name
