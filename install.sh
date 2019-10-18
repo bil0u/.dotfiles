@@ -91,19 +91,16 @@ then
 	echo ""
 fi
 
-# yaml_parse "./setup/macos.yml"
-# echo "---"
 yaml_vars "./config/config.yml"
+echo "---"
 echo ""
 echo "---> Linking dotfiles to [ ~ ]"
 link_dots
 
 if [ "$OS" == "macOS" ]
 then
-
-	# yaml_parse "./setup/macos.yml"
-	# echo "---"
 	yaml_vars "./config/macos.yml"
+	echo "---"
 	echo ""
 	echo "---> Installing/updating modules"
 	install_modules
@@ -119,7 +116,11 @@ then
 	echo ""
 	echo "---> Installing/updating apps preferences"
 	update_app_prefs "install"
-
+	echo ""
 fi
+
+echo "---> Running final steps"
+final_steps
+echo ""
 
 echo "Finished ! Please restart your session"

@@ -17,8 +17,8 @@ modules:
         exists: which brew
         install:
             - ruby modules/homebrew/install
-            - brew tap caskroom/cask
-            - brew tap homebrew/cask-fonts
+            - brew tap homebrew/cask-cask
+            - brew tap homebrew/cask-fonts 
         steps: 2
         update: brew update
         uninstall: ruby modules/homebrew/uninstall
@@ -27,8 +27,7 @@ modules:
         exists: echo $ZSH | grep oh-my-zsh
         install:
             - bash modules/oh-my-zsh/tools/install.sh
-            - chsh -s /bin/zsh
-        steps: 2
+        steps: 1
         update: bash modules/oh-my-zsh/tools/upgrade.sh
         uninstall: bash modules/oh-my-zsh/tools/uninstall.sh
     -

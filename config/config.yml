@@ -24,3 +24,7 @@ link:
         - 'prefs/vim'
         - 'prefs/zsh'
 --
+final:
+    commands:
+        - 'chsh -s $(which zsh)'
+--

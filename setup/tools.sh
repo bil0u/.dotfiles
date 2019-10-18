@@ -59,3 +59,12 @@ function unlink_dots()
 		rm -f $link > /dev/null 2> /dev/null
 	done
 }
+
+function final_steps() {
+	echo "> ${#final_commands[@]} final commands to run"
+	for command in $(echo ${final_commands[@]} | tr -d "'" )
+	do
+		echo "  $command"
+		$command
+	done
+}
