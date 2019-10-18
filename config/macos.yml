@@ -1,4 +1,5 @@
-# - WARNING - PARSER SEEMS TO HAVE A PROBLEM WITH 's' AT END OF LINES
+# - WARNING - PARSER SEEMS TO HAVE A PROBLEM WITH 's' AT END OF LINES.
+#           - TO FIX IT, YOU CAN APPEND A PROBLEMATIC LINE WITH ';'
 #
 # - SYNTAX -
 #
@@ -17,7 +18,7 @@ modules:
         exists: which brew
         install:
             - ruby modules/homebrew/install
-            - brew tap homebrew/cask-fonts
+            - brew tap homebrew/cask-fonts;
         steps: 2
         update: brew update
         uninstall: ruby modules/homebrew/uninstall
@@ -25,7 +26,7 @@ modules:
         name: 'Oh-My-Zsh'
         exists: echo $ZSH | grep oh-my-zsh
         install:
-            - bash modules/oh-my-zsh/tools/install.sh
+            - chsh -s $(which zsh)
         steps: 1
         update: bash modules/oh-my-zsh/tools/upgrade.sh
         uninstall: bash modules/oh-my-zsh/tools/uninstall.sh

@@ -119,8 +119,4 @@ then
 	echo ""
 fi
 
-echo "---> Running final steps"
-final_steps
-echo ""
-
 echo "Finished ! Please restart your session"
