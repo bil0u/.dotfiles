@@ -52,7 +52,7 @@ function yaml_vars() # Parse the yaml file given as parameter and set the result
 {
 	local yaml_file="$1"
     local prefix="$2"
-    eval "$(parse_yaml "$yaml_file" "$prefix")"
+    eval "$(yaml_parse "$yaml_file" "$prefix")"
 }
 
 #
