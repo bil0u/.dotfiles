@@ -1,0 +1,30 @@
+[user]
+	name = Ugo Popée
+	email = ugo.popee@me.com
+	username = upopee
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[web]
+	browser = safari
+[color]
+	ui = auto
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+[github]
+	user = bil0u
+[alias]
+	c = commit
+	cm = commit -m

@@ -1,0 +1,26 @@
+# - WARNING - PARSER SEEMS TO HAVE A PROBLEM WITH 's' AT END OF LINES
+#
+# - SYNTAX -
+#
+#   name:    package name
+#   exists:  command to run to know if the package is installed
+#   install: commands to run to install the package
+#   steps:   number of commands in 'install' category
+#   update:  command to update the package , 'false' if none
+#
+#   RESPECT THE INDENTATION !
+#
+--
+link:
+    files:
+        - 'prefs/git/gitconfig'
+        - 'prefs/vim/vimrc'
+        - 'prefs/zsh/zshrc'
+    directories:
+        - 'modules/oh-my-zsh'
+        - 'prefs/atom'
+        - 'prefs/iterm'
+        - 'prefs/fonts'
+        - 'prefs/vim'
+        - 'prefs/zsh'
+--

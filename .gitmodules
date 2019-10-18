@@ -1,0 +1,9 @@
+[submodule "modules/homebrew"]
+	path = modules/homebrew
+	url = https://github.com/Homebrew/install.git
+[submodule "modules/oh-my-zsh"]
+	path = modules/oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh
+[submodule "prefs/zsh/themes/powerlevel10k"]
+	path = prefs/zsh/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git

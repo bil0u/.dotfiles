@@ -1,0 +1,38 @@
+"*":
+  "autocomplete-plus":
+    confirmCompletion: "enter"
+  core:
+    disabledPackages: [
+      "snippets"
+    ]
+    ignoredNames: [
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "desktop.ini"
+      ".objects"
+    ]
+    projectHome: "/Users/Bilou/Projets"
+    telemetryConsent: "no"
+  editor:
+    fontSize: 11
+    showIndentGuide: true
+    showInvisibles: true
+    tabLength: 4
+    tabType: "hard"
+  "exception-reporting":
+    userId: "48838eaa-26da-4387-afeb-4e4a42f64b09"
+  "gruvbox-plus-syntax": {}
+  "header-42":
+    login: "upopee"
+  "seti-ui":
+    hideProjectTab: true
+    hideTitleBar: true
+    themeColor: "Orange"
+  "tree-view":
+    hideIgnoredNames: true
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false

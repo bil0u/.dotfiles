@@ -1,0 +1,85 @@
+# - WARNING - PARSER SEEMS TO HAVE A PROBLEM WITH 's' AT END OF LINES
+#
+# - SYNTAX -
+#
+#   name:    package name
+#   exists:  command to run to know if the package is installed
+#   install: commands to run to install the package
+#   steps:   number of commands in 'install' category
+#   update:  command to update the package , 'false' if none
+#
+#   RESPECT THE INDENTATION !
+#
+--
+modules:
+    -
+        name: 'Homebrew'
+        exists: which brew
+        install:
+            - bash modules/homebrew/install
+            - brew tap caskroom/cask
+            - brew tap homebrew/cask-fonts
+        steps: 2
+        update: brew update
+        uninstall: bash modules/homebrew/uninstall
+    -
+        name: 'Oh-My-Zsh'
+        exists: echo $ZSH | grep oh-my-zsh
+        install:
+            - chsh -s /bin/zsh
+        steps: 1
+        update: bash modules/oh-my-zsh/tools/upgrade.sh
+        uninstall: bash modules/oh-my-zsh/tools/uninstall.sh
+    -
+--
+brew:
+    packages:
+        - 'coreutils'
+        - 'wget'
+        - 'cmake'
+        - 'zsh-completions'
+        - 'node'
+        - 'python'
+        - 'python2'
+    casks:
+        - 'jetbrains-toolbox'
+        - 'iterm2'
+        - 'atom'
+        - 'postman'
+        - 'docker'
+        - 'font-hack-nerd-font'
+        - 'google-chrome'
+        - 'vlc'
+        - 'handbrake'
+        - 'teamviewer'
+        - 'plex-media-player'
+        - 'molotov'
+        - 'nzbget'
+        - 'transmission'
+        - 'nordvpn'
+        - 'the-unarchiver'
+        - 'lepton'
+        - 'discord'
+        - 'slack'
+        - 'sketchup'
+--
+python:
+    packages:
+      - 'virtualenv'
+      - 'virtualenvwrapper'
+      - 'ipython'
+--
+app_prefs:
+    -
+        name: 'iTerm'
+        type: plist
+        file: prefs/iterm/com.googlecode.iterm2.plist
+    -
+        name: 'Xcode'
+        type: xcode_data
+        file: prefs/xcode/UserData
+    -
+        name: 'Xcode'
+        type: plist
+        file: prefs/xcode/com.apple.dt.Xcode.plist
+    -
