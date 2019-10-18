@@ -26,8 +26,9 @@ modules:
         name: 'Oh-My-Zsh'
         exists: echo $ZSH | grep oh-my-zsh
         install:
+            - bash modules/oh-my-zsh/tools/install.sh
             - chsh -s /bin/zsh
-        steps: 1
+        steps: 2
         update: bash modules/oh-my-zsh/tools/upgrade.sh
         uninstall: bash modules/oh-my-zsh/tools/uninstall.sh
     -

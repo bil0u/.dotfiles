@@ -49,7 +49,7 @@ read -p "Press < ENTER > to continue"
 if [ "$OS" == "macOS" ]
 then
 
-	yaml_vars "./setup/macos.yml"
+	yaml_vars "./config/macos.yml"
 	echo ""
 	echo "---> Deleting modules"
 	uninstall_modules
@@ -60,7 +60,7 @@ then
 
 fi
 
-yaml_vars "./setup/config.yml"
+yaml_vars "./config/config.yml"
 echo ""
 echo "---> Removing links"
 unlink_dots
@@ -68,7 +68,6 @@ unlink_dots
 echo ""
 echo "---> Restoring old config"
 mv -f $BACKUP_DIR/* $HOME/
-rm -rf $DOTFILES_DIR
-
-export ZSH="/bin/zsh"
 cd $HOME
+rm -rf $DOTFILES_DIR
+export ZSH="/bin/zsh"
