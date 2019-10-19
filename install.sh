@@ -24,14 +24,13 @@ fi
 
 if [ "$OS" == "macOS" ]
 then
-	echo -n "Installing macOS requirements :  ... "
+	echo "Installing macOS requirements :  ... "
 	xcode-select -p &>/dev/null
 	if [ $? -ne 0 ]
 	then
-		xcode-select --install &>/dev/null
-		sudo xcodebuild -license accept &>/dev/null
+		xcode-select --install
+		sudo xcodebuild -license accept
 	fi
-	echo "DONE"
 elif [ "$OS" == "Linux" ]
 then
 	:
@@ -42,16 +41,15 @@ fi
 cd $HOME
 if [ ! -d "$DOTFILES_DIR" ]
 then
-	echo -n "Initializing repository in '$DOTFILES_DIR' ... "
+	echo "Initializing repository in '$DOTFILES_DIR' ... "
 	if ssh -q git@github.com; [ $? -eq 255 ]; then
 		REPO_SCHEME="https://"
 	else
 		REPO_SCHEME="git@"
 	fi
-	git clone --recurse-submodules $REPO_SCHEME$REPO_URL $DOTFILES_DIR &>/dev/null
+	git clone --recurse-submodules $REPO_SCHEME$REPO_URL $DOTFILES_DIR
 	cd $DOTFILES_DIR
 	mkdir -p $BACKUP_DIR
-	echo "DONE"
 else
 	echo "$DOTFILES_DIR exists, updating with last known version ... "
 	cd $DOTFILES_DIR
