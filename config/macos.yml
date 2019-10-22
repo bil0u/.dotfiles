@@ -36,6 +36,7 @@ brew:
     - 'node'
     - 'python'
     - 'python2'
+    - 'git-flow-avh'
   casks:
     - 'jetbrains-toolbox'
     - 'iterm2'
