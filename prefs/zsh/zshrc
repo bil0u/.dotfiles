@@ -122,5 +122,3 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev/projects
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python/libexec/bin/python
-
-source /usr/local/bin/virtualenvwrapper.sh
