@@ -13,11 +13,11 @@ modules:
     name: 'Homebrew'
     exists: which brew
     install:
-      - ruby modules/homebrew/install
+      - bash modules/homebrew/install.sh
       - brew tap homebrew/cask-fonts
     steps: 2
     update: brew update
-    uninstall: ruby modules/homebrew/uninstall
+    uninstall: bash modules/homebrew/uninstall.sh
   -
     name: 'Oh-My-Zsh'
     exists: echo $ZSH | grep oh-my-zsh
