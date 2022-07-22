@@ -22,3 +22,5 @@ alias atdot="atom $DOTFILES_DIR"
 alias opdot="open $DOTFILES_DIR"
 alias tomcat_start="/Library/Tomcat/bin/startup.sh"
 alias tomcat_stop="/Library/Tomcat/bin/shutdown.sh"
+
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'

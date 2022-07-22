@@ -58,7 +58,7 @@ function install_brew_packages()
 	echo "${#brew_packages[@]} packages to install"
 	for package in $(echo ${brew_packages[@]} | tr -d "'")
 	do
-		brew list | grep $package &>/dev/null
+		brew list --formula | grep $package &>/dev/null
 		if [ $? -ne 0 ]
 	 	then
 			echo ">  Installing $package ..."
@@ -74,11 +74,11 @@ function install_brew_casks()
 	echo "${#brew_casks[@]} casks to install"
 	for cask in $(echo ${brew_casks[@]} | tr -d "'")
 	do
-		ls /Applications | grep -i "$(echo $cask | sed 's/[0-9]*//g' | sed 's/-/ /g')" &>/dev/null || brew info cask $cask &>/dev/null
+		brew list --cask | grep $cask &>/dev/null
 		if [ $? -ne 0 ]
 	 	then
 			echo ">  Installing $cask ..."
-			brew cask install $cask
+			brew install --cask $cask
 		else
 			echo ">  $cask already installed"
 		fi

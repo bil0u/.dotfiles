@@ -10,10 +10,18 @@ export PATH="/usr/local/bin:$PATH"
 # Custom
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.brew/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
-# Python 3 > 2
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+# Python
+
+eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
+
+
+# Golang
+
+export PATH="/usr/local/go/bin:$PATH"
+export GOPATH="$HOME/dev/projects/golang"
 
 # Prefs
 
@@ -117,14 +125,26 @@ source "$ZSH/oh-my-zsh.sh"
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 
-# -- PYTHON --
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/dev/projects
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python/libexec/bin/python
 
 ###-tns-completion-start-###
-if [ -f /Users/bilou/.tnsrc ]; then 
-    source /Users/bilou/.tnsrc 
+if [ -f $HOME/.tnsrc ]; then 
+    source $HOME/.tnsrc 
 fi
 ###-tns-completion-end-###
+
+# -- ZSH COMPLETIONS --
+
+if type brew &>/dev/null; then
+	FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+	autoload -Uz compinit
+	compinit
+fi
+
+export NVM_DIR="$HOME/.nvm"
+source $(brew --prefix nvm)/nvm.sh
+source $(brew --prefix nvm)/etc/bash_completion.d/nvm
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform

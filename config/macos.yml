@@ -9,17 +9,15 @@
 #   RESPECT THE INDENTATION !
 #
 modules:
-  -
-    name: 'Homebrew'
+  - name: 'Homebrew'
     exists: which brew
     install:
-      - bash modules/homebrew/install.sh
+      - /bin/bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)'
       - brew tap homebrew/cask-fonts
     steps: 2
     update: brew update
-    uninstall: bash modules/homebrew/uninstall.sh
-  -
-    name: 'Oh-My-Zsh'
+    uninstall: /bin/bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)'
+  - name: 'Oh-My-Zsh'
     exists: echo $ZSH | grep oh-my-zsh
     install:
       - chsh -s $(which zsh)
@@ -37,6 +35,7 @@ brew:
     - 'python'
     - 'python2'
     - 'git-flow-avh'
+    - 'pyenv'
   casks:
     - 'font-hack-nerd-font'
     - 'iterm2'
@@ -64,21 +63,16 @@ brew:
 
 python:
   packages:
-    - 'virtualenv'
-    - 'virtualenvwrapper'
     - 'ipython'
     - 'pipenv'
 
 app_prefs:
-  -
-    name: 'iTerm'
+  - name: 'iTerm'
     type: plist
     file: prefs/iterm/com.googlecode.iterm2.plist
-  -
-    name: 'Xcode'
+  - name: 'Xcode'
     type: xcode_data
     file: prefs/xcode/UserData
-  -
-    name: 'Xcode'
+  - name: 'Xcode'
     type: plist
     file: prefs/xcode/com.apple.dt.Xcode.plist
