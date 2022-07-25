@@ -1,0 +1,77 @@
+# Selects platform specific scripts
+.chezmoiscripts/*/**
+!.chezmoiscripts/{{ .chezmoi.os }}/**
+
+# -----------------------
+# -  Permanent ignores  -
+# -----------------------
+
+.oh-my-zsh/cache/**
+.oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
+
+# -------------------------------
+# -  Platform specific ignores  -
+# -------------------------------
+
+# macOS
+{{ if eq .chezmoi.os "darwin" }}
+{{ else }}
+code
+code/**
+{{ end }}
+
+# linux
+{{ if eq .chezmoi.os "linux" }}
+.local/share/fonts
+{{ else }}
+{{ end }}
+
+# Windows
+{{ if eq .chezmoi.os "windows" }}
+code
+code/**
+.oh-my-zsh
+.oh-my-zsh/**
+.aws
+.aws/**
+.bin
+.bin/**
+.zsh
+.zsh/**
+.ssh
+.ssh/**
+.gitconfig
+.p10k.zsh
+.terraformrc
+.vimrc
+.zprofile
+.zshrc
+{{ else }}
+{{ end }}
+
+# -------------------------------
+# -  Context ignores  -
+# -------------------------------
+
+{{ if not .personal }}
+code
+code/**
+!code/iliomad
+!code/iliomad/**
+.ssh/keys/vogsphere_ed25519
+.ssh/keys/vogsphere_ed25519.pub
+{{ end }}
+
+{{ if not .work }}
+.aws
+.aws/**
+code/iliomad
+code/iliomad/**
+.ssh/keys/iliomad_aws_bastion
+.ssh/keys/iliomad_aws_bastion.pub
+{{ end }}
+
+{{ if and not .work not .personal }}
+.ssh/keys/github_ed25519
+.ssh/keys/github_ed25519.pub
+{{ end }}

@@ -1,0 +1,56 @@
+{{/* Constants, edit this if you fork the project */}}
+
+{{- $name := "Ugo Popée" -}}
+
+{{- $personalEmail := "ugo@p0p.ee" -}}
+{{- $personalVaultId := "hlnmluqkhsy4qcululpgt6uzvu" -}}
+
+{{- $workEmail := "ugo@iliomad.fr" -}}
+{{- $workVaultId := "ng4vabtt7dxvtdggfphteon5am" -}}
+{{- $workEngineeringVaultId := "wgnajbjber6dehxp34r6or4o3m" -}}
+
+{{- $githubUsername := "bil0u" -}}
+{{- $githubEmail := "github@p0p.ee" -}}
+
+{{/* Prompt for variables */}}
+
+{{- $computerName := promptString "Computer name" -}}
+{{- $hostName := promptString "Host name" -}}
+{{- $personal := promptBool "Personal use" -}}
+{{- $work := promptBool "Work use" -}}
+
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+data:
+  osid: {{ $osid | quote }}
+  computerName: {{ $computerName | quote }}
+  hostName: {{ $hostName | quote }}
+  name: {{ $name | quote }}
+  githubUsername: {{ $githubUsername | quote }}
+  {{- if $personal }}
+  personal:
+    email: {{ $personalEmail | quote }}
+    vault: {{ $personalVaultId | quote }}
+    accounts:
+      github:
+        username: {{ $githubUsername | quote }}
+        email: {{ $githubEmail | quote }}
+  {{- end }}
+  {{- if $work }}
+  work:
+    email: {{ $workEmail | quote }}
+    vault: {{ $workVaultId | quote }}
+    engineeringVault: {{ $workEngineeringVaultId | quote }}
+  {{- end }}
+
+diff:
+  exclude:
+    - "externals"
+
+edit:
+  command: code
+  args:
+    - "--wait"

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export OS_VERSION=$(sw_vers | grep ProductVersion | awk -F":\t" '/ProductVersion/ {print $2}')
+export OS_MAJOR=$(echo $OS_VERSION | awk -F"." '{print $1}')
+
+# Checking for updates
+sudo softwareupdate -i -a
+
+# Check for Xcode Command Line Tools and install them if not present
+xcode-select -p &>/dev/null
+if [ $? -ne 0 ]; then
+  echo "Installing Xcode Command Line Tools"
+  xcode-select --install
+  sudo xcodebuild -license accept
+fi
+
+# Check for Homebrew and install if we don't have it
+if test ! $(which brew); then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brew update

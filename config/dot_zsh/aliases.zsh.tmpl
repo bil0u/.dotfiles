@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+# Replace chezmoi command
+alias dot="chezmoi"
+
+# Print all personal functions informations
+alias dhelp="grep "^function" ~/.dotfiles/zsh/functions.zsh | sed 's/function/+/g' | sed 's/() #/ - /g'"
+
+alias mv="mv -i"
+
+# `cd` aliases
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias dev="cd ~/code"
+
+# cat(1) replacement
+{{- if lookPath "bat" }}
+alias cat=bat
+{{- else if lookPath "batcat" }}
+alias cat=batcat
+{{- end }}
+
+# alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'

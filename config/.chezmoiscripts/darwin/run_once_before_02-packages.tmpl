@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+
+# Taps
+# ====
+
+tap 'homebrew/bundle'
+tap 'homebrew/cask'
+tap 'homebrew/cask-fonts'
+tap 'homebrew/cask-versions'
+tap 'homebrew/core'
+tap 'zero-sh/tap'
+
+# Formulaes
+# =========
+
+# GNU utils
+brew 'cmake' # Those that come with macOS are outdated
+brew 'coreutils' # Those that come with macOS are outdated
+brew 'findutils'
+# Bash ZSH
+brew 'bash' # Latest Bash version
+brew 'bash-completion@2'
+brew 'zsh'
+brew 'zsh-completions'
+# Mac App Store manager
+brew 'mas'
+# Dev tools
+brew 'chromedriver'
+brew 'git'
+# - Javascript
+brew 'nvm'
+# - Devops
+brew 'atmos'
+brew 'terraform'
+# - Python
+brew 'pyenv'
+brew 'pipenv'
+# Utilities
+brew 'apply-user-defaults'
+brew 'bat' # Better cat in Terminal
+brew 'grep' # Global Regural Expression Print
+brew 'trash'
+brew 'tree'
+brew 'vim'
+brew 'wget'
+brew 'wifi-password'
+
+# Casks
+# =====
+
+cask '1password'
+cask '1password-cli'
+cask 'adguard'
+cask 'arduino'
+cask 'browserosaurus'
+cask 'discord'
+cask 'docker'
+cask 'figma'
+cask 'firefox'
+cask 'google-chrome'
+cask 'handbrake'
+cask 'iina'
+cask 'iterm2'
+cask 'lepton'
+cask 'lunar'
+cask 'messenger'
+cask 'microsoft-auto-update'
+cask 'microsoft-word'
+cask 'microsoft-powerpoint'
+cask 'microsoft-excel'
+cask 'microsoft-office'
+cask 'microsoft-teams'
+cask 'nordvpn'
+cask 'notion'
+cask 'nzbget'
+cask 'oracle-jdk'
+cask 'postman'
+cask 'protonmail-bridge'
+cask 'shapr3d'
+cask 'slack'
+cask 'teamviewer'
+cask 'the-unarchiver'
+cask 'tor-browser'
+cask 'transmission'
+cask 'vanilla'
+cask 'visual-studio-code'
+cask 'whatsapp'
+cask 'xmind'
+cask 'zoom'
+
+# Quicklook
+cask 'mdimagesizemdimporter'
+cask 'qlmarkdown'
+cask 'qlimagesize'
+cask 'quicklook-json'
+
+# Fonts
+cask 'font-roboto'
+cask 'font-inter'
+cask 'font-source-code-pro-for-powerline'
+cask 'font-source-code-pro'
+cask 'font-source-sans-pro'
+cask 'font-source-serif-pro'
+cask 'font-meslo-for-powerline'
+cask 'font-meslo-lg-nerd-font'
+cask 'font-meslo-lg'
+cask 'font-hack-nerd-font'
+
+# Mac AppStore
+# ============
+
+mas '1Password for Safari', id: 1569813296
+mas 'Authenticator', id: 1538761576
+mas 'Keynote', id: 409183694
+mas 'Magnet', id: 441258766
+mas 'Numbers', id: 409203825
+mas 'Pages', id: 409201541
+mas 'Parcel', id: 639968404
+mas 'Xcode', id: 497799835
+mas '', id: 000000000
+
+EOF
