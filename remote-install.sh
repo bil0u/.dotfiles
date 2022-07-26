@@ -3,7 +3,16 @@
 # Install remotely from single shell command
 # Usage : sh -c "$(curl -fsSL https://raw.githubusercontent.com/bil0u/.dotfiles/remote-install.sh)"
 
-set -e # -e: exit on error
+# Exit on error
+set -e
+
+# Check for Xcode Command Line Tools and install them if not present
+xcode-select -p &>/dev/null
+if [ $? -ne 0 ]; then
+  echo "Installing Xcode Command Line Tools"
+  xcode-select --install
+  sudo xcodebuild -license accept
+fi
 
 if [ ! "$(command -v chezmoi)" ]; then
     bin_dir="$HOME/.local/bin"
@@ -20,5 +29,5 @@ else
     chezmoi=chezmoi
 fi
 
-# exec: replace current process with chezmoi init
+# Replace current process with chezmoi init
 exec "$chezmoi" init --apply bil0u/.dotfiles
