@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export OS_VERSION=$(sw_vers | grep ProductVersion | awk -F":\t" '/ProductVersion/ {print $2}')
+export OS_VERSION=$(sw_vers | grep ProductVersion | awk -F":\t" '{print $2}')
 export OS_MAJOR=$(echo $OS_VERSION | awk -F"." '{print $1}')
 
 # Checking for updates

@@ -1,7 +1,7 @@
 [user]
-name = Ugo Popée
-email = github@p0p.ee
-username = bil0u
+name = {{ .name }}
+email = {{ .personal.accounts.github.email }}
+username = {{ .personal.accounts.github.username }}
 
 [core]
 editor = vim
@@ -31,7 +31,7 @@ changed = yellow bold
 untracked = red bold
 
 [github]
-user = bil0u
+username = {{ .personal.accounts.github.username }}
 
 [alias]
 c = commit

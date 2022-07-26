@@ -1,0 +1,549 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Closing system preferences first
+osascript -e 'tell application "System Preferences" to quit'
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until script has finished
+while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
+
+##########################
+#  SYSTEM CONFIGURATION  #
+##########################
+
+# Computer identity
+# =================
+
+# Set computer name (as done via System Preferences → Sharing)
+sudo scutil --set ComputerName '{{ .computerName }}'
+sudo scutil --set HostName '{{ .hostName }}'
+sudo scutil --set LocalHostName '{{ .hostName }}'
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName '{{ .hostName }}'
+dscacheutil -flushcache
+
+# Languages & localization
+# ========================
+
+# ~ Set locale
+defaults write NSGlobalDomain AppleLocale -string 'fr_FR'
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+# ~ Languages and text formats
+defaults write NSGlobalDomain AppleLanguages -array 'fr-FR' 'en-FR'
+defaults write com.apple.translationd InstalledLocales -array 'fr-FR' 'en-US'
+# ~ Set the timezone; see `sudo systemsetup -listtimezones` for other values
+# sudo systemsetup -settimezone 'Europe/Paris' >/dev/null
+
+# General UI/UX
+# =============
+
+# Set accent color
+defaults delete 'Apple Global Domain' AppleAccentColor
+defaults delete 'Apple Global Domain' AppleHighlightColor
+defaults write 'Apple Global Domain' AppleReduceDesktopTinting -bool false
+# Auto switch between light and dark mode
+defaults write 'Apple Global Domain' AppleInterfacesStyleSwitchesAutomatically -bool true
+# Shows scrollbar automatically
+defaults write 'Apple Global Domain' AppleshowScrollBars -string 'Automatic'
+# Clic scrollbar to go to clicked location
+defaults write 'Apple Global Domain' AppleScrollerPagingBehavior -int 1
+# Confirm changes on close
+defaults write 'Apple Global Domain' NSCloseAlwaysConfirmChanges -bool false
+# Closes windows on app quit
+defaults write 'Apple Global Domain' NSQuitAlwaysKeepsWindows -bool false
+# ~ Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+# ~ Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+# ~ Open home directory instead of iCloud when saving a document
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+# ~ Set sidebar icon size to medium
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+# ~ Add a context menu item for showing the Web Inspector in web views
+defaults write NSGlobalDomain WebKitDeveloperExtras -int 1
+# Allow keyboard navigation everywhere
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# Dock & Menubar
+# ==============
+
+# Dock icons size
+defaults write com.apple.dock tilesize -float 44
+defaults write com.apple.dock magnification -bool false
+# System Preferences > Dock & Menubar > Position
+defaults write com.apple.dock orientation -string 'bottom'
+# System Preferences > Dock & Menubar > Minimize effect
+defaults write com.apple.dock mineffect -string'scale'
+# System Preferences > Dock & Menubar > Autohide
+defaults write com.apple.dock autohide -bool false
+# System Preferences > Dock & Menubar > Disables recent applications
+defaults write com.apple.dock show-recents -bool false
+# System Preferences > Mission Control > Group by app
+defaults write com.apple.dock expose-group-apps -bool true
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+# ~ Make Dock icons of hidden applications translucent
+defaults write com.apple.dock showhidden -bool true
+# Reduces windows on double click in title bar
+defaults write NSGlobalDomain AppleActionOnDoubleClick -string 'Minimize'
+# Extended DateTime format
+defaults write com.apple.menuextra.clock DateFormat -string 'EEE d MMM à  HH:mm:ss'
+defaults write com.apple.menuextra.clock ShowDate -int 0
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+defaults write com.apple.menuextra.clock Show24Hour -bool true
+defaults write com.apple.menuextra.clock ShowSeconds -bool true
+# System Preferences > Mission Control > Rearrange spaces automatically
+defaults write com.apple.dock mru-spaces -bool false
+# Hides menubar in fullscreen
+defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool false
+
+# Control center
+# ==============
+
+# Hides wifi in menubar
+defaults write com.apple.controlcenter 'NSStatusItem Visible Wifi' -bool false
+# Hides bluetooth in menubar
+defaults write com.apple.controlcenter 'NSStatusItem Visible Bluetooth' -bool false
+# Hides airdrop in menubar
+defaults write com.apple.controlcenter 'NSStatusItem Visible AirDrop' -bool false
+# Hides focus in menubar when not enabled
+defaults write com.apple.controlcenter 'NSStatusItem Visible FocusModes' -bool false
+# Hides keyboard brightness in menubar
+defaults write com.apple.controlcenter 'NSStatusItem Visible KeyboardBrightness' -bool false
+# Hides airplay in menubar if not enabled
+defaults write com.apple.airplay showInMenuBarIfPresent -bool true
+defaults write com.apple.controlcenter 'NSStatusItem Visible ScreenMirroring' -bool false
+# Hides display in menubar
+defaults write com.apple.controlcenter 'NSStatusItem Visible Display' -bool false
+# Hides sound in menubar if not active
+defaults write com.apple.controlcenter 'NSStatusItem Visible Sound' -bool false
+# Hides accessibility shortcuts in menubar
+defaults write com.apple.controlcenter 'NSStatusItem Visible AccessibilityShortcuts' -bool false
+# Hides user switcher in menubar
+defaults write com.apple.controlcenter 'NSStatusItem Visible UserSwitcher' -bool false
+# Hides spotlight in menubar
+defaults delete com.apple.Spotlight 'NSStatusItem Visible Item-0'
+# Hides siri in menubar
+defaults write com.apple.Siri StatusMenuVisible -bool true
+# Hides time machine in menubar
+defaults delete com.apple.systemuiserver 'NSStatusItem Preferred Position com.apple.menuextra.TimeMachine'
+defaults delete com.apple.systemuiserver 'NSStatusItem Visible com.apple.menuextra.TimeMachine'
+defaults write com.apple.systemuiserver menuExtras '()'
+
+{{- if eq .host.chassisType "laptop" -}}
+# Shows battery icon
+defaults write com.apple.controlcenter 'NSStatusItem Visible Battery' -bool true
+{{- end -}}
+# Shows date & time
+defaults write com.apple.controlcenter 'NSStatusItem Visible Clock' -bool true
+# Shows control center icon
+defaults write com.apple.controlcenter 'NSStatusItem Visible BentoBox' -bool true
+
+# TBD
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-0' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-1' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-2' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-3' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-4' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-5' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-6' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-7' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-8' '0'
+# defaults write com.apple.controlcenter 'NSStatusItem Visible Item-9' '0'
+
+# Trackpad, Mouse & Keyboard
+# ==========================
+
+# > MOUSE
+# Natural scroll direction
+defaults write 'Apple Global Domain' com.apple.swipescrolldirection -bool true
+# Mouse cursor speed
+defaults write 'Apple Global Domain' com.apple.mouse.scaling -float 0.6875
+# Scrolling speed
+defaults write 'Apple Global Domain' com.apple.scrollwheel.scaling -float 5
+# Double click speed
+defaults write 'Apple Global Domain' com.apple.mouse.doubleClickTreshold -float 0.5
+
+# > KEYBOARD
+# Key repeat speed
+defaults write NSGlobalDomain KeyRepeat -int 1
+# Key repeat delay
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+{{- if eq .host.chassisType "laptop" -}}
+# > TRACKPAD
+# Disables force click
+defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -int 0
+defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool true
+# Data detection & search w/ 3 fingers
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 2
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadThreeFingerTapGesture -int 2
+# Secondary click with two fingers
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadRightClick -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 0
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadCornerSecondaryClick -int 0
+defaults write 'Apple Global Domain' ContextMenuGesture -int 1
+# Disables tap for click
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool false
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad Clicking -bool false
+# Make the click softer
+defaults write com.apple.AppleMultitouchTrackpad FirstClickTreshold -int 0
+defaults write com.apple.AppleMultitouchTrackpad SecondClickTreshold -int 0
+# Adjust move speed
+defaults write 'Apple Global Domain' com.apple.trackpad.scaling -float 0.6875
+# Natural scrolling, smooth, in both directions
+defaults write 'Apple Global Domain' com.apple.swipescrolldirection -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadScroll -bool true
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadScroll -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadHorizScroll -int 1
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadHorizScroll -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadMomentumScroll -bool true
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadMomentumScroll -bool true
+# Zoom in and out
+defaults write com.apple.AppleMultitouchTrackpad TrackpadPinch -bool true
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadPinch -bool true
+# Intelligent zoom
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerDoubleTapGesture -int 1
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadTwoFingerDoubleTapGesture -int 1
+# Rotate items
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRotate -bool true
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadRotate -bool true
+# Navigate between pages w/ 2 fingers
+defaults write 'Apple Global Domain' AppleEnableSwipeNavigateWithScrolls -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+# Navigate between apps w/ 4 fingers
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+# Show notifications center w/ 2 fingers
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+# Show mission control & exposé w/ 3 fingers
+defaults write com.apple.dock showMissionControlGestureEnabled -bool true
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadThreeFingerVertSwipeGesture -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadFourFingerVertSwipeGesture -int 2
+# Show launchpad gesture
+defaults write com.apple.dock showLaunchpadGestureEnabled -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerPinchGesture -int 2
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadFourFingerPinchGesture -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFiveFingerPinchGesture -int 2
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadFiveFingerPinchGesture -int 2
+# Show desktop gesture
+defaults write com.apple.dock showDesktopGestureEnabled -bool true
+# Keep trackpad active when a mouse is plugged
+defaults write com.apple.AppleMultitouchTrackpad USBMouseStopsTrackpad -int 0
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad USBMouseStopsTrackpad -int 0
+# Detect when hand is on trackpad
+defaults write com.apple.AppleMultitouchTrackpad TrackpadHandResting -bool true
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadHandResting -bool true
+
+# TBD
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool false
+defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadThreeFingerDrag -bool false
+defaults write com.apple.AppleMultitouchTrackpad UserPreferences -bool true
+{{- end -}}
+
+# Screen
+# ======
+
+# Sound
+# =====
+
+# ~ Disables screen flash
+defaults write NSGlobalDomain com.apple.sound.beep.flash -int 0
+# ~ Set beep sound
+defaults write NSGlobalDomain com.apple.sound.beep.sound -string /System/Library/Sounds/funk.aiff
+
+# Bluetooth & WiFi
+# ================
+
+# Siri
+# ====
+
+defaults write com.apple.Siri StatusMenuVisible -bool false
+defaults write com.apple.Siri VoiceTriggerUserEnabled -bool true
+
+# Spotlight
+# =========
+
+# ~ Indexing preferences
+defaults write com.apple.Spotlight orderedItems -array \
+    "{'enabled'=1;'name'='APPLICATIONS';}" \
+    "{'enabled'=0;'name'='MENU_SPOTLIGHT_SUGGESTIONS';}" \
+    "{'enabled'=1;'name'='MENU_CONVERSION';}" \
+    "{'enabled'=1;'name'='MENU_EXPRESSION';}" \
+    "{'enabled'=1;'name'='MENU_DEFINITION';}" \
+    "{'enabled'=1;'name'='SYSTEM_PREFS';}" \
+    "{'enabled'=1;'name'='DOCUMENTS';}" \
+    "{'enabled'=1;'name'='DIRECTORIES';}" \
+    "{'enabled'=1;'name'='PRESENTATIONS';}" \
+    "{'enabled'=1;'name'='SPREADSHEETS';}" \
+    "{'enabled'=1;'name'='PDF';}" \
+    "{'enabled'=0;'name'='MESSAGES';}" \
+    "{'enabled'=1;'name'='CONTACT';}" \
+    "{'enabled'=1;'name'='EVENT_TODO';}" \
+    "{'enabled'=1;'name'='IMAGES';}" \
+    "{'enabled'=1;'name'='BOOKMARKS';}" \
+    "{'enabled'=1;'name'='MUSIC';}" \
+    "{'enabled'=1;'name'='MOVIES';}" \
+    "{'enabled'=1;'name'='FONTS';}" \
+    "{'enabled'=1;'name'='MENU_OTHER';}"
+# ~ Load new settings before rebuilding the index
+killall mds >/dev/null 2>&1
+# ~ Make sure indexing is enabled for the main volume
+sudo mdutil -i on / >/dev/null
+# ~ Rebuild the index from scratch
+sudo mdutil -E / >/dev/null
+
+# Time Machine
+# ============
+
+# ~ Prevent Time Machine from prompting to use newly connected storage as backup volumes
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Accessibility
+# =============
+
+# ~ Enables zoom on screen using Cmd + scrollwheel
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+defaults write com.apple.universalaccess closeViewScrollWheelModifiersInt -int 262144
+
+# Quick look
+# ==========
+
+# Allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Energy saving
+# =============
+
+# Restart automatically if the computer freezes
+sudo systemsetup -setrestartfreeze on
+# Sleep the display after 15 minutes
+sudo pmset -a displaysleep 15
+# Set machine sleep to 10 minutes on battery
+sudo pmset -b sleep 10
+
+# Security
+# ========
+
+# Disables GateKeeper
+sudo spctl --master-disable
+# Enables touchID for sudo
+if ls /usr/lib/pam | grep -q "pam_tid.so"; then
+    PAM_FILE="/etc/pam.d/sudo"
+    FIRST_LINE="# ~ sudo: auth account password session"
+    if grep -q pam_tid.so "$PAM_FILE"; then
+        # ~ echo "TouchID is already enabled for sudo"
+        true
+    elif ! head -n1 "$PAM_FILE" | grep -q "$FIRST_LINE"; then
+        echo "=> $PAM_FILE is not in the expected format!"
+    else
+        TOUCHID_LINE="auth       sufficient     pam_tid.so"
+        sudo sed -i .bak -e \
+            "s/$FIRST_LINE/$FIRST_LINE\n$TOUCHID_LINE/" \
+            "$PAM_FILE"
+        sudo rm "$PAM_FILE.bak"
+    fi
+fi
+# ~ Disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+# ~ Disable disk image verification
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+# ~ Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Updates
+# =======
+
+# Turn on app auto-update
+defaults write com.apple.commerce AutoUpdate -bool true
+# defaults write com.apple.finder AutoUpdate -bool true
+# Allow the App Store to reboot machine on macOS updates
+defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
+# defaults write com.apple.finder AutoUpdateRestartRequired -bool true
+# Automatically check for updates.
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+# Download new updates when available.
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+# Installs critical updates
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+# ~ Check for software updates daily, not just once per week
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# Telemetry
+# =========
+
+# Disables targeted ads
+defaults write com.apple.AdLib allowApplePersonalizedAdvertising -bool false
+defaults write com.apple.AdLib allowIdentifierForAdvertising -bool false
+# ~ Disables autogathering large files when submitting a feedback report
+defaults write com.apple.appleseed.FeedbackAssistant Autogather -bool false
+
+################
+#  MACOS APPS  #
+################
+
+# Finder
+# ======
+
+# View > As column.
+defaults write com.apple.finder FXPreferredViewStyle -string clmv
+# View > Show view options > Sort Group By > Name.
+defaults write com.apple.finder FXArrangeGroupViewBy -string Name
+# View > Show view options > Group By > None.
+defaults write com.apple.finder FXPreferredGroupBy -string None
+# Search the current folder when performing a seach.
+defaults write com.apple.finder FXDefaultSearchScope -string SCcf
+# New Finder windows show Home directory.
+defaults write com.apple.finder NewWindowTarget -string PfHm
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
+# Show these items on the desktop:
+#   - Hard disks
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+#   - External hard drives
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+#   - Removable medias
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+#   - Servers
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirstOnDesktop -bool true
+# Show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+# Automatically open a new Finder window when a volume is mounted
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+# Disables warning when modifying a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# Hide tags
+defaults write com.apple.finder ShowRecentTags -bool false
+# Enable iCloud Drive
+defaults write com.apple.finder FXICloudDriveEnabled -bool true
+defaults write com.apple.finder FXICloudDriveDesktop -bool true
+defaults write com.apple.finder FXICloudDriveDocuments -bool true
+# ~ Enable snap-to-grid for icons on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+# ~ Expand the following File Info panes:
+# ~ “General”, “Open with”, and “Sharing & Permissions”
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+    General -bool true \
+    OpenWith -bool true \
+    Privileges -bool true
+# ~ Disable .DS_Store files on network drives.
+defaults write com.apple.desktopservices DSDontWriteNetworkStores '1'
+# ~ Disable .DS_Store files on external drives.
+defaults write com.apple.desktopservices DSDontWriteUSBStores '1'
+
+# Safari
+# ======
+
+# Set homepage to google
+defaults write com.apple.Safari.SandboxBroker Homepage "{length = 260, bytes = 0x62706c69 73743030 d4010203 04050607 0a582476 65727369 6f6e5924 61726368 69766572 5424746f 7058246f 626a6563 74731200 0186a05f 100f4e53 4b657965 64417263 68697665 72d10809 54726f6f 748001a4 0b0c1314 55246e75 6c6cd30d 0e0f1011 12574e53 2e626173 65562463 6c617373 5b4e532e 72656c61 74697665 80008003 80025f10 16687474 70733a2f 2f777777 2e676f6f 676c652e 66722fd2 15161718 5a24636c 6173736e 616d6558 24636c61 73736573 554e5355 524ca217 19584e53 4f626a65 63740811 1a242932 37494c51 53585e65 6d748082 84869fa4 afb8bec1 00000000 00000101 00000000 0000001a 00000000 00000000 00000000 000000ca }"
+# ~ Privacy: don’t send search queries to Apple
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+# ~ Prevent Safari from opening ‘safe’ files automatically after downloading
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+# ~ Enable Safari’s debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+# ~ Enable the Develop menu and the Web Inspector in Safari
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+# ~ Disable AutoFill
+defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+defaults write com.apple.Safari AutoFillPasswords -bool false
+defaults write com.apple.Safari AutoFillCreditCardData -bool false
+defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+# ~ Enable “Do Not Track”
+defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+# ~ Update extensions automatically
+defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+
+# Mail
+# ====
+
+# ~ Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+# Music
+# =====
+
+# ~ Enables losless & Dobly Atmos
+defaults write com.apple.Music losslessEnabled -bool true
+defaults write com.apple.Music downloadDolbyAtmos -bool true
+defaults write com.apple.Music dontWarnAboutAlwaysOnDolbyAtmos -bool true
+defaults write com.apple.Music dontWarnAboutPlayingDownloadedStereo -bool true
+# ~ Sets audio quality
+defaults write com.apple.Music preferredDownloadAudioQuality -int 20
+defaults write com.apple.Music preferredStreamPlaybackAudioQuality -int 15
+# ~ Maxing concurrent music downloads
+defaults write com.apple.Music userMaxConcurrentDownloads -int 10
+
+# Photos
+# ======
+
+# ~ Prevent Photos from opening automatically when devices are plugged in
+defaults write com.apple.ImageCapture disableHotPlug -bool true
+
+# TextEdit
+# ========
+
+# ~ New documents as plain text
+defaults write com.apple.TextEdit RichText -bool false
+# ~ Open and save files as UTF-8
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+# Terminal
+# ========
+
+# ~ Secure Keyboard Entry (see https://security.stackexchange.com/a/47786/8918)
+defaults write com.apple.finder SecureKeyboardEntry -bool true
+
+# Activity monitor
+# ================
+
+# Regular app icon in dock
+defaults write com.apple.ActivityMonitor IconType -int 0
+# Frequent updates (2s)
+defaults write com.apple.ActivityMonitor UpdatePeriod -int 2
+# Keep processor window on top
+defaults write com.apple.ActivityMonitor OnTop -bool true
+# Show the main window when launching Activity Monitor
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+# ~ Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 100
+# ~ Sort Activity Monitor results by CPU usage
+defaults write com.apple.ActivityMonitor SortColumn -string CPUUsage
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+# Disk utility
+# ============
+
+# ~ Enable the debug menu in Disk Utility
+defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+defaults write com.apple.DiskUtility advanced-image-options -bool true

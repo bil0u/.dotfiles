@@ -71,7 +71,7 @@ code/iliomad/**
 .ssh/keys/iliomad_aws_bastion.pub
 {{ end }}
 
-{{ if and not .work not .personal }}
+{{ if and (not .work) (not .personal) }}
 .ssh/keys/github_ed25519
 .ssh/keys/github_ed25519.pub
 {{ end }}
