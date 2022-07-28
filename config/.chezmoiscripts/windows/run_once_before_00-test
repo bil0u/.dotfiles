@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-echo "yolo"
+echo "⚙️  test"
+
+echo "⚡️ Action"

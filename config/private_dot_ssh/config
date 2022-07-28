@@ -1,14 +1,11 @@
+Host *
+	IdentityAgent ~/.ssh/op-agent.sock
+
 Host github.com
-	AddKeysToAgent yes
-	UseKeychain yes
 	IdentityFile ~/.ssh/keys/github_ed25519
 
 Host vogsphere-v2.42.fr
-	AddKeysToAgent yes
-	UseKeychain yes
 	IdentityFile ~/.ssh/keys/vogsphere_ed25519
 
 Host bastion.lab.iliomad.fr
-	AddKeysToAgent yes
-    UseKeychain yes
 	IdentityFile ~/.ssh/keys/iliomad_aws_bastion

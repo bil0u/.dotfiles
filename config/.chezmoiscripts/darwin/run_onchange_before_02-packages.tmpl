@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+echo "⚙️  packages"
+
+if ! command -v brew &>/dev/null ; then
+  {{ if eq .chezmoi.arch "arm64" -}}
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  {{ else -}}
+  eval "$(/usr/local/bin/brew shellenv)"
+  {{ end -}}
+fi
+
+echo "⚡️ Installing packages from Brewfile"
 brew bundle --no-lock --file=/dev/stdin <<EOF
 
 # Taps
@@ -27,8 +38,8 @@ brew 'zsh-completions'
 # Mac App Store manager
 brew 'mas'
 # Dev tools
-brew 'chromedriver'
 brew 'git'
+brew 'svn'
 # - Javascript
 brew 'nvm'
 # - Devops
@@ -54,12 +65,14 @@ cask '1password-cli'
 cask 'adguard'
 cask 'arduino'
 cask 'browserosaurus'
+cask 'chromedriver'
 cask 'discord'
 cask 'docker'
 cask 'figma'
 cask 'firefox'
 cask 'google-chrome'
 cask 'handbrake'
+cask 'iconjar'
 cask 'iina'
 cask 'iterm2'
 cask 'lepton'
@@ -67,9 +80,8 @@ cask 'lunar'
 cask 'messenger'
 cask 'microsoft-auto-update'
 cask 'microsoft-word'
-cask 'microsoft-powerpoint'
 cask 'microsoft-excel'
-cask 'microsoft-office'
+cask 'microsoft-powerpoint'
 cask 'microsoft-teams'
 cask 'nordvpn'
 cask 'notion'

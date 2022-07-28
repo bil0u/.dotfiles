@@ -1,22 +1,45 @@
-# <img src="https://freesvg.org/img/1535649195.png" alt="Markdown Monster icon" style="float: left; margin-right: 10px; height:44px; " /> .dotfiles
+<p align="center">
+  <img src="https://freesvg.org/img/1535649195.png" alt="Markdown Monster icon" style="float: left; height:80px;"/><br>
+  Software configuration made easy
+</p>
 
----
+<p align="center">
+  <a href="#install">Installation</a> •
+  <a href="#commands">Frequent commands</a> •
+  <a href="#docs">Documentation</a> •
+  <a href="#credits">Credits</a>
+</p>
 
-##### Software configuration made easy
+<br>
+
+## 💬 Intro
 
 These are my dotfiles, managed with [`chezmoi`](https://github.com/twpayne/chezmoi). Take anything you want, but use at your own risk.
 
 I'm using it to manage my macOS and Windows environments.
 
-## Installation
+<a name="install"></a>
+## 🚧 Installation
 
 One line install, with curl:
 
 ```sh
-sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply bil0u/.dotfiles
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/bil0u/.dotfiles/main/install.sh)" -- -r
 ```
 
-## Frequent commands
+Or install it manually:
+
+```sh
+# Make sure XCode Commmand line tools are installed
+
+
+git clone https://github.com/bil0u/.dotfiles.git ~/.local/share/chezmoi
+cd ~/.local/share/chezmoi
+./install.sh
+```
+
+<a name="commands"></a>
+## ⚡️ Frequent commands
 
 ```sh
 # Checks for common problems
@@ -39,17 +62,19 @@ dot update
 
 _For full list, see [command overview](https://www.chezmoi.io/user-guide/command-overview), and [daily operations](https://www.chezmoi.io/user-guide/daily-operations/)_
 
-## Documentation
+<a name="docs"></a>
+## 📚 Documentation
 
-[**docs**](/docs/)
-&nbsp;&nbsp;└ [defaults](/docs/defaults.md): macOS & window user preferences setup
+&nbsp;&nbsp;&nbsp;&nbsp;[**docs**](/docs/)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ [defaults](/docs/defaults.md): macOS & window user preferences setup
 
 <!-- &nbsp;&nbsp;├ [`defaults`](/docs/defaults) -->
 <!-- &nbsp;&nbsp;│&nbsp;&nbsp;└ [`defaults`](/docs/defaults) -->
 <!-- &nbsp;&nbsp;│ -->
 <!-- &nbsp;&nbsp;│&nbsp;&nbsp;│ -->
 
-## Credits
+<a name="credits"></a>
+## 🎉 Credits
 
 - Tom Payne for writing [chezmoi](https://github.com/twpayne/chezmoi/)
 - Ian Gregory for [defaults-edit](https://github.com/ThatsJustCheesy/defaults-edit)

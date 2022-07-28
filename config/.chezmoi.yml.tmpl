@@ -3,9 +3,11 @@
 {{- $name := "Ugo Popée" -}}
 
 {{- $personalEmail := "ugo@p0p.ee" -}}
-{{- $personalVaultId := "hlnmluqkhsy4qcululpgt6uzvu" -}}
+{{- $personalAccountId := "Y5UFKSYDXJED7JQCQGIYRA7B6A" -}}
+{{- $personalVaultId := "h66u55hw4da4f5bhbp7fa2ea74" -}}
 
 {{- $workEmail := "ugo@iliomad.fr" -}}
+{{- $workAccountId := "WIVYUIS6LZHHTIFPIXUWKIUQNU" -}}
 {{- $workVaultId := "ng4vabtt7dxvtdggfphteon5am" -}}
 {{- $workEngineeringVaultId := "wgnajbjber6dehxp34r6or4o3m" -}}
 
@@ -14,10 +16,12 @@
 
 {{/* Prompt for variables */}}
 
-{{- $computerName := promptString "Computer name" -}}
+{{- $friendlyName := promptString "Computer friendly name" -}}
 {{- $hostName := promptString "Host name" -}}
 {{- $personal := promptBool "Personal use" -}}
 {{- $work := promptBool "Work use" -}}
+
+{{/* Guess OS based variables */}}
 
 {{- $osid := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
@@ -37,19 +41,43 @@
 {{-   $chassisType = (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command" "if ((Get-CimInstance -Class Win32_Battery | Measure-Object).Count -gt 0) { Write-Output 'laptop' } else { Write-Output 'desktop' }") | trim }}
 {{- end }}
 
+{{- $osBuild := "unknown" }}
+{{- $osVersion := "unknown" }}
+{{- $osMajor := "unknown" }}
+{{- if eq .chezmoi.os "darwin" }}
+{{-	  $swvers := (output "sw_vers") }}
+{{-	  $osBuild = mustRegexFind "\t[0-9A-Z]{5,}" $swvers | trimPrefix "\t" }}
+{{-	  $osVersion = mustRegexFind "\t[0-9]{2}\\.[0-9]{1,2}\\.?[0-9]{0,2}" $swvers | trimPrefix "\t" }}
+{{-	  $osMajor = mustRegexFind "[0-9]{2}" $osVersion }}
+{{- else if eq .chezmoi.os "linux" }}
+{{-   $osVersion = .chezmoi.osRelease }}
+{{-   $osMajor = mustRegexFind "[0-9]+" $osVersion }}
+{{- else if eq .chezmoi.os "windows" }}
+{{-   $osBuild = .chezmoi.windowsVersion.currentBuild }}
+{{-   $osVersion = .chezmoi.windowsVersion.currentVersion }}
+{{-   $osMajor = .chezmoi.windowsVersion.currentMajorVersionNumber }}
+{{- end }}
+
+{{- /* Store needed data */}}
+
 data:
   host:
-    chassisType: {{ $chassisType | quote }}
+    friendly_name: {{ $friendlyName | quote }}
+    host_name: {{ $hostName | quote }}
+    chassis_type: {{ $chassisType | quote }}
     osid: {{ $osid | quote }}
-  computerName: {{ $computerName | quote }}
-  hostName: {{ $hostName | quote }}
+    version:
+      build: {{ $osBuild | quote }}
+      major: {{ $osMajor | quote }}
+      number: {{ $osVersion | quote }}
   name: {{ $name | quote }}
-  githubUsername: {{ $githubUsername | quote }}
   {{- if $personal }}
   personal:
     email: {{ $personalEmail | quote }}
-    vault: {{ $personalVaultId | quote }}
     accounts:
+      op:
+        account_id: {{ $personalAccountId | quote }}
+        vault: {{ $personalVaultId | quote }}
       github:
         username: {{ $githubUsername | quote }}
         email: {{ $githubEmail | quote }}
@@ -57,9 +85,14 @@ data:
   {{- if $work }}
   work:
     email: {{ $workEmail | quote }}
-    vault: {{ $workVaultId | quote }}
-    engineeringVault: {{ $workEngineeringVaultId | quote }}
+    accounts:
+      op:
+        account_id: {{ $workAccountId | quote }}
+        vault: {{ $workVaultId | quote }}
+        engineering_vault: {{ $workEngineeringVaultId | quote }}
   {{- end }}
+
+{{/* chezmoi flags */}}
 
 diff:
   exclude:

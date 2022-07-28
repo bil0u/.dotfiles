@@ -1,3 +1,3 @@
 credentials "app.terraform.io" {
-	token = "{{ (onepasswordItemFields "Terraform Cloud" .work.vault).token.value }}"
+	token = "{{ (onepasswordItemFields "Terraform Cloud" .work.accounts.op.vault .work.accounts.op.account_id).token.value }}"
 }

@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Ask for the administrator password upfront
+echo "⚙️  apps-defaults"
+
+echo "⚡️ Asking for admin password in order to continue (press Ctrl+C to exit)"
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$" || exit
+	sudo -n true
+	sleep 60
+	kill -0 "$$" || exit
 done 2>/dev/null &
 
-######################
-#  THIRD-PARTY APPS  #
-######################
+# ------------------------
+echo "☢️  Third-party apps"
+# ------------------------
 
-# iTerm2
-# ======
+echo "⚡️ iTerm2"
 
 # Specify the preferences directory
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/.iterm/"
@@ -25,5 +26,4 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 # Saves preferences on quit
 defaults write com.googlecode.iterm2 NoSyncNeverRemindPrefsChangesLostForFile_selection 0
 
-# Application
-# ===========
+# echo "⚡️ App"

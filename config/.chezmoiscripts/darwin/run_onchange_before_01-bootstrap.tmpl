@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "⚙️  bootstrap"
+
+# Enables touchID for sudo
+if ls /usr/lib/pam | grep -q "pam_tid.so"; then
+	PAM_FILE="/etc/pam.d/sudo"
+	FIRST_LINE="# sudo: auth account password session"
+	if grep -q pam_tid.so "$PAM_FILE"; then
+		# TouchID is already enabled
+		true
+	elif ! head -n1 "$PAM_FILE" | grep -q "$FIRST_LINE"; then
+		echo "🛑 .pam file invalid format"
+	else
+		echo "⚡️ Enabling TouchID for sudo"
+		TOUCHID_LINE="auth       sufficient     pam_tid.so"
+		sudo sed -i .bak -e \
+			"s/$FIRST_LINE/$FIRST_LINE\n$TOUCHID_LINE/" \
+			"$PAM_FILE"
+		sudo rm "$PAM_FILE.bak"
+	fi
+fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+echo "⚡️ Checking for updates"
+sudo softwareupdate -i -a
+
+# Check for Xcode Command Line Tools and install them if not present
+xcode-select -p &>/dev/null
+if [ $? -ne 0 ]; then
+	echo "⚡️ Installing Xcode Command Line Tools ..."
+	xcode-select --install
+fi
+
+# Accept XCode license
+xcode_version=`xcodebuild -version | grep '^Xcode\s' | sed -E 's/^Xcode[[:space:]]+([0-9\.]+)/\1/'`
+accepted_license_version=`defaults read /Library/Preferences/com.apple.dt.Xcode 2> /dev/null | grep IDEXcodeVersionForAgreedToGMLicense | cut -d '"' -f 2`
+if [ "$xcode_version" != "$accepted_license_version" ]; then
+	sudo xcodebuild -license accept
+fi
+
+{{ if eq .chezmoi.arch "arm64" -}}
+# Check that Rosetta 2 is installed
+pgrep -q oahd
+if [ $? -ne 0 ]; then
+	echo "⚡️ Installing Rosetta 2"
+	softwareupdate --install-rosetta --agree-to-license
+fi
+{{ end }}
+
+# Check for Homebrew and install if we don't have it
+
+if ! command -v brew &>/dev/null ; then
+	
+{{ if eq .chezmoi.arch "arm64" -}}
+	if command -v /opt/homebrew/bin/brew &>/dev/null ; then
+		brew=/opt/homebrew/bin/brew
+{{ else -}}
+	if command -v /usr/local/bin/brew &>/dev/null ; then
+		brew=/usr/local/bin/brew
+{{ end -}}
+	else
+		echo "⚡️ Installing homebrew"
+		/usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	fi
+else
+ 	brew=brew
+fi
+
+echo "⚡️ Checking for homebrew updates"
+$brew update
