@@ -30,13 +30,31 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/bil0u/.dotfiles/main/insta
 Or install it manually:
 
 ```sh
-# Make sure XCode Commmand line tools are installed
-
-
 git clone https://github.com/bil0u/.dotfiles.git ~/.local/share/chezmoi
 cd ~/.local/share/chezmoi
 ./install.sh
 ```
+
+#### Manual steps
+
+##### 1Password
+
+Before being able to use SSH keys in a convenient fashion, the following needs to be enabled:
+
+- **Preferences**
+	- **Security**
+		- **Touch ID** : `Enabled`
+	- **Developer**
+		- **1Password CLI 2**: `Enable biometric unlock`
+
+##### Other apps
+
+Apps that could be installed aditionnaly:
+
+- CleanMyMac
+- Adobe CC Suite
+- iStats Menu
+- Parallels Desktop
 
 <a name="commands"></a>
 ## ⚡️ Frequent commands

@@ -1,16 +1,41 @@
 ## Todo
 
-- [ ] a check `onepasswordDocument` et faire une liste
-- [ ] same pour `onepasswordDetailsFields`
-- [ ] Setup Go properly
-- [ ] Install `bat`
-- [ ] Install k'ed apps:
-  - `CleanMyMac`
-  - `Adobe CC Photoshop, Illustrator, Indesign, Premiere, Media Encoder`
-  - `Parallels Desktop`
-  - `iStat Menus`
-  - `AAA`
-
-# TMP
-
-chezmoi init --ssh bil0u/.dotfiles
+- [ ] Setup Go environment properly
+- [ ] Try to automate every app's defaults config
+	- [ ] adguard
+	- [ ] arduino
+	- [ ] browserosaurus
+	- [ ] chromedriver
+	- [ ] discord
+	- [ ] docker
+	- [ ] figma
+	- [ ] firefox
+	- [ ] google-chrome
+	- [ ] handbrake
+	- [ ] iconjar
+	- [ ] iina
+	- [ ] iterm2
+	- [ ] lepton
+	- [ ] lunar
+	- [ ] microsoft-auto-update
+	- [ ] microsoft-word
+	- [ ] microsoft-excel
+	- [ ] microsoft-powerpoint
+	- [ ] microsoft-teams
+	- [ ] nordvpn
+	- [ ] notion
+	- [ ] nzbget
+	- [ ] oracle-jdk
+	- [ ] postman
+	- [ ] protonmail-bridge
+	- [ ] shapr3d
+	- [ ] slack
+	- [ ] teamviewer
+	- [ ] the-unarchiver
+	- [ ] tor-browser
+	- [ ] transmission
+	- [ ] vanilla
+	- [ ] visual-studio-code
+	- [ ] whatsapp
+	- [ ] xmind
+	- [ ] zoom 
