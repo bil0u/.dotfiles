@@ -12,9 +12,9 @@
 
 {{- $fontDir := "" }}
 {{- if eq .chezmoi.os "darwin" }}
-{{-   $fontDir: "Library/Fonts" }}
+{{-   $fontDir = "Library/Fonts" }}
 {{- else if eq .chezmoi.os "linux" }}
-{{-   $fontDir: ".local/share/fonts" }}
+{{-   $fontDir = ".local/share/fonts" }}
 {{- end }}
 
 {{- if ne $fontDir "" }}

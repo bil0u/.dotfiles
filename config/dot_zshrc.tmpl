@@ -34,7 +34,7 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd.mm.yyyy"
 
-ZSH_DISABLE_COMPFIX=true
+# ZSH_DISABLE_COMPFIX=true
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -43,6 +43,11 @@ ZSH_DISABLE_COMPFIX=true
 plugins=(
 	git
 )
+
+compaudit &>/dev/null
+if [ $? -eq 1 ]; then
+	compaudit | xargs chmod g-w
+fi
 
 source "$ZSH/oh-my-zsh.sh"
 
