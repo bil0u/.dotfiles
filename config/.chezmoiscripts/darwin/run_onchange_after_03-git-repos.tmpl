@@ -8,7 +8,7 @@ filename "git-repos"
 # Dotfiles repository
 
 dotfiles_remote_url=$(chezmoi git -- config --get remote.origin.url)
-if [[ $dotfiles_remote_url != "git@*" ]]; then
+if [[ ${dotfiles_remote_url:0:4} != "git@" ]]; then
 	action ".dotfiles → Switching remote URL to SSH"
 	dotfiles_remote_url=$(echo $dotfiles_remote_url | sed 's/https:\/\//git@/' | sed 's/\//:/')
 	chezmoi git -- remote set-url origin $dotfiles_remote_url
