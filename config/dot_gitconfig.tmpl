@@ -1,6 +1,9 @@
 [user]
-name = {{ .name }}
+name = {{ .personal.name }}
 email = {{ .personal.accounts.github.email }}
+username = {{ .personal.accounts.github.username }}
+
+[github]
 username = {{ .personal.accounts.github.username }}
 
 [core]
@@ -29,9 +32,6 @@ whitespace = red reverse
 added = green bold
 changed = yellow bold
 untracked = red bold
-
-[github]
-username = {{ .personal.accounts.github.username }}
 
 [alias]
 c = commit

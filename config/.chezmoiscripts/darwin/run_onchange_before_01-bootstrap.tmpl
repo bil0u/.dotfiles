@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "⚙️  bootstrap"
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.utils.sh"
+
+filename "bootstrap"
 
 # Enables touchID for sudo
 if ls /usr/lib/pam | grep -q "pam_tid.so"; then
 	PAM_FILE="/etc/pam.d/sudo"
 	FIRST_LINE="# sudo: auth account password session"
 	if grep -q pam_tid.so "$PAM_FILE"; then
-		# TouchID is already enabled
+		ignored "TouchID for sudo already enabled"
 		true
 	elif ! head -n1 "$PAM_FILE" | grep -q "$FIRST_LINE"; then
-		echo "🛑 .pam file invalid format"
+		error "Cannot enable TouchID for sudo: .pam file has an invalid format"
 	else
-		echo "⚡️ Enabling TouchID for sudo"
+		action "Enabling TouchID for sudo"
 		TOUCHID_LINE="auth       sufficient     pam_tid.so"
 		sudo sed -i .bak -e \
 			"s/$FIRST_LINE/$FIRST_LINE\n$TOUCHID_LINE/" \
@@ -24,14 +26,16 @@ fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-echo "⚡️ Checking for updates"
+action "Checking for updates"
 sudo softwareupdate -i -a
 
 # Check for Xcode Command Line Tools and install them if not present
 xcode-select -p &>/dev/null
 if [ $? -ne 0 ]; then
-	echo "⚡️ Installing Xcode Command Line Tools ..."
+	action "Installing Xcode Command Line Tools ..."
 	xcode-select --install
+else
+	ignored "XCode Command Line Tools already installed"
 fi
 
 # Accept XCode license
@@ -45,8 +49,10 @@ fi
 # Check that Rosetta 2 is installed
 pgrep -q oahd
 if [ $? -ne 0 ]; then
-	echo "⚡️ Installing Rosetta 2"
+	action "Installing Rosetta 2"
 	softwareupdate --install-rosetta --agree-to-license
+else
+	ignored "Rosetta2 already installed"
 fi
 {{ end }}
 
@@ -56,20 +62,23 @@ if ! command -v brew &>/dev/null ; then
 	
 {{ if eq .chezmoi.arch "arm64" -}}
 	if command -v /opt/homebrew/bin/brew &>/dev/null ; then
+		ignored "Homebrew already installed"
 		brew=/opt/homebrew/bin/brew
 {{ else -}}
 	if command -v /usr/local/bin/brew &>/dev/null ; then
+		ignored "Homebrew already installed"
 		brew=/usr/local/bin/brew
 {{ end -}}
 	else
-		echo "⚡️ Installing homebrew"
+		action "Installing homebrew"
 		/usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
 else
+	ignored "Homebrew already installed"
  	brew=brew
 fi
 
 
 
-echo "⚡️ Checking for homebrew updates"
+action "Checking for Homebrew updates"
 $brew update

@@ -1,0 +1,175 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.utils.sh"
+
+filename "apps-defaults"
+
+prompt "Asking for admin password in order to continue (press Ctrl+C to exit)"
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do
+	sudo -n true
+	sleep 60
+	kill -0 "$$" || exit
+done 2>/dev/null &
+
+# ------------------
+group "macOS apps"
+# ------------------
+
+action "Finder"
+
+# View > As column.
+defaults write com.apple.finder FXPreferredViewStyle -string clmv
+# View > Show view options > Sort Group By > Name.
+defaults write com.apple.finder FXArrangeGroupViewBy -string Name
+# View > Show view options > Group By > None.
+defaults write com.apple.finder FXPreferredGroupBy -string None
+# Search the current folder when performing a seach.
+defaults write com.apple.finder FXDefaultSearchScope -string SCcf
+# New Finder windows show Home directory.
+defaults write com.apple.finder NewWindowTarget -string PfHm
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
+# Show these items on the desktop:
+#   - Hard disks
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+#   - External hard drives
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+#   - Removable medias
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+#   - Servers
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirstOnDesktop -bool true
+# Show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+# Automatically open a new Finder window when a volume is mounted
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+# Disables warning when modifying a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# Hide tags
+defaults write com.apple.finder ShowRecentTags -bool false
+# Enable iCloud Drive
+defaults write com.apple.finder FXICloudDriveEnabled -bool true
+defaults write com.apple.finder FXICloudDriveDesktop -bool true
+defaults write com.apple.finder FXICloudDriveDocuments -bool true
+# Enable snap-to-grid for icons on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+# Expand the following File Info panes:
+# “General”, “Open with”, and “Sharing & Permissions”
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+	General -bool true \
+	OpenWith -bool true \
+	Privileges -bool true
+# Disable .DS_Store files on network drives.
+defaults write com.apple.desktopservices DSDontWriteNetworkStores '1'
+# Disable .DS_Store files on external drives.
+defaults write com.apple.desktopservices DSDontWriteUSBStores '1'
+
+action "Safari"
+
+# Set homepage to google
+defaults write com.apple.Safari HomePage -string "https://www.google.com/"
+# Privacy: don’t send search queries to Apple
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+# Prevent Safari from opening ‘safe’ files automatically after downloading
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+# Enable Safari’s debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+# Enable the Develop menu and the Web Inspector in Safari
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+# Disable AutoFill
+defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+defaults write com.apple.Safari AutoFillPasswords -bool false
+defaults write com.apple.Safari AutoFillCreditCardData -bool false
+defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+# Enable “Do Not Track”
+defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+# Update extensions automatically
+defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+
+action "Mail"
+
+# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+action "Music"
+
+# Enables losless & Dobly Atmos
+defaults write com.apple.Music losslessEnabled -bool true
+defaults write com.apple.Music downloadDolbyAtmos -bool true
+defaults write com.apple.Music dontWarnAboutAlwaysOnDolbyAtmos -bool true
+defaults write com.apple.Music dontWarnAboutPlayingDownloadedStereo -bool true
+# Sets audio quality
+defaults write com.apple.Music preferredDownloadAudioQuality -int 20
+defaults write com.apple.Music preferredStreamPlaybackAudioQuality -int 15
+# Maxing concurrent music downloads
+defaults write com.apple.Music userMaxConcurrentDownloads -int 10
+
+action "Photos"
+
+# Prevent Photos from opening automatically when devices are plugged in
+defaults write com.apple.ImageCapture disableHotPlug -bool true
+
+action "TextEdit"
+
+# New documents as plain text
+defaults write com.apple.TextEdit RichText -bool false
+# Open and save files as UTF-8
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+action "Terminal"
+
+# Secure Keyboard Entry (see https://security.stackexchange.com/a/47786/8918)
+defaults write com.apple.finder SecureKeyboardEntry -bool true
+
+action "Activity Monitor"
+
+# Regular app icon in dock
+defaults write com.apple.ActivityMonitor IconType -int 0
+# Frequent updates (2s)
+defaults write com.apple.ActivityMonitor UpdatePeriod -int 2
+# Keep processor window on top
+defaults write com.apple.ActivityMonitor OnTop -bool true
+# Show the main window when launching Activity Monitor
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+# Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 100
+# Sort Activity Monitor results by CPU usage
+defaults write com.apple.ActivityMonitor SortColumn -string CPUUsage
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+action "Disk Utility"
+
+# Enable the debug menu in Disk Utility
+defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+defaults write com.apple.DiskUtility advanced-image-options -bool true
+
+# ------------------
+group "Third-party apps"
+# ------------------
+
+action "iTerm2"
+
+# Specify the preferences directory
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/.iterm/"
+# Tell iTerm2 to use the custom preferences in the directory
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+# Saves preferences on quit
+defaults write com.googlecode.iterm2 NoSyncNeverRemindPrefsChangesLostForFile_selection 0
+
+# action "App"

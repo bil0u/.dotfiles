@@ -1,142 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "⚙️  packages"
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.utils.sh"
 
-if ! command -v brew &>/dev/null ; then
-  {{ if eq .chezmoi.arch "arm64" -}}
+filename "packages"
+
+if ! command -v brew &>/dev/null; then
+  {{ if eq .host.arch "arm64" -}}
   eval "$(/opt/homebrew/bin/brew shellenv)"
   {{ else -}}
   eval "$(/usr/local/bin/brew shellenv)"
   {{ end -}}
 fi
 
-echo "⚡️ Installing packages from Brewfile"
+action "Installing packages ..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
-
 # Taps
-# ====
-
-tap 'homebrew/bundle'
-tap 'homebrew/cask'
-tap 'homebrew/cask-fonts'
-tap 'homebrew/cask-versions'
-tap 'homebrew/core'
-
+{{ range (.homebrew.taps | uniq) -}}
+tap '{{ . }}'
+{{ end -}}
 # Formulaes
-# =========
-
-# GNU utils
-brew 'cmake' # Those that come with macOS are outdated
-brew 'coreutils' # Those that come with macOS are outdated
-brew 'findutils'
-# Bash ZSH
-brew 'bash' # Latest Bash version
-brew 'bash-completion@2'
-brew 'zsh'
-brew 'zsh-completions'
-# Mac App Store manager
-brew 'mas'
-# Dev tools
-brew 'awscli'
-brew 'git'
-brew 'shellcheck'
-brew 'svn'
-# Javascript
-brew 'nvm'
-# Devops
-brew 'atmos'
-brew 'terraform'
-# Python
-brew 'pyenv'
-brew 'pipenv'
-brew 'poetry'
-# Utilities
-brew 'bat' # Better cat in Terminal
-brew 'grep' # Global Regural Expression Print
-brew 'trash'
-brew 'tree'
-brew 'vim'
-brew 'wget'
-brew 'wifi-password'
-
+{{ range (.homebrew.formulaes | uniq) -}}
+brew '{{ . }}'
+{{ end -}}
 # Casks
-# =====
-
-cask '1password'
-cask '1password-cli'
-cask 'adguard'
-cask 'arduino'
-cask 'browserosaurus'
-cask 'chromedriver'
-cask 'discord'
-cask 'docker'
-cask 'figma'
-cask 'firefox'
-cask 'google-chrome'
-cask 'handbrake'
-cask 'iconjar'
-cask 'iina'
-cask 'iterm2'
-cask 'lepton'
-cask 'lunar'
-cask 'messenger'
-cask 'microsoft-auto-update'
-cask 'microsoft-word'
-cask 'microsoft-excel'
-cask 'microsoft-outlook'
-cask 'microsoft-powerpoint'
-cask 'microsoft-teams'
-cask 'nordvpn'
-cask 'notion'
-cask 'nzbget'
-cask 'oracle-jdk'
-cask 'postman'
-cask 'protonmail-bridge'
-cask 'shapr3d'
-cask 'slack'
-cask 'teamviewer'
-cask 'the-unarchiver'
-cask 'tor-browser'
-cask 'transmission'
-cask 'vanilla'
-cask 'visual-studio-code'
-cask 'whatsapp'
-cask 'xmind'
-cask 'zoom'
-
-# Quicklook
-cask 'mdimagesizemdimporter'
-cask 'qlmarkdown'
-cask 'qlimagesize'
-cask 'quicklook-json'
-
-# Fonts
-cask 'font-roboto'
-cask 'font-inter'
-cask 'font-source-code-pro-for-powerline'
-cask 'font-source-code-pro'
-cask 'font-source-sans-pro'
-cask 'font-source-serif-pro'
-cask 'font-meslo-for-powerline'
-cask 'font-meslo-lg-nerd-font'
-cask 'font-meslo-lg'
-cask 'font-hack-nerd-font'
-
+{{ range (.homebrew.casks | uniq) -}}
+cask '{{ . }}'
+{{ end -}}
 # Mac AppStore
-# ============
-
-mas '1Password for Safari', id: 1569813296
-mas 'Authenticator', id: 1538761576
-mas 'Keynote', id: 409183694
-mas 'Magnet', id: 441258766
-mas 'Numbers', id: 409203825
-mas 'Pages', id: 409201541
-mas 'Parcel', id: 639968404
-mas 'Xcode', id: 497799835
-# mas '', id: 000000000
-
+{{ range (.homebrew.mas | uniq) -}}
+mas '{{ .name }}', id: {{ .id }}
+{{ end -}}
 EOF
-
-
-brew 

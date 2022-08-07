@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "⚙️  git-repos"
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.utils.sh"
+
+filename "git-repos"
 
 # Dotfiles repository
 
 dotfiles_remote_url=$(chezmoi git -- config --get remote.origin.url)
 if [[ $dotfiles_remote_url != "git@*" ]]; then
-	echo "⚡️ .dotfiles → Upgrading remote URL to SSH"
+	action ".dotfiles → Switching remote URL to SSH"
 	dotfiles_remote_url=$(echo $dotfiles_remote_url | sed 's/https:\/\//git@/' | sed 's/\//:/')
 	chezmoi git -- remote set-url origin $dotfiles_remote_url
+else
+	ignored ".dotfiles → Remote URL already switched to SSH"
 fi

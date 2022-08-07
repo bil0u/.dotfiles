@@ -19,6 +19,7 @@ These are my dotfiles, managed with [`chezmoi`](https://github.com/twpayne/chezm
 I'm using it to manage my macOS and Windows environments.
 
 <a name="install"></a>
+
 ## 🚧 Installation
 
 One line install, with curl:
@@ -42,10 +43,10 @@ cd ~/.local/share/chezmoi
 Before being able to use SSH keys in a convenient fashion, the following needs to be enabled:
 
 - **Preferences**
-	- **Security**
-		- **Touch ID** : `Enabled`
-	- **Developer**
-		- **1Password CLI 2**: `Enable biometric unlock`
+  - **Security**
+    - **Touch ID** : `Enabled`
+  - **Developer**
+    - **1Password CLI 2**: `Enable biometric unlock`
 
 ##### Other apps
 
@@ -57,7 +58,8 @@ Apps that could be installed aditionnaly:
 - Parallels Desktop
 
 <a name="commands"></a>
-## ⚡️ Frequent commands
+
+## ♻️ Frequent commands
 
 ```sh
 # Checks for common problems
@@ -81,6 +83,7 @@ dot update
 _For full list, see [command overview](https://www.chezmoi.io/user-guide/command-overview), and [daily operations](https://www.chezmoi.io/user-guide/daily-operations/)_
 
 <a name="docs"></a>
+
 ## 📚 Documentation
 
 &nbsp;&nbsp;&nbsp;&nbsp;[**docs**](/docs/)  
@@ -92,6 +95,7 @@ _For full list, see [command overview](https://www.chezmoi.io/user-guide/command
 <!-- &nbsp;&nbsp;│&nbsp;&nbsp;│ -->
 
 <a name="credits"></a>
+
 ## 🎉 Credits
 
 - Tom Payne for writing [chezmoi](https://github.com/twpayne/chezmoi/)
