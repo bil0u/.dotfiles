@@ -1,23 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.utils.sh"
+{{ template "load-utils" . }}
 
 filename "defaults"
 
 # Closing system preferences first
 osascript -e 'tell application "System Preferences" to quit'
 
-# Ask for the administrator password upfront
-prompt "Asking for admin password in order to continue (press Ctrl+C to exit)"
-sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until script has finished
-while true; do
-	sudo -n true
-	sleep 60
-	kill -0 "$$" || exit
-done 2>/dev/null &
+{{ template "prompt-sudo" . }}
 
 # --------------------
 # System configuration

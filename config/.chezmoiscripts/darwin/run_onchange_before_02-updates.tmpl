@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# time hash, based on day: {{ now | date "02 January 2006" | sha256sum }}
+
+{{ template "load-utils" . }}
+{{ template "load-homebrew" . }}
+
+filename "updates"
+
+action "Checking for system updates"
+sudo softwareupdate -i -a
+
+action "Checking for Homebrew updates"
+brew update
+
+action "Checking for Homebrew formulaes updates"
+brew upgrade
+
+action "Checking for AppStore updates"
+mas upgrade

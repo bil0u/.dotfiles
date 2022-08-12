@@ -1,0 +1,9 @@
+prompt "Asking for admin password in order to continue (press Ctrl+C to exit)"
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &

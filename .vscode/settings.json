@@ -1,12 +1,13 @@
 {
     "files.associations": {
-        "*.tmpl": "go-template",
         "*.yml": "yaml",
-        "*zshrc*": "shellscript",
+        "*.tmpl": "go-template",
         "*vimrc*": "plaintext",
-        "*gitconfig*": "ini",
-        "**/.chezmoiscripts/*/**": "shellscript",
+        "*zshrc*": "shellscript",
         "*.zsh*": "shellscript",
         "*ignore": "ignore",
+        "*gitconfig*": "ini",
+        "**/.chezmoiscripts/**/*": "shellscript",
+        "**/.chezmoitemplates/**/*": "shellscript",
     }
 }

@@ -6,14 +6,14 @@ personal:
       username: bil0u
       email: github@p0p.ee
     op:
-      account_id: Y5UFKSYDXJED7JQCQGIYRA7B6A
+      account: Y5UFKSYDXJED7JQCQGIYRA7B6A
       vault: h66u55hw4da4f5bhbp7fa2ea74
 
 work:
   email: ugo@iliomad.fr
   accounts:
     op:
-      account_id: WIVYUIS6LZHHTIFPIXUWKIUQNU
+      account: WIVYUIS6LZHHTIFPIXUWKIUQNU
       vault: ng4vabtt7dxvtdggfphteon5am
       engineering_vault: wgnajbjber6dehxp34r6or4o3m
 
@@ -75,6 +75,7 @@ homebrew:
     - 1password-cli
     - adguard
     - arduino
+    - batteries
     - browserosaurus
     - chromedriver
     - discord

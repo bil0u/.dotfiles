@@ -15,8 +15,8 @@ fi
 # Path to the oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# How often to auto-update (in days)
-export UPDATE_ZSH_DAYS=7
+# Disabling autoupdate as we rely on chezmoi externals
+DISABLE_AUTO_UPDATE="true"
 
 # Set name of the theme to load. 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -67,7 +67,7 @@ export LANG="en_US.UTF-8"
 export DOTFILES_DIR="$(chezmoi source-path)"
 
 export HOMEBREW_BAT=1
-export HOMEBREW_INSTALL_BADGE='♻️ '
+export HOMEBREW_INSTALL_BADGE='⚡️'
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
