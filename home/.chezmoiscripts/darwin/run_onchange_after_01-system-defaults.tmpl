@@ -3,7 +3,7 @@ set -euo pipefail
 
 {{ template "load-utils" . }}
 
-filename "defaults"
+filename "system-defaults"
 
 # Closing system preferences first
 osascript -e 'tell application "System Preferences" to quit'
@@ -21,6 +21,7 @@ sudo scutil --set ComputerName {{ .host.friendly_name }}
 sudo scutil --set HostName {{ .host.host_name }}
 sudo scutil --set LocalHostName {{ .host.host_name }}
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName {{ .host.host_name }}
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server ServerDescription {{ .host.host_name }}
 dscacheutil -flushcache
 
 action "Languages & localization"

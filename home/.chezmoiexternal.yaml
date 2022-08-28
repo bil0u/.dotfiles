@@ -4,7 +4,7 @@
     exact: true
     stripComponents: 1
     refreshPeriod: "168h"
-.oh-my-zsh/custom/themes/powerlevel10k:
+.zsh/omz/themes/powerlevel10k:
     type: "archive"
     url: "https://github.com/romkatv/powerlevel10k/archive/v1.16.1.tar.gz"
     exact: true

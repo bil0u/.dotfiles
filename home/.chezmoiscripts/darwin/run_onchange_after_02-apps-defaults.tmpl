@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 {{ template "load-utils" . }}
 
@@ -155,6 +155,16 @@ defaults write com.apple.DiskUtility advanced-image-options -bool true
 group "Third-party apps"
 # ------------------
 
+# action "1Password"
+# action "AdGuard"
+# action "Batteries"
+# action "Browserosaurus"
+# action "Discord"
+# action "Docker"
+# action "Figma"
+# action "Firefox"
+# action "Google Chrome"
+
 action "iTerm2"
 
 # Specify the preferences directory
@@ -164,4 +174,14 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 # Saves preferences on quit
 defaults write com.googlecode.iterm2 NoSyncNeverRemindPrefsChangesLostForFile_selection 0
 
-# action "App"
+# action "Lepton"
+# action "Lunar"
+# action "MS Office"
+# action "NordVPN"
+# action "NZBGet"
+# action "ProtonMail Bridge"
+# action "The Unarchiver"
+# action "Vanilla"
+# action "VSCode"
+# action "Magnet"
+# action "Parcel"

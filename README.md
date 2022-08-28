@@ -48,15 +48,6 @@ Before being able to use SSH keys in a convenient fashion, the following needs t
   - **Developer**
     - **1Password CLI 2**: `Enable biometric unlock`
 
-##### Other apps
-
-Apps that could be installed aditionnaly:
-
-- CleanMyMac
-- Adobe CC Suite
-- iStats Menu
-- Parallels Desktop
-
 <a name="commands"></a>
 
 ## ♻️ Frequent commands
@@ -77,6 +68,9 @@ dot apply
 # Pulls the latest changes from the remote repo and runs chezmoi apply
 dot update
 
+# Full removal of both dotfiles and chezmoi
+dot update
+
 # NOTE: `dot` is an alias for `chezmoi`
 ```
 
@@ -87,7 +81,9 @@ _For full list, see [command overview](https://www.chezmoi.io/user-guide/command
 ## 📚 Documentation
 
 &nbsp;&nbsp;&nbsp;&nbsp;[**docs**](/docs/)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ [defaults](/docs/defaults.md): macOS & window user preferences setup
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [defaults](/docs/defaults.md): system & apps preferences setup
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [apps](/docs/packages.md): installed packages
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ [runtimes](/docs/runtimes.md): installed languages runtimes
 
 <!-- &nbsp;&nbsp;├ [`defaults`](/docs/defaults) -->
 <!-- &nbsp;&nbsp;│&nbsp;&nbsp;└ [`defaults`](/docs/defaults) -->

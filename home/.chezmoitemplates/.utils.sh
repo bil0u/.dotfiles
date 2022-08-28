@@ -5,11 +5,15 @@ function filename {
 }
 
 function group {
-    echo "▶️  $1"
+    echo "📦 $1"
 }
 
 function prompt {
     echo "💬 $1"
+}
+
+function pad {
+    echo -n "   "
 }
 
 function action {

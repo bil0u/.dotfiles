@@ -1,0 +1,159 @@
+personal:
+  name: Ugo Popée
+  email: ugo@p0p.ee
+  accounts:
+    github:
+      username: bil0u
+      email: github@p0p.ee
+    op:
+      account: Y5UFKSYDXJED7JQCQGIYRA7B6A
+      vault: h66u55hw4da4f5bhbp7fa2ea74
+
+work:
+  email: ugo@iliomad.fr
+  accounts:
+    op:
+      account: WIVYUIS6LZHHTIFPIXUWKIUQNU
+      vault: ng4vabtt7dxvtdggfphteon5am
+      engineering_vault: wgnajbjber6dehxp34r6or4o3m
+
+install:
+  asdf:
+    # Languages runtimes
+    - name: python
+      global: "latest:3.10"
+      extra:
+        - "latest:3.9"
+    - name: nodejs
+      global: "latest:16.17"
+      extra:
+        - "latest:18.8"
+    - name: java
+      global: "latest:oracle"
+    - name: golang
+      global: "1.18"
+    - name: terraform
+    # CLIs
+    - name: awscli
+    # Tools
+    - name: poetry
+    - name: pipenv https://github.com/and-semakin/asdf-pipenv.git
+  homebrew:
+    taps:
+      - homebrew/bundle
+      - homebrew/cask
+      - homebrew/cask-fonts
+      - homebrew/cask-versions
+      - homebrew/core
+      - bil0u/tap
+    formulaes:
+      # Utilities
+      - bat # Better cat in Terminal
+      - cmake # Those that come with macOS are outdated
+      - coreutils # Those that come with macOS are outdated
+      - curl # Command-line tool for transferring data using various network protocols
+      - findutils # Basic directory searching utilities
+      - grep # Global Regural Expression Print
+      - jq # Lightweight and flexible command-line JSON processor
+      - trash # CLI tool that moves files or folder to the trash
+      - tree # List contents of directories in a tree-like format
+      - unzip # List, test and extract compressed files in a ZIP archive
+      - vim # Screen-based text editor program
+      - wget # Program that retrieves content from web servers
+      - wifi-password # Get current wifi password in terminal
+      - mas # Mac AppStore manager
+      # Bash / Zsh
+      - bash # Latest Bash version
+      - bash-completion@2 # Bash in-terminal auto completions
+      - zsh # Latest zsh version
+      - zsh-completions # Zsh in-terminal auto completions
+      # Dev tools
+      - asdf # Manage multiple runtime versions with a single CLI tool
+      - atmos # Universal Tool for DevOps and Cloud Automation
+      - git # Most popular software for distributed version control
+      - shellcheck # Static analysis tool that automatically finds bugs in your shell scripts
+      - svn # Software versioning and revision control system
+    casks:
+      # Fonts
+      - font-roboto
+      - font-inter
+      - font-source-code-pro-for-powerline
+      - font-source-code-pro
+      - font-source-sans-pro
+      - font-source-serif-pro
+      - font-meslo-for-powerline
+      - font-meslo-lg-nerd-font
+      - font-meslo-lg
+      - font-hack-nerd-font
+      # Apps
+      - 1password
+      - 1password-cli
+      - adguard
+      - arduino
+      - batteries
+      - browserosaurus
+      - chromedriver
+      - discord
+      - defaults-edit
+      - docker
+      - figma
+      - firefox
+      - google-chrome
+      - handbrake
+      - iconjar
+      - iina
+      - iterm2
+      - lepton
+      - lunar
+      - messenger
+      - microsoft-auto-update
+      - microsoft-word
+      - microsoft-excel
+      - microsoft-outlook
+      - microsoft-powerpoint
+      - microsoft-teams
+      - nordvpn
+      - notion
+      - nzbget
+      - oracle-jdk
+      - postman
+      - protonmail-bridge
+      - shapr3d
+      - slack
+      - teamviewer
+      - the-unarchiver
+      - tor-browser
+      - transmission
+      - vanilla
+      - visual-studio-code
+      - whatsapp
+      - xmind
+      - zoom
+      # Quicklook plugins
+      - mdimagesizemdimporter
+      - qlmarkdown
+      - qlimagesize
+      - quicklook-json
+  mas:
+    - name: "1Password for Safari"
+      id: 1569813296
+    - name: "Authenticator"
+      id: 1538761576
+    - name: "Keynote"
+      id: 409183694
+    - name: "Magnet"
+      id: 441258766
+    - name: "Numbers"
+      id: 409203825
+    - name: "Pages"
+      id: 409201541
+    - name: "Parcel"
+      id: 639968404
+    - name: "Xcode"
+      id: 497799835
+  # manual:
+  #   - name: gvm
+  #     # check: which gvm
+  #     install: zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+  #     update:
+  #     uninstall: gvm implode

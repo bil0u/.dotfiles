@@ -4,8 +4,8 @@ Most of my defaults are set automatically.
 
 On macOS, this operations is splitted in two scripts:
 
-- [`run_onchange_before_03-defaults`](/config/.chezmoiscripts/darwin/run_onchange_before_03-defaults.tmpl): sets macOS system preferences, alongside with some apple applications.
-- [`run_onchange_after_01-apps-defaults`](/config/.chezmoiscripts/darwin/run_onchange_after_01-apps-defaults): configures third party applications
+- [_run_onchange_before_03-defaults_](/home/.chezmoiscripts/darwin/run_onchange_after_01-system-defaults.tmpl): sets macOS system preferences, alongside with some apple applications.
+- [_run_onchange_after_01-apps-defaults_](/home/.chezmoiscripts/darwin/run_onchange_after_02-apps-defaults.tmpl): configures third party applications
 
 #### Resources
 

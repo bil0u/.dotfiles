@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 {{ template "load-utils" . }}
 {{ template "load-homebrew" . }}
 
 filename "packages"
 
-action "Installing packages ..."
+action "Installing homebrew packages ..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
 # Taps
-{{ range (.homebrew.taps | uniq) -}}
+{{ range (.install.homebrew.taps | uniq) -}}
 tap '{{ . }}'
 {{ end -}}
 # Formulaes
-{{ range (.homebrew.formulaes | uniq) -}}
+{{ range (.install.homebrew.formulaes | uniq) -}}
 brew '{{ . }}'
 {{ end -}}
 # Casks
-{{ range (.homebrew.casks | uniq) -}}
+{{ range (.install.homebrew.casks | uniq) -}}
 cask '{{ . }}'
 {{ end -}}
 # Mac AppStore
-{{ range (.homebrew.mas | uniq) -}}
+{{ range (.install.mas | uniq) -}}
 mas '{{ .name }}', id: {{ .id }}
 {{ end -}}
 EOF

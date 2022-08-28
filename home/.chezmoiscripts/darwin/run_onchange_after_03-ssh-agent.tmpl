@@ -3,11 +3,11 @@ set -euo pipefail
 
 {{ template "load-utils" . }}
 
-filename "1password"
+filename "ssh-agent"
 
 if [[ ! -L ~/.ssh/op-agent.sock ]]; then
-	action "Linking 1password agent socket"
+	action "Linking 1password ssh agent socket"
 	ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.ssh/op-agent.sock
 else
-	ignored "1password agent socket already linked"
+	ignored "1password ssh agent socket already linked"
 fi

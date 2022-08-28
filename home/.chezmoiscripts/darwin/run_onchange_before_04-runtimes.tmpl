@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+{{ template "load-utils" . }}
+
+filename "runtimes"
+
+action "Installing asdf plugins ... "
+
+{{ range (.install.asdf | uniq) -}}
+
+{{/* Setting needed variables */}}
+{{ $pluginName := .name -}}
+{{ $pluginUrl := "" -}}
+{{ $globalVersion := "latest" }}
+{{ $versions := list }}
+
+{{/* Checking if plugin name contains an URL */}}
+{{ if contains " http" $pluginName -}}
+	{{ $nameDict := $pluginName | split " " -}}
+	{{ $pluginName = $nameDict._0 -}}
+	{{ $pluginUrl = $nameDict._1 -}}
+{{ end -}}
+
+{{/* Retrieving global version */}}
+{{ if index . "global" -}}
+	{{ $globalVersion = .global }}
+{{ end -}}
+
+{{/* Retrieving extra versions to install */}}
+{{ if index . "extra" -}}
+	{{ $versions = .extra }}
+{{ end -}}
+
+{{/* Merging all versions */}}
+{{ $versions = (prepend $versions $globalVersion | uniq) }}
+
+{{/* Installing */}}
+group {{ $pluginName | quote }}
+
+asdf plugin add {{ $pluginName }} {{ $pluginUrl }} >/dev/null 2>&1
+case $? in
+  0) action "plugin installed" ;;
+  2) ignored "plugin already installed" ;;
+  *) error "Unknown error, skipping plugin" && SKIP=1 ;;
+esac
+
+if [[ -n SKIP ]]; then
+  {{ range $versions -}}
+    asdf install {{ $pluginName }} {{ . }} >/dev/null 2>&1
+    case $? in
+      0) action "version \"{{ . }}\" installed" ;;
+      2) ignored "version \"{{ . }}\" already installed" ;;
+      *) error "Unknown error, skipping version \"{{ . }}\"";;
+    esac
+  {{ end -}}
+  asdf global {{ $pluginName }} {{ $globalVersion }} >/dev/null 2>&1
+  action "global version set to {{ $globalVersion }}"
+fi
+
+{{ end -}}
