@@ -4,9 +4,9 @@ set -uo pipefail
 {{ template "load-utils" . }}
 {{ template "load-homebrew" . }}
 
-filename "packages"
+filename "homebrew"
 
-action "Installing homebrew packages ..."
+action "Installing packages using homebrew..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
 # Taps
 {{ range (.install.homebrew.taps | uniq) -}}

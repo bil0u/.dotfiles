@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+{{ template "load-utils" . }}
+
+filename "misc"
+
+action "Installing go binaries ..."
+{{ template "load-golang-cfg" . }}
+
+{{ range (.install.misc.go | uniq) -}}
+
+{{ $domain := default "github.com" (regexReplaceAll `^(?:(.*?)\/)?.*?\/.*?$` . "${1}") -}}
+{{ $repo := regexReplaceAll `^(?:.*?\/)?(.*?\/.*?)(?:@.*)?$` . "${1}" -}}
+{{ $version := default "latest" (regexReplaceAll `^.*?(?:@(.*))?$` . "${1}") -}}
+
+go install {{ $domain }}/{{ $repo }}@{{ $version }} >/dev/null
+
+if [ $? -ne 0 ]; then
+  error "error while installing {{ $repo }}@{{ $version }} from {{ $domain }}"
+else
+  ignored "installed {{ $repo }}@{{ $version }} from {{ $domain }}"
+fi
+
+{{ end -}}

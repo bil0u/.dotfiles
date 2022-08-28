@@ -5,8 +5,7 @@ set -euo pipefail
 
 filename "git-repos"
 
-# Dotfiles repository
-
+# Switching dotfiles repository to ssh
 dotfiles_remote_url=$(chezmoi git -- config --get remote.origin.url)
 if [[ ${dotfiles_remote_url:0:4} != "git@" ]]; then
 	action ".dotfiles → Switching remote URL to SSH"

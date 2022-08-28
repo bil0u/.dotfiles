@@ -3,9 +3,9 @@ set -uo pipefail
 
 {{ template "load-utils" . }}
 
-filename "runtimes"
+filename "asdf"
 
-action "Installing asdf plugins ... "
+action "Installing packages using asdf ..."
 
 {{ range (.install.asdf | uniq) -}}
 

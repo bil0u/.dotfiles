@@ -18,26 +18,6 @@ work:
       engineering_vault: wgnajbjber6dehxp34r6or4o3m
 
 install:
-  asdf:
-    # Languages runtimes
-    - name: python
-      global: "latest:3.10"
-      extra:
-        - "latest:3.9"
-    - name: nodejs
-      global: "latest:16.17"
-      extra:
-        - "latest:18.8"
-    - name: java
-      global: "latest:oracle"
-    - name: golang
-      global: "1.18"
-    - name: terraform
-    # CLIs
-    - name: awscli
-    # Tools
-    - name: poetry
-    - name: pipenv https://github.com/and-semakin/asdf-pipenv.git
   homebrew:
     taps:
       - homebrew/bundle
@@ -115,7 +95,6 @@ install:
       - nordvpn
       - notion
       - nzbget
-      - oracle-jdk
       - postman
       - protonmail-bridge
       - shapr3d
@@ -151,9 +130,26 @@ install:
       id: 639968404
     - name: "Xcode"
       id: 497799835
-  # manual:
-  #   - name: gvm
-  #     # check: which gvm
-  #     install: zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-  #     update:
-  #     uninstall: gvm implode
+  asdf:
+    # Languages runtimes
+    - name: python
+      global: "latest:3.10"
+      extra:
+        - "latest:3.9"
+    - name: nodejs
+      global: "latest:16.17"
+      extra:
+        - "latest:18.8"
+    - name: java
+      global: "latest:oracle"
+    - name: golang
+      global: "1.18"
+    - name: terraform
+    # CLIs
+    - name: awscli
+    # Tools
+    - name: poetry
+    - name: pipenv https://github.com/and-semakin/asdf-pipenv.git
+  misc:
+    go:
+      - github.com/catilac/plistwatch@latest
