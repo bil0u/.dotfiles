@@ -81,9 +81,8 @@ _For full list, see [command overview](https://www.chezmoi.io/user-guide/command
 ## 📚 Documentation
 
 &nbsp;&nbsp;&nbsp;&nbsp;[**docs**](/docs/)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [defaults](/docs/defaults.md): system & apps preferences setup
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [apps](/docs/packages.md): installed packages
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ [runtimes](/docs/runtimes.md): installed languages runtimes
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [apps](/docs/apps.md): installed apps, tools & packages
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ [defaults](/docs/defaults.md): system & apps preferences setup
 
 <!-- &nbsp;&nbsp;├ [`defaults`](/docs/defaults) -->
 <!-- &nbsp;&nbsp;│&nbsp;&nbsp;└ [`defaults`](/docs/defaults) -->
