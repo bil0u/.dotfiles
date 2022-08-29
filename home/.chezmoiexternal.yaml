@@ -1,3 +1,5 @@
+{{- if eq .host.os.id "darwin" }}
+
 .oh-my-zsh:
     type: "archive"
     url: "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
@@ -11,9 +13,9 @@
     stripComponents: 1
 
 {{- $fontDir := "" }}
-{{- if eq .chezmoi.os "darwin" }}
+{{- if eq .host.os.id "darwin" }}
 {{-   $fontDir = "Library/Fonts" }}
-{{- else if eq .chezmoi.os "linux" }}
+{{- else if eq .host.os.id "linux" }}
 {{-   $fontDir = ".local/share/fonts" }}
 {{- end }}
 
@@ -34,4 +36,6 @@
     type: "file"
     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Bold Italic.ttf"
     refreshPeriod: "168h"
+{{- end }}
+
 {{- end }}

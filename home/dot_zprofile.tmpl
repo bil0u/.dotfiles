@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq .host.os.id "darwin" -}}
 {{   if stat "/opt/homebrew/bin/brew" -}}
 fpath+=("$(/opt/homebrew/bin/brew --prefix)/share/zsh/site-functions")
 eval "$(/opt/homebrew/bin/brew shellenv)"

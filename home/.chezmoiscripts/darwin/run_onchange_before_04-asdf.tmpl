@@ -7,7 +7,7 @@ filename "asdf"
 
 action "Installing packages using asdf ..."
 
-{{ range (.install.asdf | uniq) -}}
+{{ range (.darwin.asdf | uniq) -}}
 
 {{/* Setting needed variables */}}
 {{ $pluginName := .name -}}

@@ -1,0 +1,20 @@
+<#
+.Synopsis
+  Search and install updates.
+.DESCRIPTION
+  Text here
+#>
+
+# time hash, based on day: {{ now | date "02 January 2006" | sha256sum }}
+
+{{ template "load-utils" . }}
+
+Filename "updates"
+
+Action "Checking for system updates"
+
+Action "Checking for Chocolatey updates"
+
+Action "Checking for Chocolatey formulaes updates"
+
+Action "Checking for Microsoft Store updates"

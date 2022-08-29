@@ -17,7 +17,7 @@ work:
       vault: ng4vabtt7dxvtdggfphteon5am
       engineering_vault: wgnajbjber6dehxp34r6or4o3m
 
-install:
+darwin:
   homebrew:
     taps:
       - homebrew/bundle
@@ -103,6 +103,7 @@ install:
       - the-unarchiver
       - tor-browser
       - transmission
+      - utm
       - vanilla
       - visual-studio-code
       - whatsapp
@@ -153,3 +154,85 @@ install:
   misc:
     go:
       - github.com/catilac/plistwatch@latest
+windows:
+  drivers:
+    - name: Chipset - Intel Z390 Express
+      url: https://domain.com
+  chocolatey:
+    drivers:
+      # - radeon-driver # GPU - AMD Radeon RX 6900XT
+      # - intel-network-driver # Network - Intel Ethernet I219-V
+      # - intel-wifi-drivers # Wifi - Intel Wireless-AC 9560 160MHz
+      # - intel-chipset-drivers # Chipset - Intel Z390 Express
+      - intel-graphics-driver # iGPU - Intel UHD 630
+      - realtek-hd-audio-driver # Audio - Realtek ALC1220-VB
+      - intel-bluetooth-drivers # Bluetooth - Intel Wireless-AC 9560 160MHz
+      - samsung-nvme-driver # Storage - Samsung 970 Evo/Pro
+    packages:
+      # Hardware utilities
+      # - amd apps
+      # - g-skill lights (RAM) ?
+      - nzxt-cam
+      - samsung-magician
+      # - NuPhy console
+      # - foo
+      # Monitoring
+      - cpu-z
+      - gpu-z
+      - pci-z
+      - ssd-z
+      - hwinfo
+      # Benchmark
+      - as-ssd
+      - lanbench
+      - geekbench
+      - cinebench
+      - furmark
+      - heaven-benchmark
+      - valley-benchmark
+      - aida64-extreme
+      - occt
+      - performancetest
+      - prime95
+      # - userbenchmark
+      # System utilities
+      - 7zip
+      - treesizefree.portable
+      - ddu
+      # - cleanmypc
+      - winrar
+      # - display-fusion
+      - powertoys
+      - malwarebytes
+      # - adguard
+      - nordvpn
+      - 1password
+      - protonmailbridge
+      # - foo
+      # Apps
+      - discord
+      - signal
+      - firefox
+      - chrome
+      - vscode
+      - notepadplusplus
+      - gamesavemanager
+      - itunes
+      - nzbget
+      # - mailbird
+      # - foo
+      # Game platforms
+      # - ankama
+      - steam-client
+      - ubisoft-connect
+      - origin
+      - battle.net
+      - leagueoflegendseuw
+      # - roblox
+      # - foo
+      # Standalone Games
+      - minecraft
+      # - craftopia
+      # - ksp-ckanamd
+      # - ksp
+      # - foo

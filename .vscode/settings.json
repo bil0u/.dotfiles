@@ -5,9 +5,12 @@
         "*vimrc*": "plaintext",
         "*zshrc*": "shellscript",
         "*.zsh*": "shellscript",
+        "*.sh": "shellscript",
+        "*.ps1": "powershell",
         "*ignore": "ignore",
         "*gitconfig*": "ini",
-        "**/.chezmoiscripts/**/*": "shellscript",
         "**/.chezmoitemplates/**/*": "shellscript",
+        "**/.chezmoiscripts/darwin/*": "shellscript",
+        "**/.chezmoiscripts/windows/*": "powershell",
     }
 }

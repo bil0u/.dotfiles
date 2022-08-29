@@ -1,3 +1,4 @@
+{{ if eq .host.os.id "darwin" -}}
 prompt "Asking for admin password in order to continue (press Ctrl+C to exit)"
 sudo -v
 
@@ -7,3 +8,5 @@ while true; do
     sleep 60
     kill -0 "$$" || exit
 done 2>/dev/null &
+{{ else if eq .host.os.id "windows" -}}
+{{ end -}}

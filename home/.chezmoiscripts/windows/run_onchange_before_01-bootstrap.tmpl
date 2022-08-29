@@ -1,0 +1,27 @@
+<#
+.Synopsis
+  Install minimal requirements to run further scripts.
+.DESCRIPTION
+  Text here
+#>
+
+{{ template "load-utils" . }}
+
+Filename "bootstrap"
+
+if (-not (Get-Command -Name choco -ErrorAction SilentlyContinue)) {
+  Action 'Installing chocolatey'
+  # Allow downloads
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force -Verbose
+
+  # Install Chocolatey
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+  Invoke-WebRequest 'https://chocolatey.org/install.ps1' -UseBasicParsing | Invoke-Expression -Verbose
+
+  # Auto confirm package installations (no need to pass -y)
+  choco feature enable -n allowGlobalConfirmation -y
+
+  refreshenv
+} else {
+  Ignored 'Chocolatey already installed'
+}

@@ -1,0 +1,142 @@
+<#
+.Synopsis
+  Configures system defaults
+.DESCRIPTION
+  Text here
+#>
+
+{{ template "load-utils" . }}
+
+Filename "system-defaults"
+
+{{ template "prompt-sudo" . }}
+
+# --------------------
+# System configuration
+# --------------------
+
+Action "Computer identity"
+
+# Set computer name (as done via System Preferences → Sharing)
+
+Action "Languages & localization"
+
+# Set locale
+
+# Languages and text formats
+
+# Set the timezone; see `sudo systemsetup -listtimezones` for other values
+# sudo systemsetup -settimezone 'Europe/Paris' >/dev/null
+
+Action "General UI/UX"
+
+# Set accent color
+
+# Auto switch between light and dark mode
+
+# Shows scrollbar automatically
+# Clic scrollbar to go to clicked location
+# Confirm changes on close
+# Closes windows on app quit
+# Expand save panel by default
+# Expand print panel by default
+# Open home directory instead of iCloud when saving a document
+# Set sidebar icon size to medium
+# Add a context menu item for showing the Web Inspector in web views
+# Allow keyboard navigation everywhere
+
+Action "Dock & menubar"
+
+# Dock icons size
+# System Preferences > Dock & Menubar > Position
+# System Preferences > Dock & Menubar > Minimize effect
+# System Preferences > Dock & Menubar > Autohide
+# System Preferences > Dock & Menubar > Disables recent applications
+# System Preferences > Mission Control > Group by app
+# Make Dock icons of hidden applications translucent
+# Reduces windows on double click in title bar
+# Extended DateTime format
+# System Preferences > Mission Control > Rearrange spaces automatically
+# Hides menubar in fullscreen
+
+Action "Control center"
+
+# Hides wifi in menubar
+# Hides bluetooth in menubar
+# Hides airdrop in menubar
+# Hides focus in menubar when not enabled
+# Hides keyboard brightness in menubar
+# Hides airplay in menubar if not enabled
+# Hides display in menubar
+# Hides sound in menubar if not active
+# Hides accessibility shortcuts in menubar
+# Hides user switcher in menubar
+# Hides spotlight in menubar
+# Hides siri in menubar
+# Hides time machine in menubar
+# Shows date & time
+# Shows control center icon
+
+# TBD
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+Action "Mouse"
+
+# Natural scroll direction
+# Mouse cursor speed
+# Scrolling speed
+# Double click speed
+
+Action "Keyboard"
+
+# Key repeat speed
+# Key repeat delay
+# Disables auto period substitution
+
+Action "Sound"
+
+# Disables screen flash
+# Set beep sound
+
+Action "Siri"
+
+Action "Accessibility"
+
+# Enables zoom on screen using Cmd + scrollwheel
+
+Action "Quick look"
+
+# Allow text selection in Quick Look
+
+Action "Energy saving"
+
+Action "Security"
+
+# Disable the “Are you sure you want to open this application?” dialog
+# Disable disk image verification
+# Require password immediately after sleep or screen saver begins
+
+Action "Updates"
+
+# Turn on app auto-update
+#
+# Allow the App Store to reboot machine on macOS updates
+#
+# Automatically check for updates.
+# Download new updates when available.
+# Installs critical updates
+# Check for software updates daily, not just once per week
+
+Action "Telemetry"
+
+# Disables targeted ads
+# Disables autogathering large files when submitting a feedback report

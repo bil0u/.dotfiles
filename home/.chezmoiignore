@@ -1,7 +1,3 @@
-# Selects platform specific scripts
-.chezmoiscripts/*/**
-!.chezmoiscripts/{{ .chezmoi.os }}/**
-
 # -----------------------
 # -  Permanent ignores  -
 # -----------------------
@@ -14,63 +10,28 @@
 # -------------------------------
 
 # macOS
-{{ if eq .chezmoi.os "darwin" }}
-{{ else }}
-code
-code/**
-{{ end }}
-
-# linux
-{{ if eq .chezmoi.os "linux" }}
-.local/share/fonts
-{{ else }}
+{{ if eq .host.os.id "darwin" }}
 {{ end }}
 
 # Windows
-{{ if eq .chezmoi.os "windows" }}
-code
-code/**
-.oh-my-zsh
-.oh-my-zsh/**
-.aws
-.aws/**
-.bin
-.bin/**
-.zsh
-.zsh/**
-.ssh
-.ssh/**
-.gitconfig
-.terraformrc
-.vimrc
-.zprofile
-.zshrc
-{{ else }}
+{{ if eq .host.os.id "windows" }}
+*
 {{ end }}
 
-# -------------------------------
-# -  Context ignores  -
-# -------------------------------
+# ---------------------
+# -  Final overrides  -
+# ---------------------
 
-{{ if not .personal }}
-code
-code/**
-!code/iliomad
-!code/iliomad/**
-.ssh/keys/vogsphere_ed25519
-.ssh/keys/vogsphere_ed25519.pub
-{{ end }}
+# Do not put anything after this line
 
-{{ if not .work }}
-.aws
-.aws/**
-code/iliomad
-code/iliomad/**
-.ssh/keys/iliomad_aws_bastion
-.ssh/keys/iliomad_aws_bastion.pub
-{{ end }}
+# Auto select scripts to run
+.chezmoiscripts/*
+!.chezmoiscripts/{{ .host.os.id }}/
 
-{{ if and (not .work) (not .personal) }}
-.ssh/keys/github_ed25519
-.ssh/keys/github_ed25519.pub
-{{ end }}
+# Keep mandatory files
+!.chezmoitemplates/
+!.chezmoi.yaml.tmpl
+!.chezmoidata.yaml
+!.chezmoiexternal.yaml
+!.chezmoiignore.yaml
+!.chezmoiremove.yaml
