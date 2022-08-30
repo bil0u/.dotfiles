@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-{{ template "load-utils" . }}
+{{ template "darwin/utils.sh" . }}
 
 filename "asdf"
 
@@ -41,7 +41,7 @@ group {{ $pluginName | quote }}
 asdf plugin add {{ $pluginName }} {{ $pluginUrl }} >/dev/null 2>&1
 case $? in
   0) action "plugin installed" ;;
-  2) ignored "plugin already installed" ;;
+  2) ignored "plugin already installed " ;;
   *) error "Unknown error, skipping plugin" && SKIP=1 ;;
 esac
 

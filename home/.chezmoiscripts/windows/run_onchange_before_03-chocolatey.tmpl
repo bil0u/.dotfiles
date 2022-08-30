@@ -5,7 +5,7 @@
   Text here
 #>
 
-{{ template "load-utils" . }}
+{{ template "darwin/utils.ps1" . }}
 
 Filename "chocolatey"
 
@@ -20,7 +20,7 @@ $configFile = New-TemporaryFile
 {{ end -}}
 </packages>
 "@ | Out-File $configFile
-choco install --yes --limitoutput $tempFile
+choco install --yes --limitoutput $configFile
  
 # Delete config file
 Remove-Item -Path $configFile

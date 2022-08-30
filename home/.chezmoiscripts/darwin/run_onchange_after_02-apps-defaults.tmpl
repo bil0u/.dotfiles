@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-{{ template "load-utils" . }}
+{{ template "darwin/utils.sh" . }}
 
-filename "apps-defaults"
+filename "apps-defaults "
 
-{{ template "prompt-sudo" . }}
+{{ template "darwin/prompt-sudo.sh" . }}
 
 # ------------------
 group "macOS apps"

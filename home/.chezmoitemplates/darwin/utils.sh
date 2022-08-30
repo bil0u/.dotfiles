@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 function filename {
     echo "🟠 $1"
 }

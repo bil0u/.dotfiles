@@ -16,6 +16,10 @@
 # Windows
 {{ if eq .host.os.id "windows" }}
 *
+!.ssh/config
+!.ssh/keys/github*
+!.gitconfig
+!.gitignore
 {{ end }}
 
 # ---------------------
@@ -25,8 +29,8 @@
 # Do not put anything after this line
 
 # Auto select scripts to run
-.chezmoiscripts/*
-!.chezmoiscripts/{{ .host.os.id }}/
+.chezmoiscripts/*/**
+!.chezmoiscripts/{{ .host.os.id }}/**
 
 # Keep mandatory files
 !.chezmoitemplates/

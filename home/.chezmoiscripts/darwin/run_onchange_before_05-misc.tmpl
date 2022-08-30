@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-{{ template "load-utils" . }}
+{{ template "darwin/utils.sh" . }}
 
 filename "misc"
 
-action "Installing go binaries ..."
-{{ template "load-golang-cfg" . }}
+action "Installing go binaries ... "
+{{ template "darwin/golang-cfg.sh" . }}
 
 {{ range (.darwin.misc.go | uniq) -}}
 
@@ -23,3 +23,8 @@ else
 fi
 
 {{ end -}}
+
+action "Configuring host file"
+
+sudo curl -s "https://someonewhocares.org/hosts/hosts" -o "/etc/hosts"
+sudo killall -HUP mDNSResponder >/dev/null

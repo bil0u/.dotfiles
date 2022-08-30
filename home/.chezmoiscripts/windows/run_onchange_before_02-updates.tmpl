@@ -7,7 +7,7 @@
 
 # time hash, based on day: {{ now | date "02 January 2006" | sha256sum }}
 
-{{ template "load-utils" . }}
+{{ template "darwin/utils.ps1" . }}
 
 Filename "updates"
 

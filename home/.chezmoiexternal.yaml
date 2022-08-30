@@ -12,30 +12,21 @@
     exact: true
     stripComponents: 1
 
-{{- $fontDir := "" }}
-{{- if eq .host.os.id "darwin" }}
-{{-   $fontDir = "Library/Fonts" }}
-{{- else if eq .host.os.id "linux" }}
-{{-   $fontDir = ".local/share/fonts" }}
-{{- end }}
-
-{{- if ne $fontDir "" }}
-"{{ $fontDir }}/MesloLGS NF Regular.ttf":
+"{{ .host.paths.font }}/MesloLGS NF Regular.ttf":
     type: "file"
     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Regular.ttf"
     refreshPeriod: "168h"
-"{{ $fontDir }}/MesloLGS NF Bold.ttf":
+"{{ .host.paths.font }}/MesloLGS NF Bold.ttf":
     type: "file"
     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Bold.ttf"
     refreshPeriod: "168h"
-"{{ $fontDir }}/MesloLGS NF Italic.ttf":
+"{{ .host.paths.font }}/MesloLGS NF Italic.ttf":
     type: "file"
     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Italic.ttf"
     refreshPeriod: "168h"
-"{{ $fontDir }}/MesloLGS NF Bold Italic.ttf":
+"{{ .host.paths.font }}/MesloLGS NF Bold Italic.ttf":
     type: "file"
     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS NF Bold Italic.ttf"
     refreshPeriod: "168h"
-{{- end }}
 
 {{- end }}

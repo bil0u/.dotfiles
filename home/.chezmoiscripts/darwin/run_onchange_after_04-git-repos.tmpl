@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-{{ template "load-utils" . }}
+{{ template "darwin/utils.sh" . }}
 
-filename "git-repos"
+filename "git-repos "
 
 # Switching dotfiles repository to ssh
 dotfiles_remote_url=$(chezmoi git -- config --get remote.origin.url)

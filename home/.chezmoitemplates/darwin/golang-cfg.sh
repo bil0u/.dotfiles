@@ -1,3 +1,1 @@
-{{ if eq .host.os.id "darwin" -}}
 source "{{ .chezmoi.sourceDir }}/dot_zsh/omz/plugins/golang-cfg/golang-cfg.plugin.zsh"
-{{ end -}}

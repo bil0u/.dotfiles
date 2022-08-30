@@ -9,7 +9,7 @@
         "*.ps1": "powershell",
         "*ignore": "ignore",
         "*gitconfig*": "ini",
-        "**/.chezmoitemplates/**/*": "shellscript",
+        // "**/.chezmoiexternal.yaml": "go-template",
         "**/.chezmoiscripts/darwin/*": "shellscript",
         "**/.chezmoiscripts/windows/*": "powershell",
     }

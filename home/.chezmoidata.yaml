@@ -155,9 +155,6 @@ darwin:
     go:
       - github.com/catilac/plistwatch@latest
 windows:
-  drivers:
-    - name: Chipset - Intel Z390 Express
-      url: https://domain.com
   chocolatey:
     drivers:
       # - radeon-driver # GPU - AMD Radeon RX 6900XT
@@ -183,56 +180,56 @@ windows:
       - ssd-z
       - hwinfo
       # Benchmark
+      - aida64-extreme
       - as-ssd
-      - lanbench
-      - geekbench
       - cinebench
       - furmark
-      - heaven-benchmark
-      - valley-benchmark
-      - aida64-extreme
+      - geekbench
+      - lanbench
       - occt
       - performancetest
       - prime95
-      # - userbenchmark
+      - heaven-benchmark
+      - valley-benchmark
       # System utilities
       - 7zip
-      - treesizefree.portable
       - ddu
-      # - cleanmypc
+      - git
+      - treesizefree.portable
       - winrar
+      # - cleanmypc
       # - display-fusion
-      - powertoys
       - malwarebytes
+      - powertoys
       # - adguard
-      - nordvpn
       - 1password
+      - nordvpn
       - protonmailbridge
       # - foo
       # Apps
-      - discord
-      - signal
-      - firefox
       - chrome
-      - vscode
-      - notepadplusplus
+      - discord
+      - firefox
       - gamesavemanager
       - itunes
+      - notepadplusplus
       - nzbget
+      - signal
+      - vscode
       # - mailbird
       # - foo
       # Game platforms
       # - ankama
-      - steam-client
-      - ubisoft-connect
-      - origin
       - battle.net
       - leagueoflegendseuw
+      - origin
+      - steam-client
+      - ubisoft-connect
       # - roblox
       # - foo
       # Standalone Games
       - minecraft
       # - craftopia
-      # - ksp-ckanamd
+      # - ksp-ckan
       # - ksp
       # - foo

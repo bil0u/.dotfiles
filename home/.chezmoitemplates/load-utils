@@ -1,5 +1,0 @@
-{{ if eq .host.os.id "darwin" -}}
-source "{{ .chezmoi.sourceDir }}/.chezmoitemplates/.utils.sh"
-{{ else if eq .host.os.id "windows" -}}
-. "{{ .chezmoi.sourceDir }}/.chezmoitemplates/.utils.ps1"
-{{ end -}}

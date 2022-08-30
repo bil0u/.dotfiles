@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-{{ template "load-utils" . }}
-{{ template "load-homebrew" . }}
+{{ template "darwin/utils.sh" . }}
+{{ template "darwin/load-brew.sh" . }}
 
 filename "homebrew"
 
-action "Installing packages using homebrew..."
+action "Installing packages using homebrew... "
 brew bundle --no-lock --file=/dev/stdin <<EOF
 # Taps
 {{ range (.darwin.homebrew.taps | uniq) -}}

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-{{ template "load-utils" . }}
+{{ template "darwin/utils.sh" . }}
 
 filename "system-defaults"
 
 # Closing system preferences first
-osascript -e 'tell application "System Preferences" to quit'
+osascript -e 'tell application "System Preferences" to quit '
 
-{{ template "prompt-sudo" . }}
+{{ template "darwin/prompt-sudo.sh" . }}
 
 # --------------------
 # System configuration
