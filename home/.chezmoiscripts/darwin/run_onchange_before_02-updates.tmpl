@@ -4,12 +4,15 @@ set -uo pipefail
 # time hash, based on day: {{ now | date "02 January 2006" | sha256sum }}
 
 {{ template "darwin/utils.sh" . }}
-{{ template "darwin/load-brew.sh" . }}
 
 filename "updates"
 
+{{ template "darwin/elevate.sh" . }}
+
 action "Checking for system updates "
 sudo softwareupdate -i -a
+
+{{ template "darwin/load-brew.sh" . }}
 
 action "Checking for Homebrew updates"
 brew update

@@ -1,7 +1,16 @@
 #!/usr/bin/env zsh
 
 # Replace chezmoi command
-alias dot="chezmoi"
+dot() {
+    if [[ "$1" == "cd" ]]; then
+        cd $(chezmoi source-path)
+    else
+        chezmoi $@
+    fi
+}
+
+# alias dot="chezmoi"
+# alias "dot cd"="cd $(chezmoi source-path)"
 
 # Print all personal functions informations
 alias dhelp="grep "^function" ~/.dotfiles/zsh/functions.zsh | sed 's/function/+/g' | sed 's/() #/ - /g'"

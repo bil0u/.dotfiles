@@ -96,6 +96,7 @@ darwin:
       - notion
       - nzbget
       - postman
+      - powershell
       - protonmail-bridge
       - shapr3d
       - slack
@@ -192,19 +193,23 @@ windows:
       - heaven-benchmark
       - valley-benchmark
       # System utilities
+      - 1password
+      - op
       - 7zip
       - ddu
-      - git
+      - git.install
+      # git.install -params '"/GitAndUnixToolsOnPath /WindowsTerminal"'
+      - malwarebytes
+      - nordvpn
+      - powertoys
+      - protonmailbridge
+      - rufus
       - treesizefree.portable
+      - windirstat
       - winrar
       # - cleanmypc
       # - display-fusion
-      - malwarebytes
-      - powertoys
       # - adguard
-      - 1password
-      - nordvpn
-      - protonmailbridge
       # - foo
       # Apps
       - chrome

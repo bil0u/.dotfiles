@@ -5,7 +5,7 @@ set -uo pipefail
 
 filename "apps-defaults "
 
-{{ template "darwin/prompt-sudo.sh" . }}
+{{ template "darwin/elevate.sh" . }}
 
 # ------------------
 group "macOS apps"

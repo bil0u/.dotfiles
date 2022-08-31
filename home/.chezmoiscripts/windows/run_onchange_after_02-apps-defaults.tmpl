@@ -5,11 +5,11 @@
   Text here
 #>
 
-{{ template "darwin/utils.ps1" . }}
+{ { template "darwin/utils.ps1" . } }
 
 Filename "apps-defaults"
 
-# {{ template "darwin/prompt-sudo.ps1" . }}
+# {{ template "darwin/elevate.ps1" . }}
 
 # ------------------
 Group "Windows apps"

@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://freesvg.org/img/1535649195.png" alt="Markdown Monster icon" style="float: left; height:80px;"/><br>
-  Software configuration made easy
+  Personal computers bootsrapping made easy
 </p>
 
 <p align="center">
@@ -22,15 +22,33 @@ I'm using it to manage my macOS and Windows environments.
 
 ## 🚧 Installation
 
-One line install, with curl:
+#### macOS
+
+One liner:
 
 ```sh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/bil0u/.dotfiles/main/install.sh)" -- -r
 ```
 
-Or install it manually:
+Manual install:
 
 ```sh
+git clone https://github.com/bil0u/.dotfiles.git ~/.local/share/chezmoi
+cd ~/.local/share/chezmoi
+./install.sh
+```
+
+#### Windows
+
+One liner:
+
+```powershell
+& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/bil0u/.dotfiles/main/install.ps1))) -RepoID [user/repo]
+```
+
+Manual install:
+
+```powershell
 git clone https://github.com/bil0u/.dotfiles.git ~/.local/share/chezmoi
 cd ~/.local/share/chezmoi
 ./install.sh
@@ -46,6 +64,7 @@ Before being able to use SSH keys in a convenient fashion, the following needs t
   - **Security**
     - **Touch ID** : `Enabled`
   - **Developer**
+    - **Use SSH Agent**: `Enabled`
     - **1Password CLI 2**: `Enable biometric unlock`
 
 <a name="commands"></a>

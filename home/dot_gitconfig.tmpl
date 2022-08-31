@@ -7,8 +7,11 @@ username = {{ .personal.accounts.github.username }}
 username = {{ .personal.accounts.github.username }}
 
 [core]
-editor = vim
 excludesfile = ~/.gitignore
+editor = vim
+{{ if eq .host.os.id "windows" -}}
+sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+{{ end -}}
 
 [web]
 browser = firefox

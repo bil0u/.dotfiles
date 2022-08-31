@@ -8,7 +8,7 @@ filename "system-defaults"
 # Closing system preferences first
 osascript -e 'tell application "System Preferences" to quit '
 
-{{ template "darwin/prompt-sudo.sh" . }}
+{{ template "darwin/elevate.sh" . }}
 
 # --------------------
 # System configuration
@@ -351,3 +351,8 @@ defaults write com.apple.AdLib allowApplePersonalizedAdvertising -bool false
 defaults write com.apple.AdLib allowIdentifierForAdvertising -bool false
 # Disables autogathering large files when submitting a feedback report
 defaults write com.apple.appleseed.FeedbackAssistant Autogather -bool false
+
+action "Configuring host file"
+
+sudo curl -s "https://someonewhocares.org/hosts/hosts" -o "/etc/hosts"
+sudo killall -HUP mDNSResponder >/dev/null

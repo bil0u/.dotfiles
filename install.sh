@@ -6,9 +6,9 @@
 # Exit on error
 set -e
 
-REPO_SCHEME="https://github.com/"
-REPO_ID=""
-DEFAULT_REPO_ID="bil0u/.dotfiles"
+REPOSITORY_BASE_URL="https://github.com/"
+REPOSITORY=""
+DEFAULT_REPOSITORY="bil0u/.dotfiles"
 
 main() {
 	echo "\e[1m\e[33m🚀 install.sh\e[0m"
@@ -27,7 +27,7 @@ usage() {
 		options:
 
 		    -r --remote  For remote installs, use a github repo as source instead of local files.
-							Optionally give a user/repo to override the default ($REPO_ID)
+							Optionally give a user/repo to override the default ($REPOSITORY)
 		    -h --help    Display this message.
 
 	EOF
@@ -49,9 +49,9 @@ parse_args() {
 		case ${opt} in
 		-r | --remote)
 			if [ $# -eq 0 -o "${1:0:1}" = "-" ]; then
-				REPO_ID=$DEFAULT_REPO_ID
+				REPOSITORY=$DEFAULT_REPOSITORY
 			else
-				REPO_ID=$1
+				REPOSITORY=$1
 				shift
 			fi
 			;;
@@ -110,10 +110,10 @@ install_chezmoi() {
 bootstrap() {
 	echo "♻️  Initializing dotfiles ..."
 
-	if [ -z "$REPO_ID" ]; then
+	if [ -z "$REPOSITORY" ]; then
 		args="--source=$script_dir"
 	else
-		args="$REPO_SCHEME$REPO_ID"
+		args="$REPOSITORY_BASE_URL$REPOSITORY"
 	fi
 	exec "$CHEZMOI" init --apply "$args"
 }

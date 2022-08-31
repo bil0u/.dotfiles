@@ -5,6 +5,8 @@ set -euo pipefail
 
 filename "bootstrap"
 
+{{ template "darwin/elevate.sh" . }}
+
 # Enables touchID for sudo
 if ls /usr/lib/pam | grep -q "pam_tid.so"; then
 	PAM_FILE="/etc/pam.d/sudo"

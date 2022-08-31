@@ -5,33 +5,33 @@
   Text here
 #>
 
-{{ template "darwin/utils.ps1" . }}
+{ { template "darwin/utils.ps1" . } }
 
 Filename "system-defaults"
 
-# {{ template "darwin/prompt-sudo.ps1" . }}
-
-# --------------------
-# System configuration
-# --------------------
-
+# {{ template "darwin/elevate.ps1" . }}
 
 # --- Disable Settings ---
 Disable-UAC
 
-# --- Update Windows settings ---
-Disable-BingSearch
-Disable-GameBarTips
+Action "Computer identity"
 
-Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
-Set-WindowsExplorerOptions -DisableOpenFileExplorerToQuickAccess -DisableShowRecentFilesInQuickAccess -DisableShowFrequentFoldersInQuickAccess
+$computername = { { .host.friendly_name } }
+if ($env:computername -ne $computername) {
+  Rename-Computer -NewName $computername
+}
+
+
+Action "Windows Explorer"
+
+Set-WindowsExplorerOptions -EnableShowProtectedOSFiles -DisableOpenFileExplorerToQuickAccess -DisableShowRecentFilesInQuickAccess -DisableShowFrequentFoldersInQuickAccess
 
 # Better File Explorer
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
 
-# Change Windows Updates to "Notify to schedule restart"
-# Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name UxOption -Type DWord -Value 1
+
+Action "Telemetry"
 
 # Ad Privacy
 If (-Not (Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo")) {
@@ -40,26 +40,36 @@ If (-Not (Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Advertising
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo -Name Enabled -Type DWord -Value 0
 
 # Disable activity tracking
-@('EnableActivityFeed','PublishUserActivities','UploadUserActivities') |% { Set-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\System -Name $_ -Type DWord -Value 0 }
-
-# Disable Bing search results in start menu
-Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Type DWord -Value 0
-
-# Diable SmartScreen filter for store apps
-Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost -Name EnableWebContentEvaluation -Type DWord -Value 0
+@('EnableActivityFeed', 'PublishUserActivities', 'UploadUserActivities') | % { Set-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\System -Name $_ -Type DWord -Value 0 }
 
 # Disable Telemetry (requires a reboot to take effect)
 Set-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection -Name AllowTelemetry -Type DWord -Value 0
-Get-Service DiagTrack,Dmwappushservice | Stop-Service | Set-Service -StartupType Disabled
+Get-Service DiagTrack, Dmwappushservice | Stop-Service | Set-Service -StartupType Disabled
+
+Action "Bing"
+
+# Disable Bing search results in start menu
+Disable-BingSearch
+Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Type DWord -Value 0
+
+# Disable SmartScreen filter for store apps
+Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost -Name EnableWebContentEvaluation -Type DWord -Value 0
+
+Action "XBox Gamebar"
 
 # Disable Xbox Gamebar
+Disable-GameBarTips
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" -Name AppCaptureEnabled -Type DWord -Value 0
 Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name GameDVR_Enabled -Type DWord -Value 0
+
+Action "Wi-Fi"
 
 # WiFi Sense: disable hotspot sharing
 Set-ItemProperty -Path HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting -Name value -Type DWord -Value 0
 # WiFi Sense: disable hotspot auto-connect
 Set-ItemProperty -Path HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots -Name value -Type DWord -Value 0
+
+Action "Junk removal"
 
 # --- Uninstall Microsoft junk ---
 Get-AppxPackage Microsoft.*3D* | Remove-AppxPackage
@@ -84,220 +94,51 @@ Get-AppxPackage Microsoft.WindowsPhone | Remove-AppxPackage
 Get-AppxPackage Microsoft.WindowsSoundRecorder | Remove-AppxPackage
 Get-AppxPackage microsoft.windowscommunicationsapps | Remove-AppxPackage
 Get-AppxPackage Microsoft.Zune* | Remove-AppxPackage
-
-# --- Uninstall OEM junk ---
-# TBD
+Get-appxpackage *Microsoft.549981C3F5F10* | Remove-AppxPackage # Cortana
 
 # Windows features
 Disable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 cinst Microsoft-Windows-Subsystem-Linux -source windowsfeatures
 
-# # --- Install Software ---
-# $cache = "$env:userprofile\AppData\Local\ChocoCache"
-# New-Item -Path $cache -ItemType directory -Force
+Action "Host file"
 
-# # Utilities
-# cup chezmoi --cacheLocation $cache
-# cup chocolateygui --cacheLocation $cache
-# cup cmder --cacheLocation $cache
-# cup cpu-z --cacheLocation $cache
-# cup ffmpeg --cacheLocation $cache
-# cup git.install -params '"/GitAndUnixToolsOnPath /WindowsTerminal"' --cacheLocation $cache
-# cup rufus --cacheLocation $cache
-# cup sysinternals --cacheLocation $cache
-# cup virtualclonedrive --params "/NoQuickLaunch /NoDesktopShortcut" --cacheLocation $cache
-# cup windirstat --cacheLocation $cache
-
-# # Basic apps
-# cup autohotkey --cacheLocation $cache
-# cup brave --cacheLocation $cache
-# cup dropbox --cacheLocation $cache
-# cup expressvpn --cacheLocation $cache
-# cup googlechrome --ignore-checksums --cacheLocation $cache
-# cup peazip --cacheLocation $cache
-# cup rainmeter --cacheLocation $cache
-# cup spotify --cacheLocation $cache
-# cup vlc --cacheLocation $cache
-# cup wox --cacheLocation $cache
-
-# # Game and Environment
-# # - broken install -
-# # cup battle.net --cacheLocation $cache
-# cup discord --cacheLocation $cache
-# cup dosbox --cacheLocation $cache
-# cup gamebooster --cacheLocation $cache
-# cup itch --cacheLocation $cache
-# cup origin --cacheLocation $cache
-# cup steam --cacheLocation $cache
-# cup virtualbox --params "/NoQuickLaunch /NoDesktopShortcut" --cacheLocation $cache
-
-# --- Host ---
 Invoke-WebRequest -Uri "https://someonewhocares.org/hosts/hosts" -OutFile "${env:SystemRoot}\System32\drivers\etc\hosts"
 
-#--- Rename the Computer ---
-$computername = "woprbox"
-if ($env:computername -ne $computername) {
-	Rename-Computer -NewName $computername
-}
 
 # --- Restore Settings ---
 Enable-UAC
-Enable-MicrosoftUpdate
-Install-WindowsUpdate -acceptEula -getUpdatesFromMS -SuppressReboots
 
-# --- Manual Installers ---
-Invoke-WebRequest -Uri "https://us.battle.net/download/getInstaller?os=win&installer=Battle.net-Setup.exe" -OutFile "${env:USERPROFILE}\desktop\Battle.net-Setup.exe"
+Action "Power scheme"
 
-# --- Cleanup ---
-del $env:userprofile\AppData\Local\ChocoCache\*.*
-del $env:userprofile\AppData\Local\Temp\*.*
-
-# --- Setup WSL ---
-# This requires user interaction to enter the new account's un/pw, so it's last
-# iwr -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile ~/Ubuntu.appx -UseBasicParsing
-# Add-AppxPackage -Path ~/Ubuntu.appx
-# run the distro once and have it install locally with root user, unset password
-# RefreshEnv
-# ubuntu1804 install --root
-# ubuntu1804 run apt update
-# ubuntu1804 run apt upgrade -y
-
-
-
-
-
-
-
-# ------------------------------------------------------------------------
-
-
-
-
-
-
-
-Action "Computer identity"
-
-# Set computer name (as done via System Preferences → Sharing)
-
-Action "Languages & localization"
-
-# Set locale
-
-# Languages and text formats
-
-# Set the timezone; see `sudo systemsetup -listtimezones` for other values
-# sudo systemsetup -settimezone 'Europe/Paris' >/dev/null
-
-Action "General UI/UX"
-
-# Set accent color
-
-# Auto switch between light and dark mode
-
-# Shows scrollbar automatically
-# Clic scrollbar to go to clicked location
-# Confirm changes on close
-# Closes windows on app quit
-# Expand save panel by default
-# Expand print panel by default
-# Open home directory instead of iCloud when saving a document
-# Set sidebar icon size to medium
-# Add a context menu item for showing the Web Inspector in web views
-# Allow keyboard navigation everywhere
-
-Action "Dock & menubar"
-
-# Dock icons size
-# System Preferences > Dock & Menubar > Position
-# System Preferences > Dock & Menubar > Minimize effect
-# System Preferences > Dock & Menubar > Autohide
-# System Preferences > Dock & Menubar > Disables recent applications
-# System Preferences > Mission Control > Group by app
-# Make Dock icons of hidden applications translucent
-# Reduces windows on double click in title bar
-# Extended DateTime format
-# System Preferences > Mission Control > Rearrange spaces automatically
-# Hides menubar in fullscreen
-
-Action "Control center"
-
-# Hides wifi in menubar
-# Hides bluetooth in menubar
-# Hides airdrop in menubar
-# Hides focus in menubar when not enabled
-# Hides keyboard brightness in menubar
-# Hides airplay in menubar if not enabled
-# Hides display in menubar
-# Hides sound in menubar if not active
-# Hides accessibility shortcuts in menubar
-# Hides user switcher in menubar
-# Hides spotlight in menubar
-# Hides siri in menubar
-# Hides time machine in menubar
-# Shows date & time
-# Shows control center icon
-
-# TBD
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-
-Action "Mouse"
-
-# Natural scroll direction
-# Mouse cursor speed
-# Scrolling speed
-# Double click speed
-
-Action "Keyboard"
-
-# Key repeat speed
-# Key repeat delay
-# Disables auto period substitution
-
-Action "Sound"
-
-# Disables screen flash
-# Set beep sound
-
-Action "Siri"
-
-Action "Accessibility"
-
-# Enables zoom on screen using Cmd + scrollwheel
-
-Action "Quick look"
-
-# Allow text selection in Quick Look
-
-Action "Energy saving"
-
-Action "Security"
-
-# Disable the “Are you sure you want to open this application?” dialog
-# Disable disk image verification
-# Require password immediately after sleep or screen saver begins
+$PowerScheme = @{
+  #    High Performance - The scheme is designed to deliver maximum performance at the expense of power consumption savings.
+  "GUID_MIN_POWER_SAVINGS" = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"
+}
+$PowerScheme.GetEnumerator() | % { $_.key ; $_.value ; PowerCFG -SetActive $_.value ; PowerCFG -GetActiveScheme ; } ;
 
 Action "Updates"
 
-# Turn on app auto-update
-#
-# Allow the App Store to reboot machine on macOS updates
-#
-# Automatically check for updates.
-# Download new updates when available.
-# Installs critical updates
-# Check for software updates daily, not just once per week
+# Enable Automatic updates
 
-Action "Telemetry"
+# 0 |	aunlNotConfigured	            | Not configured	[must be set via Windows Update Troubleshooter]
+# 1 |	aunlDisabled		          	  | Never check for updates (not recommended)
+# 2 |	aunlNotifyBeforeDownload	    | Check for updates but let me choose whether to download and install them
+# 3 |	aunlNotifyBeforeInstallation	| Download updates but let me choose wether to install them
+# 4 |	aunlScheduledInstallation	    | Install updates automatically (recommended)
 
-# Disables targeted ads
-# Disables autogathering large files when submitting a feedback report
+$WindowsUpdateAgent = (New-Object -com "Microsoft.Update.AutoUpdate").Settings
+$WindowsUpdateAgent.NotificationLevel = 4
+$WindowsUpdateAgent.Save()
+
+# Include optional or recommended updates when a search for updates and installation of updates is performed
+$WindowsUpdateAgent.IncludeRecommendedUpdates = $true
+
+# Enable display notifications for featured updates
+$WindowsUpdateAgent.FeaturedUpdatesEnabled = $true
+
+Action "Languages & localization"
+
+Action "General UI/UX"
+
+Action "Quick look"
+

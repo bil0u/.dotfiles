@@ -28,12 +28,16 @@
 {{- $osBuild := "unknown" }}
 {{- $osVersion := "unknown" }}
 {{- $osMajor := "unknown" }}
+{{- $osHost := "none" }}
 {{- if eq $osid "darwin" }}
 {{-	  $swvers := (output "sw_vers") }}
 {{-	  $osBuild = mustRegexFind "\t[0-9A-Z]{5,}" $swvers | trimPrefix "\t" }}
 {{-	  $osVersion = mustRegexFind "\t[0-9]{2}\\.[0-9]{1,2}\\.?[0-9]{0,2}" $swvers | trimPrefix "\t" }}
 {{-	  $osMajor = mustRegexFind "[0-9]{2}" $osVersion }}
 {{- else if eq $osid "linux" }}
+{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+{{-     $osHost = "wsl" }}
+{{-   end }}
 {{-   $osVersion = .chezmoi.osRelease }}
 {{-   $osMajor = mustRegexFind "[0-9]+" $osVersion }}
 {{- else if eq $osid "windows" }}
@@ -63,6 +67,7 @@ data:
     arch: {{ .chezmoi.arch }}
     os:
       id: {{ $osid }}
+      host: {{ $osHost }}
       version: {{ $osVersion }}
       major: {{ $osMajor }}
       build: {{ $osBuild }}
