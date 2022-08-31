@@ -12,5 +12,11 @@
         // "**/.chezmoiexternal.yaml": "go-template",
         "**/.chezmoiscripts/darwin/*": "shellscript",
         "**/.chezmoiscripts/windows/*": "powershell",
-    }
+    },
+    "powershell.codeFormatting.whitespaceBeforeOpenBrace": false,
+    "powershell.codeFormatting.whitespaceInsideBrace": false,
+    "powershell.codeFormatting.whitespaceAroundOperator": false,
+    "powershell.codeFormatting.newLineAfterCloseBrace": false,
+    "powershell.codeFormatting.newLineAfterOpenBrace": false,
+
 }

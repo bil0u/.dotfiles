@@ -1,0 +1,80 @@
+<#
+.Synopsis
+  Configures system defaults
+.DESCRIPTION
+  Text here
+#>
+
+{{- template "windows/utils.ps1" . }}
+
+Filename "system-defaults"
+
+Import-Module Boxstarter.Chocolatey
+Disable-UAC
+
+
+Action "Computer identity"
+if ($env:computername -ne "{{ .host.friendly_name }}") {
+  Rename-Computer -NewName "{{ .host.friendly_name }}"
+}
+
+
+Action "Host file"
+Invoke-WebRequest -Uri "https://someonewhocares.org/hosts/hosts" -OutFile "${env:SystemRoot}\System32\drivers\etc\hosts"
+
+# Action "Wi-Fi"
+
+
+Action "Power scheme"
+$PowerScheme = @{
+  #    High Performance - The scheme is designed to deliver maximum performance at the expense of power consumption savings.
+  "GUID_MIN_POWER_SAVINGS" = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"
+}
+$PowerScheme.GetEnumerator() | % { $_.key ; $_.value ; PowerCFG -SetActive $_.value ; PowerCFG -GetActiveScheme ; } ;
+
+# Action "Boot"
+
+Action "TaskBar"
+{{ $taskbarOptions := list
+    "-Size Small -Dock Bottom -Combine Always"
+    "-UnLock -NoAutoHide"
+    "-EnableSearchBox"
+    "-AlwaysShowIconsOn"
+    "-MultiMonitorOn -MultiMonitorMode All -MultiMonitorCombine Always" -}}
+{{ range ($taskbarOptions | sortAlpha | uniq ) -}}
+Set-BoxstarterTaskbarOptions {{ . }}
+{{ end -}}
+
+{{ if gt (len (default "" .windows.features)) 0 -}}
+Action "Optional Features"
+{{ range (.windows.features | sortAlpha | uniq ) -}}
+Enable-WindowsOptionalFeature -Online -FeatureName {{ . }}
+{{ end -}}
+{{ else -}}
+Ignored "No optional features defined in config"
+{{ end -}}
+
+
+Action "Updates"
+Enable-MicrosoftUpdate -ErrorAction SilentlyContinue
+# 0 |	aunlNotConfigured	            | Not configured	[must be set via Windows Update Troubleshooter]
+# 1 |	aunlDisabled		          	  | Never check for updates (not recommended)
+# 2 |	aunlNotifyBeforeDownload	    | Check for updates but let me choose whether to download and install them
+# 3 |	aunlNotifyBeforeInstallation	| Download updates but let me choose wether to install them
+# 4 |	aunlScheduledInstallation	    | Install updates automatically (recommended)
+$WindowsUpdateAgent = (New-Object -com "Microsoft.Update.AutoUpdate").Settings
+$WindowsUpdateAgent.NotificationLevel = 4
+$WindowsUpdateAgent.Save()
+# Include optional or recommended updates when a search for updates and installation of updates is performed
+$WindowsUpdateAgent.IncludeRecommendedUpdates = $true
+# Enable display notifications for featured updates
+$WindowsUpdateAgent.FeaturedUpdatesEnabled = $true
+
+Action "Telemetry"
+# Disable activity tracking
+@('EnableActivityFeed', 'PublishUserActivities', 'UploadUserActivities')
+Get-Service DiagTrack, Dmwappushservice `
+| Stop-Service `
+| Set-Service -StartupType Disabled
+
+Enable-UAC

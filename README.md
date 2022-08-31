@@ -22,50 +22,23 @@ I'm using it to manage my macOS and Windows environments.
 
 ## 🚧 Installation
 
-#### macOS
+##### macOS
 
-One liner:
+You can either use the [install.sh](/install.sh) script if you cloned the repo locally, or use this one liner to do a remote install:
 
 ```sh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/bil0u/.dotfiles/main/install.sh)" -- -r
 ```
 
-Manual install:
+##### Windows
 
-```sh
-git clone https://github.com/bil0u/.dotfiles.git ~/.local/share/chezmoi
-cd ~/.local/share/chezmoi
-./install.sh
-```
-
-#### Windows
-
-One liner:
+You can either use the [install.ps1](/install.ps1) script if you cloned the repo locally, or use this one liner to do a remote install:
 
 ```powershell
-& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/bil0u/.dotfiles/main/install.ps1))) -Remote [user/repo]
+$installer = "$env:temp\dot-install.ps1"; Invoke-WebRequest "https://raw.githubusercontent.com/bil0u/.dotfiles/main/install.ps1" -OutFile "$installer"; PowerShell.exe -ExecutionPolicy Bypass -File "$installer" -Remote; Exit;
 ```
 
-Manual install:
-
-```powershell
-git clone https://github.com/bil0u/.dotfiles.git ~/.local/share/chezmoi
-cd ~/.local/share/chezmoi
-./install.sh
-```
-
-#### Manual steps
-
-##### 1Password
-
-Before being able to use SSH keys in a convenient fashion, the following needs to be enabled:
-
-- **Preferences**
-  - **Security**
-    - **Touch ID** : `Enabled`
-  - **Developer**
-    - **Use SSH Agent**: `Enabled`
-    - **1Password CLI 2**: `Enable biometric unlock`
+Finally, you should check for any [manual steps](/docs/manual-steps.md) to complete the installation.
 
 <a name="commands"></a>
 
@@ -100,8 +73,10 @@ _For full list, see [command overview](https://www.chezmoi.io/user-guide/command
 ## 📚 Documentation
 
 &nbsp;&nbsp;&nbsp;&nbsp;[**docs**](/docs/)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [apps](/docs/apps.md): installed apps, tools & packages
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ [defaults](/docs/defaults.md): system & apps preferences setup
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [darwin](/docs/apps.md): macOS related documentation  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [windows](/docs/windows.md): Windows related documentation
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ [manual-steps](/docs/manual-steps.md): Steps to do manually to complete the installation
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ [resources](/docs/resources.md): Useful resources used for the project
 
 <!-- &nbsp;&nbsp;├ [`defaults`](/docs/defaults) -->
 <!-- &nbsp;&nbsp;│&nbsp;&nbsp;└ [`defaults`](/docs/defaults) -->

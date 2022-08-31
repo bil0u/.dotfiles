@@ -3,7 +3,7 @@
 {{- writeToStdout "🌱 Initializing dotfiles...\n" -}}
 
 {{- $friendlyName := promptStringOnce .host "friendly_name" "Computer friendly name" -}}
-{{- $hostName := promptStringOnce .host "host_name" "Host name" -}}
+{{- $hostName := $friendlyName | lower -}}
 
 {{/* Guess OS based variables */}}
 

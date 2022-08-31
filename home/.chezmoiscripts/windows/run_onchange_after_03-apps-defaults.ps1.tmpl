@@ -1,0 +1,95 @@
+<#
+.Synopsis
+  Configures applications defaults
+.DESCRIPTION
+  Text here
+#>
+
+{{- template "windows/utils.ps1" . }}
+
+Filename "apps-defaults"
+
+Import-Module Boxstarter.Chocolatey
+Disable-UAC
+
+
+# ------------------
+Group "Windows apps"
+# ------------------
+
+# $SystemRegistry = "HKCU:\System"
+# $AppsRegistry = "HKCU:\Software\Microsoft\Windows\CurrentVersion"
+
+Action "Windows Explorer"
+Set-WindowsExplorerOptions `
+  -EnableShowProtectedOSFiles `
+  -DisableOpenFileExplorerToQuickAccess `
+  -DisableShowRecentFilesInQuickAccess `
+  -DisableShowFrequentFoldersInQuickAccess `
+  -DisableSnapAssist
+
+Action "Bing"
+# Disable Bing search results in start menu
+Disable-BingSearch -ErrorAction SilentlyContinue
+
+Action "XBox Gamebar"
+# Disable Xbox Gamebar
+Disable-GameBarTips -ErrorAction SilentlyContinue
+
+Action "Windows media player"
+Disable-WindowsOptionalFeature `
+  -Online `
+  -FeatureName "WindowsMediaPlayer" `
+  -NoRestart `
+  -WarningAction SilentlyContinue `
+| Out-Null
+
+# ------------------
+Group "Third-party apps"
+# ------------------
+
+# Action "1Password"
+# Action "AdGuard"
+# Action "Discord"
+# Action "Firefox"
+# Action "Google Chrome"
+# Action "NordVPN"
+# Action "NZBGet"
+# Action "ProtonMail Bridge"
+# Action "VSCode"
+
+# ------------------
+Group "Miscellaneous"
+# ------------------
+
+{{ if gt (len (default "" .windows.taskbar)) 0 -}}
+Action "Pinned taskbar items"
+{{ range (.windows.taskbar | sortAlpha | uniq ) -}}
+Install-ChocolateyPinnedTaskBarItem -TargetFilePath {{ . | quote }}
+{{ end -}}
+{{ else -}}
+Ignored "No pinned taskbar item defined in config"
+{{ end -}}
+
+{{ if gt (len (default "" .windows.shortcuts)) 0 -}}
+Action "Shortcuts"
+{{- range (.windows.shortcuts | sortAlpha | uniq ) }}
+$arguments = {{ template "windows/get-args.ps1" . }}
+Install-ChocolateyShortcut @arguments
+{{- end }}
+{{ else -}}
+Ignored "No shortcut defined in config"
+{{- end }}
+
+
+{{ if gt (len (default "" .windows.associations)) 0 -}}
+Action "Files associations"
+{{ range $key, $value := (.windows.associations) -}}
+Install-ChocolateyFileAssociation -Extension {{ $key | quote }} -Executable  {{ $value | quote }}
+{{ end -}}
+{{ else -}}
+Ignored "No files associations defined in config"
+{{ end -}}
+
+
+Enable-UAC

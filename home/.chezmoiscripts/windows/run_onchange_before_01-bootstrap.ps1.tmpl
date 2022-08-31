@@ -1,0 +1,24 @@
+<#
+.Synopsis
+  Install minimal requirements to run further scripts.
+.DESCRIPTION
+  Text here
+#>
+
+{{- template "windows/utils.ps1" . }}
+
+Filename "bootstrap"
+
+# Check if chocolatey is installed
+if (-not (Get-Command -Name choco -ErrorAction SilentlyContinue)) {
+  Action "Installing chocolatey"
+
+  Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://community.chocolatey.org/install.ps1"))
+
+  # Auto confirm package installations (no need to pass -y)
+  choco feature enable -n allowGlobalConfirmation -y
+
+  refreshenv
+} else {
+  Ignored "Chocolatey already installed"
+}

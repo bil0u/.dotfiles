@@ -1,0 +1,48 @@
+<#
+.Synopsis
+  Install packages using chocolatey.
+.DESCRIPTION
+  Text here
+#>
+
+{{ template "windows/utils.ps1" . }}
+
+{{ template "windows/load-choco.ps1" . }}
+
+Filename "chocolatey"
+
+Action "Installing packages using chocolatey..."
+
+{{ if gt (len (default "" .windows.chocolatey.manual)) 0 -}}
+{{  range .windows.chocolatey.manual -}}
+$arguments = {{ template "windows/get-args.ps1" . }}
+Install-ChocolateyPackage @arguments
+{{  end -}}
+{{ else -}}
+Ignored "No manual package installation defined in config"
+{{ end -}}
+
+{{ $chocoList := concat .windows.chocolatey.drivers .windows.chocolatey.packages -}}
+{{ if gt (len (default "" $chocoList)) 0 -}}
+$configFile = "$env:temp\choco.config"
+@"
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+{{ range ($chocoList | uniq) -}}
+{{  $pkg := . -}}
+{{  if kindIs "string" $pkg -}}
+  <package id="{{ $pkg }}"/>
+{{  else -}}
+  <package {{ range ( keys $pkg | uniq) }} {{ . }}="{{ get $pkg . }}"{{ end }}/>
+{{  end -}}
+{{ end -}}
+</packages>
+"@ | Out-File $configFile
+# choco install --yes --limitoutput $configFile
+choco install --yes --limitoutput boxstarter
+
+# Delete config file
+Remove-Item -Path $configFile -Force
+{{ else -}}
+Ignored "No chocolatey package to install defined in config"
+{{ end -}}

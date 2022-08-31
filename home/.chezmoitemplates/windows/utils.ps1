@@ -1,27 +1,27 @@
-function Filename ($str) {
-    Write-Output "🟠 $str"
+function Filename {
+    Write-Output "$args"
 }
 
-function Group ($str) {
-    Write-Output "📦 $str"
+function Group {
+    Write-Output "$args"
 }
 
-function Prompt ($str) {
-    Write-Output "💬 $str"
+function Prompt {
+    Write-Output "$args"
 }
 
-function Pad ($str) {
-    Write-Output -NoNewline "   "
+function Pad {
+    Write-Output -NoNewline "    "
 }
 
-function Action ($str) {
-    Write-Output "🚀 $str"
+function Action {
+    Write-Output "$args"
 }
 
-function Ignored ($str) {
-    Write-Output "✨ $str"
+function Ignored {
+    Write-Output "$args"
 }
 
-function Error ($str) {
-    Write-Error "🛑 $str" >&2
+function Error {
+    Write-Error "$args"
 }

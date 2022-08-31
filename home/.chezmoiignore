@@ -11,11 +11,13 @@
 
 # macOS
 {{ if eq .host.os.id "darwin" }}
+Documents/
 {{ end }}
 
 # Windows
 {{ if eq .host.os.id "windows" }}
 *
+!Documents/WindowsPowerShell/
 !.ssh/config
 !.ssh/keys/github*
 !.gitconfig

@@ -7,24 +7,21 @@
 
 # time hash, based on day: {{ now | date "02 January 2006" | sha256sum }}
 
-{ { template "darwin/utils.ps1" . } }
+{{ template "windows/utils.ps1" . }}
 
 Filename "updates"
 
-Action "Checking for system updates"
-if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate)) {
-  Install-Module -Name PSWindowsUpdate
-} 
+Import-Module Boxstarter.Chocolatey
 
-Import-Module PSWindowsUpdate
-Get-WUInstall –Install –AcceptAll -ForceInstall –IgnoreReboot
+Action "Checking for system updates"
+Install-WindowsUpdate -acceptEula -SuppressReboots
+
+Action "Checking for Microsoft Store updates"
+winget upgrade --accept-source-agreements
 
 Action "Checking for Chocolatey updates"
 choco upgrade chocolatey
 
 Action "Checking for Chocolatey formulaes updates"
 choco upgrade all
-choco optimize
 
-Action "Checking for Microsoft Store updates"
-winget upgrade

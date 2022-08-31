@@ -156,7 +156,62 @@ darwin:
     go:
       - github.com/catilac/plistwatch@latest
 windows:
+  cleanup:
+    - "*Adobe*"
+    - "*Autodesk*"
+    - "*BubbleWitch*"
+    - "*CandyCrush*"
+    - "*Disney*"
+    - "*MarchofEmpires*"
+    - "*Messenger*"
+    - "*Microsoft.549981C3F5F10*"
+    - "*Netflix*"
+    - "*Plex*"
+    - "*PrimeVideo*"
+    - "*Spotify*"
+    - "*TikTok*"
+    - "*Twitter*"
+    - Microsoft.*3D*
+    - Microsoft.*advertising*
+    - Microsoft.Bing*
+    - Microsoft.BingFinance
+    - Microsoft.BingNews
+    - Microsoft.BingSports
+    - Microsoft.BingWeather
+    - Microsoft.CommsPhone
+    - Microsoft.Getstarted
+    - Microsoft.Messaging
+    - Microsoft.MicrosoftOfficeHub
+    - Microsoft.MicrosoftStickyNotes
+    - Microsoft.Office.OneNote
+    - Microsoft.Office.Sway
+    - Microsoft.OneConnect
+    - Microsoft.People
+    - Microsoft.People
+    - Microsoft.SkypeApp
+    - Microsoft.Wallet
+    - Microsoft.Windows.Photos
+    - Microsoft.WindowsAlarms
+    - microsoft.windowscommunicationsapps
+    - Microsoft.WindowsFeedbackHub
+    - Microsoft.WindowsMaps
+    - Microsoft.WindowsPhone
+    - Microsoft.WindowsSoundRecorder
+    - Microsoft.Zune*
   chocolatey:
+    # https://docs.chocolatey.org/en-us/create/functions/install-chocolateypackage
+    manual:
+    # - packageName: test
+    #   fileType: msi
+    #   url: https://somewhere.com/file.msi
+    #   url64bit: https://somewhere.com/file-x64.msi
+    #   silentArgs: "/qn /norestart"
+    #   validExitCodes: [0, 3010, 1641]
+    #   softwareName: Bob*
+    #   checksum: "12345"
+    #   checksumType: sha256
+    #   checksum64: "123356"
+    #   checksumType64: sha256
     drivers:
       # - radeon-driver # GPU - AMD Radeon RX 6900XT
       # - intel-network-driver # Network - Intel Ethernet I219-V
@@ -195,10 +250,12 @@ windows:
       # System utilities
       - 1password
       - op
-      - 7zip
+      - 7zipcj
+      - boxstarter
+      - chezmoi
       - ddu
-      - git.install
-      # git.install -params '"/GitAndUnixToolsOnPath /WindowsTerminal"'
+      - id: git
+        installArguments: /GitAndUnixToolsOnPath /WindowsTerminal
       - malwarebytes
       - nordvpn
       - powertoys
@@ -238,3 +295,57 @@ windows:
       # - ksp-ckan
       # - ksp
       # - foo
+  features:
+    # - Containers
+  registry:
+    # Careful here ! There is a special syntax you should know about before changing values.
+    # See /docs/registry.md
+    HKLM::
+      \SOFTWARE:
+        \Microsoft:
+          \Windows\CurrentVersion\Policies\System:
+            ConsentPromptBehaviorAdmin: 5
+          \PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots:
+            value: 0
+        \Policies\Microsoft\Windows:
+          \system:
+            EnableActivityFeed: 0
+            PublishUserActivities: 0
+            UploadUserActivities: 0
+          \DataCollection:
+            AllowTelemetry: 0
+    HKCU::
+      \SOFTWARE:
+        \Microsoft\Windows\CurrentVersion:
+          \AdvertisingInfo:
+            Enabled: 0
+          \Explorer\Advanced:
+            NavPaneExpandToCurrentFolder: 1
+            NavPaneShowAllFolders: 1
+            LaunchTo: 1
+          \Search:
+            BingSearchEnabled: 0
+          \AppHost:
+            EnableWebContentEvaluation: 0
+          \GameDVR:
+            AppCaptureEnabled: 0
+      \SYSTEM:
+        \GameConfigStore:
+          GameDVR_Enabled: 0
+  # https://docs.chocolatey.org/en-us/create/functions/install-chocolateypinnedtaskbaritem#mainContent
+  taskbar:
+    # - firefox
+    # - discord
+    # - signal
+    # - steam-client
+  # https://docs.chocolatey.org/en-us/create/functions/install-chocolateyshortcut
+  shortcuts:
+    # - ShortcutFilePath: C:\notepad.lnk
+    #   TargetPath: C:\Windows\System32\notepad.exe
+    #   WorkingDirectory: C:\
+    #   Arguments: C:\test.txt
+    #   IconLocation: C:\test.ico
+    #   Description: This is the description
+  # https://docs.chocolatey.org/en-us/create/functions/install-chocolateyfileassociation
+  associations:
+    # .nzb: NZBGet.exe

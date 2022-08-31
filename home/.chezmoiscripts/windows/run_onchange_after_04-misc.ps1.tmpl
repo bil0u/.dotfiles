@@ -1,0 +1,28 @@
+<#
+.Synopsis
+  Setup git repositories
+.DESCRIPTION
+  Text here
+#>
+
+{{- template "windows/utils.ps1" . }}
+
+Filename "git-repos"
+
+Import-Module Boxstarter.Chocolatey
+Disable-UAC
+
+
+Exit
+
+Action "Configuring chezmoi source repository"
+# Switching dotfiles repository to ssh
+$DotfilesUrl = chezmoi git -- config --get remote.origin.url | Out-String
+if ($DotfilesUrl.Substring(0, 4) -ne "git@") {
+	Action ".dotfiles > Switching remote URL to SSH"
+	chezmoi git -- remote set-url origin $DotfilesUrl.Replace("https?:\/\/(.*?)\/(.*)", "git@${1}:${2}")
+} else {
+	Ignored ".dotfiles > Remote URL already switched to SSH"
+}
+
+Enable-UAC
