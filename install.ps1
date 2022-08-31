@@ -12,7 +12,7 @@
   
 param(
 	[string]
-	$Repository = "bil0u/.dotfiles"
+	$Remote = "bil0u/.dotfiles"
 )
 	
 # Base URL to use for repository

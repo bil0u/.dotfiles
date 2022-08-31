@@ -15,6 +15,7 @@ Action "Checking for system updates"
 if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate)) {
   Install-Module -Name PSWindowsUpdate
 } 
+
 Import-Module PSWindowsUpdate
 Get-WUInstall –Install –AcceptAll -ForceInstall –IgnoreReboot
 

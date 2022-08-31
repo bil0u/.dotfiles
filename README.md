@@ -43,7 +43,7 @@ cd ~/.local/share/chezmoi
 One liner:
 
 ```powershell
-& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/bil0u/.dotfiles/main/install.ps1))) -RepoID [user/repo]
+& ([scriptblock]::Create((iwr https://raw.githubusercontent.com/bil0u/.dotfiles/main/install.ps1))) -Remote [user/repo]
 ```
 
 Manual install:
