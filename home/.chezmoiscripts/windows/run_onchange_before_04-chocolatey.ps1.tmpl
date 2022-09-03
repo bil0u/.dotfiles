@@ -38,8 +38,7 @@ $configFile = "$env:temp\choco.config"
 {{ end -}}
 </packages>
 "@ | Out-File $configFile
-# choco install --yes --limitoutput $configFile
-choco install --yes --limitoutput boxstarter
+choco install --yes --limitoutput $configFile
 
 # Delete config file
 Remove-Item -Path $configFile -Force
