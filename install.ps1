@@ -41,8 +41,8 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 		Write-Output "Cannot continue: this script should be stored on disk before execution."
 		Write-Output "Aborting."
 	} elseif ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-		$CommandLine = "-NoExit -File `"$($MyInvocation.MyCommand.Definition)`" $(@('-Remote')[!$Remote]) $Repository"
-		Start-Process -FilePath PowerShell.exe -ExecutionPolicy Bypass -Verb Runas -ArgumentList "$CommandLine"
+		$CommandLine = "-ExecutionPolicy Bypass -NoExit -File `"$($MyInvocation.MyCommand.Path)`" $(@('-Remote')[!$Remote]) $Repository"
+		Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "$CommandLine"
 		Close-CurrentWindow
 	}	
 	Exit
