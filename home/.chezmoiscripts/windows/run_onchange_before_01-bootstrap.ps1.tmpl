@@ -26,8 +26,10 @@ if (-not (Get-Command -Name choco -ErrorAction SilentlyContinue)) {
 # Check if boxstarter is installed
 if (-not (Get-Command -Name BoxStarterShell -ErrorAction SilentlyContinue)) {
   Action "Installing boxstarter"
-
+  
   choco install boxstarter
+  
+  refreshenv
 } else {
   Ignored "Boxstarter already installed"
 }
