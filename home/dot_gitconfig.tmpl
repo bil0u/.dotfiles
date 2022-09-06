@@ -9,9 +9,9 @@ username = {{ .personal.accounts.github.username }}
 [core]
 excludesfile = ~/.gitignore
 editor = vim
-{{ if eq .host.os.id "windows" -}}
+{{- if eq .host.os.id "windows" }}
 sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
-{{ end -}}
+{{- end }}
 
 [web]
 browser = firefox

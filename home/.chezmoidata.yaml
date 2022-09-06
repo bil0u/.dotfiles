@@ -31,10 +31,11 @@ darwin:
       - bat # Better cat in Terminal
       - cmake # Those that come with macOS are outdated
       - coreutils # Those that come with macOS are outdated
-      - curl # Command-line tool for transferring data using various network protocols
+      - curl # CLI tool for transferring data using various network protocols
+      # - dockutil # CLI tool to manage dock icons
       - findutils # Basic directory searching utilities
       - grep # Global Regural Expression Print
-      - jq # Lightweight and flexible command-line JSON processor
+      - jq # Lightweight and flexible CLI JSON processor
       - trash # CLI tool that moves files or folder to the trash
       - tree # List contents of directories in a tree-like format
       - unzip # List, test and extract compressed files in a ZIP archive
@@ -71,11 +72,11 @@ darwin:
       - adguard
       - arduino
       - batteries
-      - browserosaurus
       - chromedriver
-      - discord
       - defaults-edit
+      - discord
       - docker
+      - hpedrorodrigues/tools/dockutil # Temporary solution while dockutil does not support macOS 12+
       - figma
       - firefox
       - google-chrome
@@ -152,11 +153,38 @@ darwin:
     # Tools
     - name: poetry
     - name: pipenv https://github.com/and-semakin/asdf-pipenv.git
+  dock-icons:
+    apps:
+      - Calendar
+      - Reminders
+      - Safari
+      - Firefox
+      - Mail
+      - Messages
+      - WhatsApp
+      - Discord
+      - Slack
+      - Music
+      - Notion
+      - iTerm
+      - Visual Studio Code
+      - NordVPN
+      - Figma
+      - Microsoft Outlook
+      - Microsoft Teams
+    others:
+      - path: ~/Downloads
+        display: folder
+        view: list
+        sort: dateadded
   misc:
     go:
       - github.com/catilac/plistwatch@latest
+
 windows:
   cleanup:
+    # List all bloatware installed:
+    #   Get-AppxPackage | Select-Object -Expand Name
     - "*Adobe*"
     - "*Autodesk*"
     - "*BubbleWitch*"
@@ -174,10 +202,7 @@ windows:
     - Microsoft.*3D*
     - Microsoft.*advertising*
     - Microsoft.Bing*
-    - Microsoft.BingFinance
-    - Microsoft.BingNews
-    - Microsoft.BingSports
-    - Microsoft.BingWeather
+    - Microsoft.Bing*
     - Microsoft.CommsPhone
     - Microsoft.Getstarted
     - Microsoft.Messaging
@@ -198,20 +223,113 @@ windows:
     - Microsoft.WindowsPhone
     - Microsoft.WindowsSoundRecorder
     - Microsoft.Zune*
+
+  # 1527c705-839a-4832-9118-54d4Bd6a0c89
+  # c5e2524a-ea46-4f67-841f-6a9465d9d515
+  # E2A4F912-2574-4A75-9BB0-0D023378592B
+  # F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE
+  # Microsoft.549981C3F5F10
+  # Microsoft.AAD.BrokerPlugin
+  # Microsoft.AccountsControl
+  # Microsoft.AsyncTextService
+  # Microsoft.BingNews
+  # Microsoft.BingWeather
+  # Microsoft.BioEnrollment
+  # Microsoft.CredDialogHost
+  # Microsoft.DesktopAppInstaller
+  # Microsoft.ECApp
+  # Microsoft.GetHelp
+  # Microsoft.Getstarted
+  # Microsoft.HEIFImageExtension
+  # Microsoft.LockApp
+  # Microsoft.MicrosoftEdge
+  # Microsoft.MicrosoftEdge.Stable
+  # Microsoft.MicrosoftEdgeDevToolsClient
+  # Microsoft.MicrosoftOfficeHub
+  # Microsoft.MicrosoftSolitaireCollection
+  # Microsoft.MicrosoftStickyNotes
+  # Microsoft.NET.Native.Framework.2.2
+  # Microsoft.NET.Native.Framework.2.2
+  # Microsoft.NET.Native.Runtime.2.2
+  # Microsoft.NET.Native.Runtime.2.2
+  # Microsoft.OneDriveSync
+  # Microsoft.Paint
+  # Microsoft.People
+  # Microsoft.ScreenSketch
+  # Microsoft.SecHealthUI
+  # Microsoft.StorePurchaseApp
+  # Microsoft.Todos
+  # Microsoft.UI.Xaml.2.4
+  # Microsoft.UI.Xaml.2.4
+  # Microsoft.UI.Xaml.CBS
+  # Microsoft.VCLibs.140.00
+  # Microsoft.VCLibs.140.00
+  # Microsoft.VCLibs.140.00
+  # Microsoft.VCLibs.140.00
+  # Microsoft.VCLibs.140.00.UWPDesktop
+  # Microsoft.VCLibs.140.00.UWPDesktop
+  # Microsoft.VCLibs.140.00.UWPDesktop
+  # Microsoft.VP9VideoExtensions
+  # Microsoft.WebMediaExtensions
+  # Microsoft.WebpImageExtension
+  # Microsoft.Win32WebViewHost
+  # Microsoft.Windows.Apprep.ChxApp
+  # Microsoft.Windows.CallingShellApp
+  # Microsoft.Windows.CapturePicker
+  # Microsoft.Windows.CloudExperienceHost
+  # Microsoft.Windows.ContentDeliveryManager
+  # Microsoft.Windows.NarratorQuickStart
+  # Microsoft.Windows.OOBENetworkCaptivePortal
+  # Microsoft.Windows.OOBENetworkConnectionFlow
+  # Microsoft.Windows.ParentalControls
+  # Microsoft.Windows.PeopleExperienceHost
+  # Microsoft.Windows.Photos
+  # Microsoft.Windows.PinningConfirmationDialog
+  # Microsoft.Windows.Search
+  # Microsoft.Windows.ShellExperienceHost
+  # Microsoft.Windows.StartMenuExperienceHost
+  # Microsoft.Windows.XGpuEjectDialog
+  # Microsoft.WindowsAlarms
+  # Microsoft.WindowsCalculator
+  # Microsoft.WindowsCamera
+  # microsoft.windowscommunicationsapps
+  # Microsoft.WindowsFeedbackHub
+  # Microsoft.WindowsMaps
+  # Microsoft.WindowsNotepad
+  # Microsoft.WindowsSoundRecorder
+  # Microsoft.WindowsStore
+  # Microsoft.WindowsTerminal
+  # Microsoft.Xbox.TCUI
+  # Microsoft.XboxGameCallableUI
+  # Microsoft.XboxGameOverlay
+  # Microsoft.XboxGamingOverlay
+  # Microsoft.XboxIdentityProvider
+  # Microsoft.XboxSpeechToTextOverlay
+  # Microsoft.YourPhone
+  # Microsoft.ZuneMusic
+  # Microsoft.ZuneVideo
+  # MicrosoftWindows.Client.CBS
+  # MicrosoftWindows.Client.WebExperience
+  # MicrosoftWindows.UndockedDevKit
+  # NcsiUwpApp
+  # Windows.CBSPreview
+  # windows.immersivecontrolpanel
+  # Windows.PrintDialog
+
   chocolatey:
     # https://docs.chocolatey.org/en-us/create/functions/install-chocolateypackage
     manual:
-    # - packageName: test
-    #   fileType: msi
-    #   url: https://somewhere.com/file.msi
-    #   url64bit: https://somewhere.com/file-x64.msi
-    #   silentArgs: "/qn /norestart"
-    #   validExitCodes: [0, 3010, 1641]
-    #   softwareName: Bob*
-    #   checksum: "12345"
-    #   checksumType: sha256
-    #   checksum64: "123356"
-    #   checksumType64: sha256
+      - packageName: AMD Radeon Software
+        fileType: msi
+        url: https://somewhere.com/file.msi
+        url64bit: https://somewhere.com/file-x64.msi
+        silentArgs: "/qn /norestart"
+        validExitCodes: [0, 3010, 1641]
+        softwareName: Bob*
+        checksum: "12345"
+        checksumType: sha256
+        checksum64: "123356"
+        checksumType64: sha256
     drivers:
       # - radeon-driver # GPU - AMD Radeon RX 6900XT
       # - intel-network-driver # Network - Intel Ethernet I219-V

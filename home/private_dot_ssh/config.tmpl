@@ -1,4 +1,4 @@
-{{ if eq .host.os.id "darwin" -}}
+{{- if eq .host.os.id "darwin" }}
 Host *
 	IdentityAgent ~/.ssh/op-agent.sock
 
@@ -7,7 +7,7 @@ Host vogsphere-v2.42.fr
 
 Host bastion.lab.iliomad.fr
 	IdentityFile ~/.ssh/keys/iliomad_aws_bastion
-{{ end -}}
+{{- end }}
 
 Host github.com
 	IdentityFile ~/.ssh/keys/github_ed25519

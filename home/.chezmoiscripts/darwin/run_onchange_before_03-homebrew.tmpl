@@ -9,19 +9,19 @@ filename "homebrew"
 action "Installing packages using homebrew... "
 brew bundle --no-lock --file=/dev/stdin <<EOF
 # Taps
-{{ range (.darwin.homebrew.taps | uniq) -}}
+{{- range (.darwin.homebrew.taps | uniq) }}
 tap '{{ . }}'
-{{ end -}}
+{{- end }}
 # Formulaes
-{{ range (.darwin.homebrew.formulaes | uniq) -}}
+{{- range (.darwin.homebrew.formulaes | uniq) }}
 brew '{{ . }}'
-{{ end -}}
+{{- end }}
 # Casks
-{{ range (.darwin.homebrew.casks | uniq) -}}
+{{- range (.darwin.homebrew.casks | uniq) }}
 cask '{{ . }}'
-{{ end -}}
+{{- end }}
 # Mac AppStore
-{{ range (.darwin.mas | uniq) -}}
+{{- range (.darwin.mas | uniq) }}
 mas '{{ .name }}', id: {{ .id }}
-{{ end -}}
+{{- end }}
 EOF

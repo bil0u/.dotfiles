@@ -12,7 +12,7 @@ Filename "registry"
 Import-Module Boxstarter.Chocolatey
 Disable-UAC
 
-{{ if gt (len (default "" .windows.registry)) 0 -}}
+{{- if gt (len (default "" .windows.registry)) 0 }}
 
 Action "Writing registry values ..."
 

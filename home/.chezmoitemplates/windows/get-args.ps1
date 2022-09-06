@@ -1,11 +1,11 @@
 @{
-    {{ range $key, $value := ( keys . | uniq) -}}
-    {{     if kindIs "list" $value -}}
+    {{- range $key, $value := ( keys . | uniq) }}
+    {{-     if kindIs "list" $value }}
     {{ $key }} = @{ {{ $value | join ", " }} }
-    {{     else if kindIs "string" $value -}}
+    {{-     else if kindIs "string" $value }}
     {{ $key }} = "$value"
-    {{     else -}}
+    {{-     else }}
     {{ $key }} = $value
-    {{     end -}}
-    {{ end -}}
+    {{-     end }}
+    {{- end }}
 }

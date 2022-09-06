@@ -42,7 +42,7 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 		Write-Output "Aborting."
 	} elseif ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
 		$CommandLine = "-NoExit -File `"$($MyInvocation.MyCommand.Definition)`" $(@('-Remote')[!$Remote]) $Repository"
-		Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList "$CommandLine"
+		Start-Process -FilePath PowerShell.exe -ExecutionPolicy Bypass -Verb Runas -ArgumentList "$CommandLine"
 		Close-CurrentWindow
 	}	
 	Exit

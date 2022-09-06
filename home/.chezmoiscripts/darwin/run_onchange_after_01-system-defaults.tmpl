@@ -76,7 +76,7 @@ defaults write com.apple.dock magnification -bool false
 # System Preferences > Dock & Menubar > Position
 defaults write com.apple.dock orientation -string 'bottom'
 # System Preferences > Dock & Menubar > Minimize effect
-defaults write com.apple.dock mineffect -string'scale'
+defaults write com.apple.dock mineffect -string 'scale'
 # System Preferences > Dock & Menubar > Autohide
 defaults write com.apple.dock autohide -bool false
 # System Preferences > Dock & Menubar > Disables recent applications
@@ -132,10 +132,10 @@ defaults write com.apple.systemuiserver dontAutoLoad -array '/System/Library/Cor
 defaults write com.apple.controlcenter 'NSStatusItem Visible Clock' -bool true
 # Shows control center icon
 defaults write com.apple.controlcenter 'NSStatusItem Visible BentoBox' -bool true
-{{ if eq .host.chassis_type "laptop" -}}
+{{- if eq .host.chassis_type "laptop" }}
 # Shows battery icon
 defaults write com.apple.controlcenter 'NSStatusItem Visible Battery' -bool true
-{{ end -}}
+{{- end }}
 
 # TBD
 # defaults write com.apple.controlcenter 'NSStatusItem Visible Item-0' '0'
@@ -169,7 +169,7 @@ defaults write -g InitialKeyRepeat -int 10
 # Disables auto period substitution
 defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
 
-{{ if eq .host.chassis_type "laptop" -}}
+{{- if eq .host.chassis_type "laptop" }}
 action "Trackpad"
 
 # Disables force click
@@ -245,7 +245,7 @@ defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadHandRes
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool false
 defaults write com.apple.driver.AppleMultitouchTrackpad.trackpad TrackpadThreeFingerDrag -bool false
 defaults write com.apple.AppleMultitouchTrackpad UserPreferences -bool true
-{{ end -}}
+{{- end }}
 
 action "Sound"
 

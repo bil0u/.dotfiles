@@ -8,11 +8,11 @@ filename "misc"
 action "Installing go binaries ... "
 {{ template "darwin/golang-cfg.sh" . }}
 
-{{ range (.darwin.misc.go | uniq) -}}
+{{- range (.darwin.misc.go | uniq) }}
 
-{{ $domain := default "github.com" (regexReplaceAll `^(?:(.*?)\/)?.*?\/.*?$` . "${1}") -}}
-{{ $repo := regexReplaceAll `^(?:.*?\/)?(.*?\/.*?)(?:@.*)?$` . "${1}" -}}
-{{ $version := default "latest" (regexReplaceAll `^.*?(?:@(.*))?$` . "${1}") -}}
+{{- $domain := default "github.com" (regexReplaceAll `^(?:(.*?)\/)?.*?\/.*?$` . "${1}") }}
+{{- $repo := regexReplaceAll `^(?:.*?\/)?(.*?\/.*?)(?:@.*)?$` . "${1}" }}
+{{- $version := default "latest" (regexReplaceAll `^.*?(?:@(.*))?$` . "${1}") }}
 
 go install {{ $domain }}/{{ $repo }}@{{ $version }} >/dev/null
 
@@ -22,4 +22,4 @@ else
   ignored "installed {{ $repo }}@{{ $version }} from {{ $domain }}"
 fi
 
-{{ end -}}
+{{- end }}

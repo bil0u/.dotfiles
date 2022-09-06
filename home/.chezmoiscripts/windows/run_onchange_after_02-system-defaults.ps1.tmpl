@@ -41,18 +41,18 @@ Action "TaskBar"
     "-EnableSearchBox"
     "-AlwaysShowIconsOn"
     "-MultiMonitorOn -MultiMonitorMode All -MultiMonitorCombine Always" -}}
-{{ range ($taskbarOptions | sortAlpha | uniq ) -}}
+{{- range ($taskbarOptions | sortAlpha | uniq ) }}
 Set-BoxstarterTaskbarOptions {{ . }}
-{{ end -}}
+{{- end }}
 
-{{ if gt (len (default "" .windows.features)) 0 -}}
+{{- if gt (len (default "" .windows.features)) 0 }}
 Action "Optional Features"
-{{ range (.windows.features | sortAlpha | uniq ) -}}
+{{- range (.windows.features | sortAlpha | uniq ) }}
 Enable-WindowsOptionalFeature -Online -FeatureName {{ . }}
-{{ end -}}
-{{ else -}}
+{{- end }}
+{{- else }}
 Ignored "No optional features defined in config"
-{{ end -}}
+{{- end }}
 
 
 Action "Updates"

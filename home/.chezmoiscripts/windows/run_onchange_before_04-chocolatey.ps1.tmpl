@@ -13,35 +13,35 @@ Filename "chocolatey"
 
 Action "Installing packages using chocolatey..."
 
-{{ if gt (len (default "" .windows.chocolatey.manual)) 0 -}}
-{{  range .windows.chocolatey.manual -}}
+{{- if gt (len (default "" .windows.chocolatey.manual)) 0 }}
+{{-  range .windows.chocolatey.manual }}
 $arguments = {{ template "windows/get-args.ps1" . }}
 Install-ChocolateyPackage @arguments
-{{  end -}}
-{{ else -}}
+{{-  end }}
+{{- else }}
 Ignored "No manual package installation defined in config"
-{{ end -}}
+{{- end }}
 
-{{ $chocoList := concat .windows.chocolatey.drivers .windows.chocolatey.packages -}}
-{{ if gt (len (default "" $chocoList)) 0 -}}
+{{- $chocoList := concat .windows.chocolatey.drivers .windows.chocolatey.packages }}
+{{- if gt (len (default "" $chocoList)) 0 }}
 $configFile = "$env:temp\choco.config"
 @"
 <?xml version="1.0" encoding="utf-8"?>
 <packages>
-{{ range ($chocoList | uniq) -}}
-{{  $pkg := . -}}
-{{  if kindIs "string" $pkg -}}
+{{- range ($chocoList | uniq) }}
+{{-  $pkg := . }}
+{{-  if kindIs "string" $pkg }}
   <package id="{{ $pkg }}"/>
-{{  else -}}
+{{-  else }}
   <package {{ range ( keys $pkg | uniq) }} {{ . }}="{{ get $pkg . }}"{{ end }}/>
-{{  end -}}
-{{ end -}}
+{{-  end }}
+{{- end }}
 </packages>
 "@ | Out-File $configFile
 choco install --yes --limitoutput $configFile
 
 # Delete config file
 Remove-Item -Path $configFile -Force
-{{ else -}}
+{{- else }}
 Ignored "No chocolatey package to install defined in config"
-{{ end -}}
+{{- end }}

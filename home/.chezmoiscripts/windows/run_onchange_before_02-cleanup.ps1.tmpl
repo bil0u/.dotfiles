@@ -12,13 +12,13 @@ Filename "system-defaults"
 Import-Module Boxstarter.Chocolatey
 Disable-UAC
 
-{{ if gt (len (default "" .windows.cleanup)) 0 -}}
+{{- if gt (len (default "" .windows.cleanup)) 0 }}
 Action "Removing Microsoft junk"
-{{ range (.windows.cleanup | sortAlpha | uniq ) -}}
+{{- range (.windows.cleanup | sortAlpha | uniq ) }}
 Get-AppxPackage {{ . }} | Remove-AppxPackage
-{{ end -}}
-{{ else -}}
+{{- end }}
+{{- else }}
 Ignored "No microsoft junk to remove defined in config"
-{{ end -}}
+{{- end }}
 
 Enable-UAC

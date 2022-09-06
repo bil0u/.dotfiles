@@ -59,34 +59,34 @@ Group "Third-party apps"
 Group "Miscellaneous"
 # ------------------
 
-{{ if gt (len (default "" .windows.taskbar)) 0 -}}
+{{- if gt (len (default "" .windows.taskbar)) 0 }}
 Action "Pinned taskbar items"
-{{ range (.windows.taskbar | sortAlpha | uniq ) -}}
+{{- range (.windows.taskbar | sortAlpha | uniq ) }}
 Install-ChocolateyPinnedTaskBarItem -TargetFilePath {{ . | quote }}
-{{ end -}}
-{{ else -}}
+{{- end }}
+{{- else }}
 Ignored "No pinned taskbar item defined in config"
-{{ end -}}
+{{- end }}
 
-{{ if gt (len (default "" .windows.shortcuts)) 0 -}}
+{{- if gt (len (default "" .windows.shortcuts)) 0 }}
 Action "Shortcuts"
 {{- range (.windows.shortcuts | sortAlpha | uniq ) }}
 $arguments = {{ template "windows/get-args.ps1" . }}
 Install-ChocolateyShortcut @arguments
 {{- end }}
-{{ else -}}
+{{- else }}
 Ignored "No shortcut defined in config"
 {{- end }}
 
 
-{{ if gt (len (default "" .windows.associations)) 0 -}}
+{{- if gt (len (default "" .windows.associations)) 0 }}
 Action "Files associations"
-{{ range $key, $value := (.windows.associations) -}}
+{{- range $key, $value := (.windows.associations) }}
 Install-ChocolateyFileAssociation -Extension {{ $key | quote }} -Executable  {{ $value | quote }}
-{{ end -}}
-{{ else -}}
+{{- end }}
+{{- else }}
 Ignored "No files associations defined in config"
-{{ end -}}
+{{- end }}
 
 
 Enable-UAC

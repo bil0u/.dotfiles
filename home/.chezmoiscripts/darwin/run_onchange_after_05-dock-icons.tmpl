@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{ template "darwin/utils.sh" . }}
+
+filename "dock-icons"
+
+{{ $apps := .darwin.dock-icons.apps | uniq }}
+{{ $others := .darwin.dock-icons.others | uniq }}
+
+{{ $appsCount := len (default "" $apps) }}
+{{ $othersCount := len (default "" $others) }}
+
+{{- if eq (add $appsCount $othersCount) 0 }}
+ignored "No dock preferences set."
+exit
+{{- else }}
+
+action "Customizing dock ..."
+
+{{- $defaultRestart := "--no-restart" }}
+dockutil --remove all {{ $defaultRestart }}
+
+{{- range $apps }}
+{{-   $path := ""}}
+{{-   if hasPrefix ":" . }}
+{{-     $path = trimPrefix ":" . }}
+{{-   else }}
+{{-     $path = (list "/Applications/" . ".app/" | join "") }}
+{{-     if not (stat $path) }}
+{{-       $path = replace "/Applications/" "/System/Applications/" }}
+{{-     end }}
+{{-   end }}
+{{-   if stat $path }}
+dockutil --add {{ $path }} --section apps {{ $defaultRestart }}
+{{-   else }}
+ignored "Could not find {{ . | quote }}, ignored"
+{{-   end }}
+{{- end }}
+
+{{- range $index, $data := $others }}
+{{-   $path := "" }}
+{{-   $args := "" }}
+{{-   if kindIs "string" $data }}
+{{-     $path = $data }}
+{{-   else }}
+{{-     $path = .path }}
+{{-     range $k, $v := $data }}
+{{-       if ne $k "path" }}
+{{-         $args = (list $args (list "--" $k | join "") $v | join " ") }}
+{{-       end }}
+{{-     end }}
+{{-   end }}
+{{-   $restart := $defaultRestart }}
+{{-   if eq (add $index 1) $othersCount }}
+{{-     $restart = "--restart" }}
+{{-   end }}
+{{-   if stat $path }}
+dockutil --add {{ $path }} --section others {{ $args }} {{ $restart }}
+{{-   else }}
+ignored "Could not find {{ $path  | quote }}"
+{{-   end }}
+{{- end }}
+
+{{- end }}

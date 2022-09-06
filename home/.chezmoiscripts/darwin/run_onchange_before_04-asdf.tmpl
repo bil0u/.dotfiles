@@ -7,30 +7,30 @@ filename "asdf"
 
 action "Installing packages using asdf ..."
 
-{{ range (.darwin.asdf | uniq) -}}
+{{- range (.darwin.asdf | uniq) }}
 
 {{/* Setting needed variables */}}
-{{ $pluginName := .name -}}
-{{ $pluginUrl := "" -}}
+{{- $pluginName := .name }}
+{{- $pluginUrl := "" }}
 {{ $globalVersion := "latest" }}
 {{ $versions := list }}
 
 {{/* Checking if plugin name contains an URL */}}
-{{ if contains " http" $pluginName -}}
-	{{ $nameDict := $pluginName | split " " -}}
-	{{ $pluginName = $nameDict._0 -}}
-	{{ $pluginUrl = $nameDict._1 -}}
-{{ end -}}
+{{- if contains " http" $pluginName }}
+	{{- $nameDict := $pluginName | split " " }}
+	{{- $pluginName = $nameDict._0 }}
+	{{- $pluginUrl = $nameDict._1 }}
+{{- end }}
 
 {{/* Retrieving global version */}}
-{{ if index . "global" -}}
+{{- if index . "global" }}
 	{{ $globalVersion = .global }}
-{{ end -}}
+{{- end }}
 
 {{/* Retrieving extra versions to install */}}
-{{ if index . "extra" -}}
+{{- if index . "extra" }}
 	{{ $versions = .extra }}
-{{ end -}}
+{{- end }}
 
 {{/* Merging all versions */}}
 {{ $versions = (prepend $versions $globalVersion | uniq) }}
@@ -46,16 +46,16 @@ case $? in
 esac
 
 if [[ -n SKIP ]]; then
-  {{ range $versions -}}
+  {{- range $versions }}
     asdf install {{ $pluginName }} {{ . }} >/dev/null 2>&1
     case $? in
       0) action "version \"{{ . }}\" installed" ;;
       2) ignored "version \"{{ . }}\" already installed" ;;
       *) error "Unknown error, skipping version \"{{ . }}\"";;
     esac
-  {{ end -}}
+  {{- end }}
   asdf global {{ $pluginName }} {{ $globalVersion }} >/dev/null 2>&1
   action "global version set to {{ $globalVersion }}"
 fi
 
-{{ end -}}
+{{- end }}

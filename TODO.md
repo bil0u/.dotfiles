@@ -1,5 +1,9 @@
 ## Todo
 
+Resources:
+
+- Remove bloatware + elevate as admin _([link](https://raw.githubusercontent.com/Sycnex/Windows10Debloater/master/Windows10DebloaterGUI.ps1))_
+
 #### Global
 
 - [ ] Finish writing documentation
@@ -55,12 +59,18 @@
   - [ ] whatsapp
   - [ ] xmind
   - [ ] zoom
+  - [ ] utm
+  - Auto fetch & update [spice guest tools](https://github.com/utmapp/qemu/releases/download/v6.2.0-utm/spice-guest-tools-0.164.3.iso) using `.chezmoiexternal.yaml`
 
 #### Windows
 
 - ✨ Cosmetics
   - [ ] Taskbar
   - [ ] Shortcuts
+- ⚙️ Settings
+  - [ ] Keyboard & language
+  - [ ] Apps
+    - [ ] Powertoys
 - 📀 Install extras applications
   - [ ] Windows features
   - [ ] Drivers
@@ -69,3 +79,4 @@
 - 🗃 Misc
   - [ ] Files associations
   - [ ] Powershell profile
+  - [ ] Create a restore point : Checkpoint-Computer -Description "Clean install" -RestorePointType "MODIFY_SETTINGS" # Create a restore point

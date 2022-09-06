@@ -1,4 +1,4 @@
-{{ if eq .host.os.id "darwin" -}}
+{{- if eq .host.os.id "darwin" }}
 # Created by https://www.toptal.com/developers/gitignore/api/macos
 
 # General
@@ -31,7 +31,7 @@ Temporary Items
 ### macOS Patch ###
 # iCloud generated files
 *.icloud
-{{ else if eq .host.os.id "windows" -}}
+{{- else if eq .host.os.id "windows" }}
 # Created by https://www.toptal.com/developers/gitignore/api/windows
 
 # Windows thumbnail cache files
@@ -58,4 +58,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-{{ end -}}
+{{- end }}
