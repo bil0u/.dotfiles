@@ -28,8 +28,6 @@ if (-not (Get-Command -Name BoxStarterShell -ErrorAction SilentlyContinue)) {
   Action "Installing boxstarter"
 
   choco install boxstarter
-
-  {{ template "windows/load-choco.ps1" . }}
 } else {
   Ignored "Boxstarter already installed"
 }
