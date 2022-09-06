@@ -22,3 +22,12 @@ if (-not (Get-Command -Name choco -ErrorAction SilentlyContinue)) {
 } else {
   Ignored "Chocolatey already installed"
 }
+
+# Check if boxstarter is installed
+if (-not (Get-Command -Name BoxStarterShell -ErrorAction SilentlyContinue)) {
+  Action "Installing boxstarter"
+
+  choco install boxstarter
+} else {
+  Ignored "Boxstarter already installed"
+}
