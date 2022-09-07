@@ -20,7 +20,7 @@ action "Customizing dock ..."
 
 {{- $defaultRestart := "--no-restart" }}
 {{- $homeDir := .chezmoi.homeDir }}
-dockutil --remove all {{ $defaultRestart }}
+dockutil --remove all {{ $defaultRestart }}  >/dev/null
 
 {{- range $apps }}
 {{-   $path := ""}}
@@ -32,8 +32,9 @@ dockutil --remove all {{ $defaultRestart }}
 {{-       $path = $path | replace "/Applications/" "/System/Applications/" }}
 {{-     end }}
 {{-   end }}
+{{-   $path = regexReplaceAll "(~|$HOME)" $path $homeDir }}
 {{-   if stat $path }}
-dockutil --add "{{ $path }}" --section apps {{ $defaultRestart }}
+dockutil --add {{ $path | quote }} --section apps {{ $defaultRestart }} >/dev/null
 {{-   else }}
 ignored "Could not find {{ . | quote }}, ignored"
 {{-   end }}
@@ -56,9 +57,9 @@ ignored "Could not find {{ . | quote }}, ignored"
 {{-   if eq (add $index 1) $othersCount }}
 {{-     $restart = "--restart" }}
 {{-   end }}
-{{- $path = regexReplaceAll "(~|$HOME)" $path $homeDir }}
+{{-   $path = regexReplaceAll "(~|$HOME)" $path $homeDir }}
 {{-   if stat $path }}
-dockutil --add "{{ $path }}" --section others {{ $args }} {{ $restart }}
+dockutil --add {{ $path | quote }} --section others {{ $args }} {{ $restart }}  >/dev/null
 {{-   else }}
 ignored "others: could not find {{ $path | quote }}"
 {{-   end }}
