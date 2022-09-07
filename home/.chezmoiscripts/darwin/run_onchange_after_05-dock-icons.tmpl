@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# set -euo pipefail
 
 {{ template "darwin/utils.sh" . }}
 
 filename "dock-icons"
 
-{{ $apps := .darwin.dock-icons.apps | uniq }}
-{{ $others := .darwin.dock-icons.others | uniq }}
+{{- $apps := .darwin.dock_icons.apps }}
+{{- $others := .darwin.dock_icons.others }}
 
-{{ $appsCount := len (default "" $apps) }}
-{{ $othersCount := len (default "" $others) }}
+{{- $appsCount := len (default "" $apps) }}
+{{- $othersCount := len (default "" $others) }}
 
 {{- if eq (add $appsCount $othersCount) 0 }}
 ignored "No dock preferences set."
@@ -19,6 +19,7 @@ exit
 action "Customizing dock ..."
 
 {{- $defaultRestart := "--no-restart" }}
+{{- $homeDir := .chezmoi.homeDir }}
 dockutil --remove all {{ $defaultRestart }}
 
 {{- range $apps }}
@@ -28,11 +29,11 @@ dockutil --remove all {{ $defaultRestart }}
 {{-   else }}
 {{-     $path = (list "/Applications/" . ".app/" | join "") }}
 {{-     if not (stat $path) }}
-{{-       $path = replace "/Applications/" "/System/Applications/" }}
+{{-       $path = $path | replace "/Applications/" "/System/Applications/" }}
 {{-     end }}
 {{-   end }}
 {{-   if stat $path }}
-dockutil --add {{ $path }} --section apps {{ $defaultRestart }}
+dockutil --add "{{ $path }}" --section apps {{ $defaultRestart }}
 {{-   else }}
 ignored "Could not find {{ . | quote }}, ignored"
 {{-   end }}
@@ -55,10 +56,11 @@ ignored "Could not find {{ . | quote }}, ignored"
 {{-   if eq (add $index 1) $othersCount }}
 {{-     $restart = "--restart" }}
 {{-   end }}
+{{- $path = regexReplaceAll "(~|$HOME)" $path $homeDir }}
 {{-   if stat $path }}
-dockutil --add {{ $path }} --section others {{ $args }} {{ $restart }}
+dockutil --add "{{ $path }}" --section others {{ $args }} {{ $restart }}
 {{-   else }}
-ignored "Could not find {{ $path  | quote }}"
+ignored "others: could not find {{ $path | quote }}"
 {{-   end }}
 {{- end }}
 

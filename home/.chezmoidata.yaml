@@ -153,7 +153,8 @@ darwin:
     # Tools
     - name: poetry
     - name: pipenv https://github.com/and-semakin/asdf-pipenv.git
-  dock-icons:
+  dock_icons:
+    # Note: order matters. First entry will we the left-most item on the dock after the Finder
     apps:
       - Calendar
       - Reminders
@@ -167,14 +168,18 @@ darwin:
       - Music
       - Notion
       - iTerm
-      - Visual Studio Code
+      - "Visual Studio Code"
       - NordVPN
       - Figma
-      - Microsoft Outlook
-      - Microsoft Teams
+      - "Microsoft Outlook"
+      - "Microsoft Teams"
     others:
-      - path: ~/Downloads
+      - path: "~"
         display: folder
+        view: list
+        sort: name
+      - path: ~/Downloads
+        display: stack
         view: list
         sort: dateadded
   misc:
