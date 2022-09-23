@@ -424,38 +424,38 @@ windows:
   registry:
     # Careful here ! There is a special syntax you should know about before changing values.
     # See /docs/registry.md
-    HKLM::
-      \SOFTWARE:
-        \Microsoft:
-          \Windows\CurrentVersion\Policies\System:
-            ConsentPromptBehaviorAdmin: 5
-          \PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots:
-            value: 0
-        \Policies\Microsoft\Windows:
-          \system:
-            EnableActivityFeed: 0
-            PublishUserActivities: 0
-            UploadUserActivities: 0
-          \DataCollection:
-            AllowTelemetry: 0
-    HKCU::
-      \SOFTWARE:
-        \Microsoft\Windows\CurrentVersion:
-          \AdvertisingInfo:
-            Enabled: 0
-          \Explorer\Advanced:
-            NavPaneExpandToCurrentFolder: 1
-            NavPaneShowAllFolders: 1
-            LaunchTo: 1
-          \Search:
-            BingSearchEnabled: 0
-          \AppHost:
-            EnableWebContentEvaluation: 0
-          \GameDVR:
-            AppCaptureEnabled: 0
-      \SYSTEM:
-        \GameConfigStore:
-          GameDVR_Enabled: 0
+    # HKLM::
+    #   \SOFTWARE:
+    #     \Microsoft:
+    #       \Windows\CurrentVersion\Policies\System:
+    #         ConsentPromptBehaviorAdmin: 5
+    #       \PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots:
+    #         value: 0
+    #     \Policies\Microsoft\Windows:
+    #       \system:
+    #         EnableActivityFeed: 0
+    #         PublishUserActivities: 0
+    #         UploadUserActivities: 0
+    #       \DataCollection:
+    #         AllowTelemetry: 0
+    # HKCU::
+    #   \SOFTWARE:
+    #     \Microsoft\Windows\CurrentVersion:
+    #       \AdvertisingInfo:
+    #         Enabled: 0
+    #       \Explorer\Advanced:
+    #         NavPaneExpandToCurrentFolder: 1
+    #         NavPaneShowAllFolders: 1
+    #         LaunchTo: 1
+    #       \Search:
+    #         BingSearchEnabled: 0
+    #       \AppHost:
+    #         EnableWebContentEvaluation: 0
+    #       \GameDVR:
+    #         AppCaptureEnabled: 0
+    #   \SYSTEM:
+    #     \GameConfigStore:
+    #       GameDVR_Enabled: 0
   # https://docs.chocolatey.org/en-us/create/functions/install-chocolateypinnedtaskbaritem#mainContent
   taskbar:
     # - firefox
