@@ -356,7 +356,7 @@ windows:
       - cpu-z
       - gpu-z
       - pci-z
-      - ssd-z
+      - ssd-z.portable
       - hwinfo
       # Benchmark
       - aida64-extreme
@@ -373,10 +373,11 @@ windows:
       # System utilities
       - 1password
       - op
-      - 7zipcj
+      - 7zip
       - boxstarter
       - chezmoi
       - ddu
+      - eartrumpet
       - id: git
         installArguments: /GitAndUnixToolsOnPath /WindowsTerminal
       - malwarebytes
@@ -392,7 +393,7 @@ windows:
       # - adguard
       # - foo
       # Apps
-      - chrome
+      - googlechrome
       - discord
       - firefox
       - gamesavemanager
