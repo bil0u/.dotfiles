@@ -324,17 +324,17 @@ windows:
   chocolatey:
     # https://docs.chocolatey.org/en-us/create/functions/install-chocolateypackage
     manual:
-      - packageName: AMD Radeon Software
-        fileType: msi
-        url: https://somewhere.com/file.msi
-        url64bit: https://somewhere.com/file-x64.msi
-        silentArgs: "/qn /norestart"
-        validExitCodes: [0, 3010, 1641]
-        softwareName: Bob*
-        checksum: "12345"
-        checksumType: sha256
-        checksum64: "123356"
-        checksumType64: sha256
+    # - packageName: AMD Radeon Software
+    #   fileType: msi
+    #   url: https://somewhere.com/file.msi
+    #   url64bit: https://somewhere.com/file-x64.msi
+    #   silentArgs: "/qn /norestart"
+    #   validExitCodes: [0, 3010, 1641]
+    #   softwareName: Bob*
+    #   checksum: "12345"
+    #   checksumType: sha256
+    #   checksum64: "123356"
+    #   checksumType64: sha256
     drivers:
       # - radeon-driver # GPU - AMD Radeon RX 6900XT
       # - intel-network-driver # Network - Intel Ethernet I219-V

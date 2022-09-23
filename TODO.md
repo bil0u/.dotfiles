@@ -11,6 +11,8 @@ Resources:
 - [ ] Big refacto:
   1.  split scripts into the smallest units possible
       - take advantage of chezmoi scripts order
+      - easier to debug
+      - each script only execute if config is found in [.chezmoidata](/home/.chezmoidata.yaml), which allow to enable or disable scripts just by commenting a few lines in the file
   2.  documentation:
       - each script documented with possible configuration and synopsis
       - per platform general overview, linking to script docs
@@ -18,6 +20,13 @@ Resources:
 
 #### macOS
 
+- ☕️ **Homebrew**
+  - [ ] Add [clop](https://lowtechguys.com/clop/) cask to personal tap
+  - [ ] Add [rcmd](https://lowtechguys.com/rcmd/) cask to personal tap
+  - [ ] Add [volum](https://lowtechguys.com/volum/) cask to personal tap
+- 🤖 **Scripts**
+  - [ ] set default browser
+  - [ ] unquaratine installed apps using `sudo xattr -rd com.apple.quarantine /Applications/LockedApp.app`
 - ✨ **Cosmetic**
   - [ ] Set Dock icons
   - [ ] Set Mission control icons
