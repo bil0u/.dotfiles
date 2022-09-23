@@ -1,6 +1,6 @@
 {{- range $key, $value := . }}
 {{-   $d := dict "value" $value "path" $key }}
-{{-   define "chunk" $d }}
+{{-   block "chunk" $d }}
 {{-     $p := .path }}
 {{-     $v := .value }}
 {{-     range $key, $value := $v }}
