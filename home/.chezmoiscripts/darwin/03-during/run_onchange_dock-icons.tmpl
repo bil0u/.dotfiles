@@ -1,15 +1,9 @@
-#!/usr/bin/env bash
-# set -euo pipefail
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
 
-{{ template "darwin/utils.sh" . }}
-
-filename "dock-icons"
-
-{{- $apps := .darwin.dock_icons.apps }}
-{{- $others := .darwin.dock_icons.others }}
-
-{{- $appsCount := len (default "" $apps) }}
-{{- $othersCount := len (default "" $others) }}
+{{- $appsCount := len (default "" $config.apps) }}
+{{- $othersCount := len (default "" $config.others) }}
 
 {{- if eq (add $appsCount $othersCount) 0 }}
 ignored "No dock preferences set."
@@ -22,7 +16,7 @@ action "Customizing dock ..."
 {{- $homeDir := .chezmoi.homeDir }}
 dockutil --remove all {{ $defaultRestart }}  >/dev/null
 
-{{- range $apps }}
+{{- range $config.apps }}
 {{-   $path := ""}}
 {{-   if hasPrefix ":" . }}
 {{-     $path = trimPrefix ":" . }}
@@ -40,7 +34,7 @@ ignored "Could not find {{ . | quote }}, ignored"
 {{-   end }}
 {{- end }}
 
-{{- range $index, $data := $others }}
+{{- range $index, $data := $config.others }}
 {{-   $path := "" }}
 {{-   $args := "" }}
 {{-   if kindIs "string" $data }}
@@ -54,7 +48,7 @@ ignored "Could not find {{ . | quote }}, ignored"
 {{-     end }}
 {{-   end }}
 {{-   $restart := $defaultRestart }}
-{{-   if eq (add $index 1) $othersCount }}
+{{-   if eq (add $index 1) $config.othersCount }}
 {{-     $restart = "--restart" }}
 {{-   end }}
 {{-   $path = regexReplaceAll "(~|$HOME)" $path $homeDir }}

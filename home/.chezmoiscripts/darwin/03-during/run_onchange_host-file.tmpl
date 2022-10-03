@@ -1,0 +1,10 @@
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
+
+set -euo pipefail
+
+{{ template "darwin/elevate.sh" . }}
+
+sudo curl -s {{ $config | quote }} -o "/etc/hosts"
+sudo killall -HUP mDNSResponder >/dev/null

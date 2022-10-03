@@ -1,0 +1,5 @@
+{{ if eq .host.os.id "darwin" }}
+source "{{ .chezmoi.sourceDir }}/.chezmoitemplates/darwin/utils.sh"
+{{ else if eq .host.os.id "windows" }}
+. "{{ .chezmoi.sourceDir }}\.chezmoitemplates\windows\utils.ps1"
+{{ end }}

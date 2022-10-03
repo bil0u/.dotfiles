@@ -1,0 +1,12 @@
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
+
+set -euo pipefail
+
+if [[ ! -L ~/.ssh/agent.sock ]]; then
+	action "Linking 1password ssh agent socket"
+	ln -s {{ $config | quote }} ~/.ssh/agent.sock
+else
+	ignored "1password ssh agent socket already linked"
+fi

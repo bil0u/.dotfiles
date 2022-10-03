@@ -1,0 +1,23 @@
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
+
+set -euo pipefail
+
+{{- template "darwin/elevate.sh" . }}
+
+# Check for Xcode Command Line Tools and install them if not present
+xcode-select -p &>/dev/null
+if [ $? -ne 0 ]; then
+	action "Installing Xcode Command Line Tools ..."
+	xcode-select --install
+else
+	ignored "XCode Command Line Tools already installed"
+fi
+
+# Accept XCode license
+xcode_version=$(xcodebuild -version | grep '^Xcode\s' | sed -E 's/^Xcode[[:space:]]+([0-9\.]+)/\1/')
+accepted_license_version=$(defaults read /Library/Preferences/com.apple.dt.Xcode 2>/dev/null | grep IDEXcodeVersionForAgreedToGMLicense | cut -d '"' -f 2)
+if [ "$xcode_version" != "$accepted_license_version" ]; then
+	sudo xcodebuild -license accept
+fi

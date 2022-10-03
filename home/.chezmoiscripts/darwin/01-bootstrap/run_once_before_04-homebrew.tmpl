@@ -1,0 +1,24 @@
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
+
+set -euo pipefail
+
+# Check for Homebrew and install if we don't have it
+
+if ! command -v brew &>/dev/null ; then
+	
+{{- if eq .chezmoi.arch "arm64" }}
+	if command -v /opt/homebrew/bin/brew &>/dev/null ; then
+		ignored "Homebrew already installed"
+{{- else }}
+	if command -v /usr/local/bin/brew &>/dev/null ; then
+		ignored "Homebrew already installed"
+{{- end }}
+	else
+		action "Installing homebrew"
+		/usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	fi
+else
+	ignored "Homebrew already installed"
+fi

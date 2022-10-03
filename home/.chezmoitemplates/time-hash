@@ -1,0 +1,2 @@
+{{- $formats := dict "minute" "04" "hour" "03" "day" "02" "month" "01" "year" "06" }}
+# {{ now | date (get $formats .) | sha256sum }}

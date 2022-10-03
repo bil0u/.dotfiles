@@ -10,7 +10,6 @@
 {{- $osid := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
 {{-   $osid = printf "%s-%s" $osid .chezmoi.osRelease.id -}}
-{{- end -}}
 
 {{- $chassisType := "desktop" }}
 {{- if eq $osid "darwin" }}

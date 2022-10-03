@@ -1,9 +1,8 @@
-#!/usr/bin/env bash
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
+
 set -euo pipefail
-
-{{ template "darwin/utils.sh" . }}
-
-filename "git-repos "
 
 # Switching dotfiles repository to ssh
 dotfiles_remote_url=$(chezmoi git -- config --get remote.origin.url)

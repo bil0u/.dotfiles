@@ -1,0 +1,26 @@
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
+
+set -euo pipefail
+
+{{- template "darwin/elevate.sh" . }}
+
+# Enables touchID for sudo
+if ls /usr/lib/pam | grep -q "pam_tid.so"; then
+	PAM_FILE="/etc/pam.d/sudo"
+	FIRST_LINE="# sudo: auth account password session"
+	if grep -q pam_tid.so "$PAM_FILE"; then
+		ignored "TouchID for sudo already enabled"
+		true
+	elif ! head -n1 "$PAM_FILE" | grep -q "$FIRST_LINE"; then
+		error "Cannot enable TouchID for sudo: .pam file has an invalid format"
+	else
+		action "Enabling TouchID for sudo"
+		TOUCHID_LINE="auth       sufficient     pam_tid.so"
+		sudo sed -i .bak -e \
+			"s/$FIRST_LINE/$FIRST_LINE\n$TOUCHID_LINE/" \
+			"$PAM_FILE"
+		sudo rm "$PAM_FILE.bak"
+	fi
+fi

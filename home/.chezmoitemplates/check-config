@@ -1,0 +1,4 @@
+{{- if or (and (kindIs "string" .) (eq . "false")) (and (kindIs "bool" .) (eq . false)) }}
+ignored "Disabled in config"
+exit
+{{- end }}

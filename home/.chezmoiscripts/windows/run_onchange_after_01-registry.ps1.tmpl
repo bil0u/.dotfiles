@@ -5,24 +5,17 @@
   Text here
 #>
 
-{{- template "windows/utils.ps1" . }}
+{{- if gt (len (default "" .windows.registry)) 0 }}
 
-Filename "registry"
-
+{{ template "source-utils" . }}
 Import-Module Boxstarter.Chocolatey
 Disable-UAC
 
-{{- if gt (len (default "" .windows.registry)) 0 }}
-
 Action "Writing registry values ..."
 
-{{- template "windows/registry.ps1" .windows.registry }}
+{{- template "windows/write-registry.ps1" .windows.registry }}
 
-{{- else }}
-
-Ignored "No registry value defined in config"
+Enable-UAC
 
 {{- end }}
 
-
-Enable-UAC

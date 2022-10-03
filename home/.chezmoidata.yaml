@@ -17,8 +17,17 @@ work:
       vault: ng4vabtt7dxvtdggfphteon5am
       engineering_vault: wgnajbjber6dehxp34r6or4o3m
 
+# Scripts configuration
 darwin:
+  # Bootstrap
+  touchid-for-sudo:
+  xcode-cli-tools:
+  rosetta:
   homebrew:
+  # Before
+  update-system: week
+  update-apps: day
+  brewfile:
     taps:
       - homebrew/bundle
       - homebrew/cask
@@ -116,24 +125,25 @@ darwin:
       - qlmarkdown
       - qlimagesize
       - quicklook-json
-  mas:
-    - name: "1Password for Safari"
-      id: 1569813296
-    - name: "Authenticator"
-      id: 1538761576
-    - name: "Keynote"
-      id: 409183694
-    - name: "Magnet"
-      id: 441258766
-    - name: "Numbers"
-      id: 409203825
-    - name: "Pages"
-      id: 409201541
-    - name: "Parcel"
-      id: 639968404
-    - name: "Xcode"
-      id: 497799835
-  asdf:
+    mas:
+      - name: "1Password for Safari"
+        id: 1569813296
+      - name: "Authenticator"
+        id: 1538761576
+      - name: "Keynote"
+        id: 409183694
+      - name: "Magnet"
+        id: 441258766
+      - name: "Numbers"
+        id: 409203825
+      - name: "Pages"
+        id: 409201541
+      - name: "Parcel"
+        id: 639968404
+      - name: "Xcode"
+        id: 497799835
+  # During
+  asdf-plugins:
     # Languages runtimes
     - name: python
       global: "latest:3.10"
@@ -153,8 +163,8 @@ darwin:
     # Tools
     - name: poetry
     - name: pipenv https://github.com/and-semakin/asdf-pipenv.git
-  dock_icons:
-    # Note: order matters. First entry will we the left-most item on the dock after the Finder
+  dock-icons:
+    # Order matters: first entry will we the left-most item on the dock after the Finder
     apps:
       - Calendar
       - Reminders
@@ -182,9 +192,45 @@ darwin:
         display: stack
         view: list
         sort: dateadded
-  misc:
-    go:
-      - github.com/catilac/plistwatch@latest
+  go-binaries:
+    - github.com/catilac/plistwatch@latest
+  host-file: https://someonewhocares.org/hosts/hosts
+  link-ssh-agent: ~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
+  switch-to-ssh:
+
+  # -> apps defaults
+  apps-defaults:
+    activity-monitor:
+    disk-utility:
+    finder:
+    iterm2:
+    mail:
+    music:
+    photos:
+    safari:
+    terminal:
+    textedit:
+  # -> system defaults
+  system-defaults:
+    # quit-system-prefs:
+    accessibility:
+    computer-identity:
+    control-center:
+    dock-menubar:
+    energy-saving:
+    keyboard:
+    localization:
+    mouse:
+    quicklook:
+    security:
+    siri:
+    sound:
+    spotlight:
+    telemetry:
+    time-machine:
+    trackpad:
+    ui-ux:
+    updates:
 
 windows:
   cleanup:
@@ -424,38 +470,38 @@ windows:
   registry:
     # Careful here ! There is a special syntax you should know about before changing values.
     # See /docs/registry.md
-    # HKLM::
-    #   \SOFTWARE:
-    #     \Microsoft:
-    #       \Windows\CurrentVersion\Policies\System:
-    #         ConsentPromptBehaviorAdmin: 5
-    #       \PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots:
-    #         value: 0
-    #     \Policies\Microsoft\Windows:
-    #       \system:
-    #         EnableActivityFeed: 0
-    #         PublishUserActivities: 0
-    #         UploadUserActivities: 0
-    #       \DataCollection:
-    #         AllowTelemetry: 0
-    # HKCU::
-    #   \SOFTWARE:
-    #     \Microsoft\Windows\CurrentVersion:
-    #       \AdvertisingInfo:
-    #         Enabled: 0
-    #       \Explorer\Advanced:
-    #         NavPaneExpandToCurrentFolder: 1
-    #         NavPaneShowAllFolders: 1
-    #         LaunchTo: 1
-    #       \Search:
-    #         BingSearchEnabled: 0
-    #       \AppHost:
-    #         EnableWebContentEvaluation: 0
-    #       \GameDVR:
-    #         AppCaptureEnabled: 0
-    #   \SYSTEM:
-    #     \GameConfigStore:
-    #       GameDVR_Enabled: 0
+    HKLM::
+      \SOFTWARE:
+        \Microsoft:
+          \Windows\CurrentVersion\Policies\System:
+            ConsentPromptBehaviorAdmin: 5
+          \PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots:
+            value: 0
+        \Policies\Microsoft\Windows:
+          \system:
+            EnableActivityFeed: 0
+            PublishUserActivities: 0
+            UploadUserActivities: 0
+          \DataCollection:
+            AllowTelemetry: 0
+    HKCU::
+      \SOFTWARE:
+        \Microsoft\Windows\CurrentVersion:
+          \AdvertisingInfo:
+            Enabled: 0
+          \Explorer\Advanced:
+            NavPaneExpandToCurrentFolder: 1
+            NavPaneShowAllFolders: 1
+            LaunchTo: 1
+          \Search:
+            BingSearchEnabled: 0
+          \AppHost:
+            EnableWebContentEvaluation: 0
+          \GameDVR:
+            AppCaptureEnabled: 0
+      \SYSTEM:
+        \GameConfigStore:
+          GameDVR_Enabled: 0
   # https://docs.chocolatey.org/en-us/create/functions/install-chocolateypinnedtaskbaritem#mainContent
   taskbar:
     # - firefox

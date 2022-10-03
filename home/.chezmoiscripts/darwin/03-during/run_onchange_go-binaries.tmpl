@@ -1,14 +1,13 @@
-#!/usr/bin/env bash
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
+
 set -uo pipefail
 
-{{ template "darwin/utils.sh" . }}
-
-filename "misc"
+{{- template "darwin/load-golang.sh" . }}
 
 action "Installing go binaries ... "
-{{ template "darwin/golang-cfg.sh" . }}
-
-{{- range (.darwin.misc.go | uniq) }}
+{{- range ($config | uniq) }}
 
 {{- $domain := default "github.com" (regexReplaceAll `^(?:(.*?)\/)?.*?\/.*?$` . "${1}") }}
 {{- $repo := regexReplaceAll `^(?:.*?\/)?(.*?\/.*?)(?:@.*)?$` . "${1}" }}

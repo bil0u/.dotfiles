@@ -1,0 +1,14 @@
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- if and (not (empty $config)) (eq .chezmoi.arch "arm64") -}}
+{{- template "shebang" . }}
+
+set -euo pipefail
+
+# Check that Rosetta 2 is installed
+pgrep -q oahd
+if [ $? -ne 0 ]; then
+	action "Installing Rosetta 2"
+	softwareupdate --install-rosetta --agree-to-license
+else
+	ignored "Rosetta2 already installed"
+fi

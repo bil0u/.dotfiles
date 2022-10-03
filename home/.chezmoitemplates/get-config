@@ -1,0 +1,8 @@
+{{- $config := get (get . .host.os.id) (includeTemplate "filename" .chezmoi.sourceFile) }}
+{{- if stat (joinPath .chezmoi.sourceDir ".chezmoidata.yaml") }}
+{{-   $config | toYaml }}
+{{- else if stat (joinPath .chezmoi.sourceDir ".chezmoidata.toml") }}
+{{-   $config | toToml }}
+{{- else if stat (joinPath .chezmoi.sourceDir ".chezmoidata.ini") }}
+{{-   $config | toIni }}
+{{- end }}

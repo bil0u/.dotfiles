@@ -1,13 +1,12 @@
-#!/usr/bin/env bash
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "check-config" $config }}
+{{- template "shebang" . }}
+
 set -uo pipefail
-
-{{ template "darwin/utils.sh" . }}
-
-filename "asdf"
 
 action "Installing packages using asdf ..."
 
-{{- range (.darwin.asdf | uniq) }}
+{{- range ($config | uniq) }}
 
 {{/* Setting needed variables */}}
 {{- $pluginName := .name }}
