@@ -1,0 +1,9 @@
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "shebang" . }}
+{{- template "check-config" $config }}
+
+set -uo pipefail
+
+{{ template "darwin/load-brew.sh" . }}
+
+{{- template "darwin/brew-install.sh" $config }}

@@ -1,39 +1,38 @@
 {{- $config := includeTemplate "get-config" . | fromYaml -}}
-{{- template "check-config" $config }}
 {{- template "shebang" . }}
+{{- template "check-config" $config }}
 
 set -uo pipefail
 
 action "Installing packages using asdf ..."
 
-{{- range ($config | uniq) }}
+{{- range $pluginName, $pluginConfig := $config -}}
 
 {{/* Setting needed variables */}}
-{{- $pluginName := .name }}
-{{- $pluginUrl := "" }}
-{{ $globalVersion := "latest" }}
-{{ $versions := list }}
+{{- $pluginUrl := "" -}}
+{{- $globalVersion := "latest" -}}
+{{- $versions := list -}}
 
-{{/* Checking if plugin name contains an URL */}}
-{{- if contains " http" $pluginName }}
-	{{- $nameDict := $pluginName | split " " }}
-	{{- $pluginName = $nameDict._0 }}
-	{{- $pluginUrl = $nameDict._1 }}
-{{- end }}
+{{- if kindIs "dict" $pluginConfig -}}
+
+{{-   if hasKey $pluginConfig "url" -}}
+{{-     $pluginUrl = $pluginConfig.url -}}
+{{-   end -}}
 
 {{/* Retrieving global version */}}
-{{- if index . "global" }}
-	{{ $globalVersion = .global }}
-{{- end }}
+{{-   if hasKey $pluginConfig "global" -}}
+{{-     $globalVersion = $pluginConfig.global -}}
+{{-   end -}}
 
 {{/* Retrieving extra versions to install */}}
-{{- if index . "extra" }}
-	{{ $versions = .extra }}
-{{- end }}
+{{-   if hasKey $pluginConfig "extra" -}}
+{{-     $versions = $pluginConfig.extra -}}
+{{-   end -}}
+
+{{- end -}}
 
 {{/* Merging all versions */}}
-{{ $versions = (prepend $versions $globalVersion | uniq) }}
-
+{{- $versions = (prepend $versions $globalVersion | uniq) -}}
 {{/* Installing */}}
 group {{ $pluginName | quote }}
 
@@ -45,16 +44,16 @@ case $? in
 esac
 
 if [[ -n SKIP ]]; then
-  {{- range $versions }}
-    asdf install {{ $pluginName }} {{ . }} >/dev/null 2>&1
-    case $? in
-      0) action "version \"{{ . }}\" installed" ;;
-      2) ignored "version \"{{ . }}\" already installed" ;;
-      *) error "Unknown error, skipping version \"{{ . }}\"";;
-    esac
-  {{- end }}
+{{- range $versions }}
+  asdf install {{ $pluginName }} {{ . }} >/dev/null 2>&1
+  case $? in
+    0) action "version \"{{ . }}\" installed" ;;
+    2) ignored "version \"{{ . }}\" already installed" ;;
+    *) error "Unknown error, skipping version \"{{ . }}\"";;
+  esac
+{{- end }}
   asdf global {{ $pluginName }} {{ $globalVersion }} >/dev/null 2>&1
   action "global version set to {{ $globalVersion }}"
 fi
 
-{{- end }}
+{{- end -}}

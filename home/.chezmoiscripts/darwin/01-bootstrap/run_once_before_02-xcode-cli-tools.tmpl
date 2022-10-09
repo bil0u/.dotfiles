@@ -1,10 +1,10 @@
 {{- $config := includeTemplate "get-config" . | fromYaml -}}
-{{- template "check-config" $config }}
 {{- template "shebang" . }}
+{{- template "check-config" $config }}
 
 set -euo pipefail
 
-{{- template "darwin/elevate.sh" . }}
+{{ template "darwin/elevate.sh" . }}
 
 # Check for Xcode Command Line Tools and install them if not present
 xcode-select -p &>/dev/null

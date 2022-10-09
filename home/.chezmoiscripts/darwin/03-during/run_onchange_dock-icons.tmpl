@@ -1,6 +1,6 @@
 {{- $config := includeTemplate "get-config" . | fromYaml -}}
-{{- template "check-config" $config }}
 {{- template "shebang" . }}
+{{- template "check-config" $config }}
 
 {{- $appsCount := len (default "" $config.apps) }}
 {{- $othersCount := len (default "" $config.others) }}
@@ -48,7 +48,7 @@ ignored "Could not find {{ . | quote }}, ignored"
 {{-     end }}
 {{-   end }}
 {{-   $restart := $defaultRestart }}
-{{-   if eq (add $index 1) $config.othersCount }}
+{{-   if eq (add $index 1) $othersCount }}
 {{-     $restart = "--restart" }}
 {{-   end }}
 {{-   $path = regexReplaceAll "(~|$HOME)" $path $homeDir }}

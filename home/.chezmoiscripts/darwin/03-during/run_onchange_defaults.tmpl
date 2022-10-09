@@ -1,0 +1,34 @@
+{{- $config := includeTemplate "get-config" . | fromYaml -}}
+{{- template "shebang" . }}
+{{- template "check-config" $config }}
+
+{{ template "darwin/elevate.sh" . }}
+
+# Closing system preferences first
+osascript -e 'tell application "System Preferences" to quit '
+
+{{- $defaultExt := "sh" }}
+{{- if hasKey $config "extension" }}
+{{-   $defaultExt = $config.extension }}
+{{-   $_ := unset $config "extension" }}
+{{- end }}
+
+{{- $baseContext := . }}
+{{- $currentDir := joinPath .chezmoi.sourceDir (osDir .chezmoi.sourceFile) }}
+{{- range $scriptsDir, $scriptsList := $config }}
+group {{ $scriptsDir }}
+{{-   $scriptsAbsolutePath := joinPath $currentDir $scriptsDir }}
+{{-   range $scriptName, $scriptConfig := $scriptsList }}
+{{-     if not (regexMatch "\\.[\\w\\d]{2,4}?$" $scriptName) }}
+{{-       $scriptName = printf "%s.%s" $scriptName $defaultExt }}
+{{-     end }}
+{{-     $scriptFullPath := joinPath $scriptsAbsolutePath $scriptName }}
+{{-     if stat $scriptFullPath }}
+action {{ $scriptName }}
+{{-       $finalConfig := merge (default dict $scriptConfig) (pick $baseContext "chezmoi" "host") }}
+{{        includeTemplate $scriptFullPath $finalConfig }}
+{{-     else }}
+ignored "Script {{ $scriptName }} does not exist"
+{{-     end }}
+{{-   end }}
+{{- end }}

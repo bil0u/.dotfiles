@@ -1,6 +1,6 @@
 {{- $config := includeTemplate "get-config" . | fromYaml -}}
-{{- template "check-config" $config }}
 {{- template "shebang" . }}
+{{- template "check-config" $config }}
 
 set -uo pipefail
 

@@ -2,9 +2,11 @@
 {{- template "shebang" . }}
 {{- template "check-config" $config }}
 
-set -euo pipefail
+{{- template "time-hash" $config }}
+
+set -uo pipefail
 
 {{ template "darwin/elevate.sh" . }}
 
-sudo curl -s {{ $config | quote }} -o "/etc/hosts"
-sudo killall -HUP mDNSResponder >/dev/null
+action "Checking for system updates "
+sudo softwareupdate -i -a

@@ -1,9 +1,9 @@
 
-{{ if eq .host.os.id "darwin" }}
+{{- if eq .host.os.id "darwin" -}}
 #!/usr/bin/env bash
 source "{{ .chezmoi.sourceDir }}/.chezmoitemplates/darwin/utils.sh"
 filename {{ includeTemplate "filename" .chezmoi.sourceFile }}
-{{ else if eq .host.os.id "windows" }}
+{{- else if eq .host.os.id "windows" -}}
 . "{{ .chezmoi.sourceDir }}\.chezmoitemplates\windows\utils.ps1"
 Filename {{ includeTemplate "filename" .chezmoi.sourceFile }}
-{{ end }}
+{{- end -}}

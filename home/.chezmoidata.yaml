@@ -145,24 +145,25 @@ darwin:
   # During
   asdf-plugins:
     # Languages runtimes
-    - name: python
+    python:
       global: "latest:3.10"
       extra:
         - "latest:3.9"
-    - name: nodejs
+    nodejs:
       global: "latest:16.17"
       extra:
         - "latest:18.8"
-    - name: java
+    java:
       global: "latest:oracle"
-    - name: golang
+    golang:
       global: "1.18"
-    - name: terraform
+    terraform: latest
     # CLIs
-    - name: awscli
+    awscli: latest
     # Tools
-    - name: poetry
-    - name: pipenv https://github.com/and-semakin/asdf-pipenv.git
+    poetry: latest
+    pipenv:
+      url: https://github.com/and-semakin/asdf-pipenv.git
   dock-icons:
     # Order matters: first entry will we the left-most item on the dock after the Finder
     apps:
@@ -197,40 +198,37 @@ darwin:
   host-file: https://someonewhocares.org/hosts/hosts
   link-ssh-agent: ~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
   switch-to-ssh:
-
-  # -> apps defaults
-  apps-defaults:
-    activity-monitor:
-    disk-utility:
-    finder:
-    iterm2:
-    mail:
-    music:
-    photos:
-    safari:
-    terminal:
-    textedit:
-  # -> system defaults
-  system-defaults:
-    # quit-system-prefs:
-    accessibility:
-    computer-identity:
-    control-center:
-    dock-menubar:
-    energy-saving:
-    keyboard:
-    localization:
-    mouse:
-    quicklook:
-    security:
-    siri:
-    sound:
-    spotlight:
-    telemetry:
-    time-machine:
-    trackpad:
-    ui-ux:
-    updates:
+  defaults:
+    .system-defaults:
+      accessibility:
+      computer-identity:
+      control-center:
+      dock-menubar:
+      energy-saving:
+      keyboard:
+      localization:
+      mouse:
+      quicklook:
+      security:
+      siri:
+      sound:
+      spotlight:
+      telemetry:
+      time-machine:
+      trackpad:
+      ui-ux:
+      updates:
+    .apps-defaults:
+      activity-monitor:
+      disk-utility:
+      finder:
+      iterm2:
+      mail:
+      music:
+      photos:
+      safari:
+      terminal:
+      textedit:
 
 windows:
   cleanup:

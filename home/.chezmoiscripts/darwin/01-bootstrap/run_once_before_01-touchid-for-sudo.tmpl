@@ -1,10 +1,10 @@
-{{- $config := includeTemplate "get-config" . | fromYaml -}}
-{{- template "check-config" $config }}
+{{- $config := includeTemplate "get-config" . | fromYaml }}
 {{- template "shebang" . }}
+{{- template "check-config" $config }}
 
 set -euo pipefail
 
-{{- template "darwin/elevate.sh" . }}
+{{ template "darwin/elevate.sh" . }}
 
 # Enables touchID for sudo
 if ls /usr/lib/pam | grep -q "pam_tid.so"; then
