@@ -1,0 +1,18 @@
+{
+  "app.hideMenubarIcon" : true,
+  "app.launchOnStartup" : false,
+  "app.preferredTerminal" : "iTerm2",
+  "autocomplete.disable" : false,
+  "autocomplete.fontFamily" : "nerdfont-complete",
+  "autocomplete.fontSize" : 14,
+  "autocomplete.height" : 140,
+  "autocomplete.keybindings.insertCommonPrefixOrNavigateDown" : "tab",
+  "autocomplete.keybindings.insertSelected" : "tab",
+  "autocomplete.onlyShowOnTab" : true,
+  "autocomplete.scrollWrapAround" : true,
+  "autocomplete.theme" : "github-dark",
+  "cli.tips.disabled" : true,
+  "dotfiles.syncImmediately" : false,
+  "integrations.hyper.disabled" : true,
+  "telemetry.disabled" : true
+}

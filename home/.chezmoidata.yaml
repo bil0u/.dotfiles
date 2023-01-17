@@ -60,6 +60,7 @@ darwin:
       # Dev tools
       - asdf # Manage multiple runtime versions with a single CLI tool
       - atmos # Universal Tool for DevOps and Cloud Automation
+      - fig # Awesome terminal autocompletion plugin
       - git # Most popular software for distributed version control
       - shellcheck # Static analysis tool that automatically finds bugs in your shell scripts
       - svn # Software versioning and revision control system

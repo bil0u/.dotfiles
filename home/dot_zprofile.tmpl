@@ -1,3 +1,6 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zprofile.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.pre.zsh"
+
 {{- if eq .host.os.id "darwin" }}
 {{-   if stat "/opt/homebrew/bin/brew" }}
 fpath+=("$(/opt/homebrew/bin/brew --prefix)/share/zsh/site-functions")
@@ -7,3 +10,6 @@ fpath+=("$(/usr/local/bin/brew --prefix)/share/zsh/site-functions")
 eval "$(/usr/local/bin/brew shellenv)"
 {{-   end }}
 {{- end }}
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zprofile.post.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.post.zsh"
