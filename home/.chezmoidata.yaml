@@ -35,6 +35,9 @@ darwin:
       - homebrew/cask-versions
       - homebrew/core
       - bil0u/tap
+      - jakehilborn/jakehilborn
+      - name: lencx/chatgpt
+        url: "https://github.com/lencx/ChatGPT.git"
     formulaes:
       # Utilities
       - bat # Better cat in Terminal
@@ -42,6 +45,7 @@ darwin:
       - coreutils # Those that come with macOS are outdated
       - curl # CLI tool for transferring data using various network protocols
       # - dockutil # CLI tool to manage dock icons
+      - displayplacer
       - findutils # Basic directory searching utilities
       - grep # Global Regural Expression Print
       - jq # Lightweight and flexible CLI JSON processor
@@ -60,7 +64,6 @@ darwin:
       # Dev tools
       - asdf # Manage multiple runtime versions with a single CLI tool
       - atmos # Universal Tool for DevOps and Cloud Automation
-      - fig # Awesome terminal autocompletion plugin
       - git # Most popular software for distributed version control
       - shellcheck # Static analysis tool that automatically finds bugs in your shell scripts
       - svn # Software versioning and revision control system
@@ -82,11 +85,15 @@ darwin:
       - adguard
       - arduino
       - batteries
+      - betterdisplay
+      - name: chatgpt
+        args: '{ "no-quarantine": true }'
       - chromedriver
       - defaults-edit
       - discord
       - docker
       - hpedrorodrigues/tools/dockutil # Temporary solution while dockutil does not support macOS 12+
+      - fig # Awesome terminal autocompletion plugin
       - figma
       - firefox
       - google-chrome
@@ -95,7 +102,7 @@ darwin:
       - iina
       - iterm2
       - lepton
-      - lunar
+      - little-snitch
       - messenger
       - microsoft-auto-update
       - microsoft-word
@@ -170,18 +177,15 @@ darwin:
     apps:
       - Calendar
       - Reminders
-      - Safari
-      - Firefox
+      - Arc
       - Mail
-      - Messages
-      - WhatsApp
       - Discord
       - Slack
       - Music
       - Notion
       - iTerm
       - Visual Studio Code
-      - NordVPN
+      - PyCharm
       - Figma
       - Microsoft Outlook
       - Microsoft Teams
