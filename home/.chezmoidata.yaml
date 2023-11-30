@@ -192,7 +192,7 @@ darwin:
   go-binaries:
     - github.com/catilac/plistwatch@latest
   host-file: https://someonewhocares.org/hosts/hosts
-  link-ssh-agent: ~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
+  link-ssh-agent: "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   switch-to-ssh:
   defaults:
     .system-defaults:
