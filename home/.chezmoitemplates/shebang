@@ -1,6 +1,6 @@
 
 {{- if eq .host.os.id "darwin" -}}
-#!/usr/bin/env bash
+#!{{ lookPath "bash" }}
 source "{{ .chezmoi.sourceDir }}/.chezmoitemplates/darwin/utils.sh"
 filename {{ includeTemplate "filename" .chezmoi.sourceFile }}
 {{- else if eq .host.os.id "windows" -}}

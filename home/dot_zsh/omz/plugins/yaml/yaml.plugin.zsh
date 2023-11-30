@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 #
 # -- BASIC PARSER FOR YAML FILES
 #

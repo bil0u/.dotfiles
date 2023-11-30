@@ -10,12 +10,7 @@ personal:
       vault: h66u55hw4da4f5bhbp7fa2ea74
 
 work:
-  email: ugo@iliomad.fr
-  accounts:
-    op:
-      account: WIVYUIS6LZHHTIFPIXUWKIUQNU
-      vault: ng4vabtt7dxvtdggfphteon5am
-      engineering_vault: wgnajbjber6dehxp34r6or4o3m
+  email: pro@p0p.ee
 
 # Scripts configuration
 darwin:
@@ -36,8 +31,6 @@ darwin:
       - homebrew/core
       - bil0u/tap
       - jakehilborn/jakehilborn
-      - name: lencx/chatgpt
-        url: "https://github.com/lencx/ChatGPT.git"
     formulaes:
       # Utilities
       - bat # Better cat in Terminal
@@ -86,16 +79,14 @@ darwin:
       - arduino
       - batteries
       - betterdisplay
-      - name: chatgpt
-        args: '{ "no-quarantine": true }'
       - chromedriver
       - defaults-edit
       - discord
       - docker
       - hpedrorodrigues/tools/dockutil # Temporary solution while dockutil does not support macOS 12+
-      - fig # Awesome terminal autocompletion plugin
       - figma
       - firefox
+      # - free-gpgmail
       - google-chrome
       - handbrake
       - iconjar
@@ -107,10 +98,7 @@ darwin:
       - microsoft-auto-update
       - microsoft-word
       - microsoft-excel
-      - microsoft-outlook
       - microsoft-powerpoint
-      - microsoft-teams
-      - nordvpn
       - notion
       - nzbget
       - postman
@@ -164,7 +152,7 @@ darwin:
     java:
       global: "latest:oracle"
     golang:
-      global: "1.18"
+      global: "latest:1.21"
     terraform: latest
     # CLIs
     awscli: latest
@@ -180,15 +168,18 @@ darwin:
       - Arc
       - Mail
       - Discord
+      - Messages
+      - WhatsApp
+      - Messenger
       - Slack
       - Music
       - Notion
       - iTerm
       - Visual Studio Code
-      - PyCharm
+      - "Adobe Photoshop 2023/Adobe Photoshop 2023"
+      - "Adobe Illustrator 2022/Adobe Illustrator"
+      - "Adobe InDesign 2022/Adobe InDesign 2022"
       - Figma
-      - Microsoft Outlook
-      - Microsoft Teams
     others:
       - path: "~"
         display: folder

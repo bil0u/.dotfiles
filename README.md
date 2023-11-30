@@ -60,8 +60,8 @@ dot apply
 # Pulls the latest changes from the remote repo and runs chezmoi apply
 dot update
 
-# Full removal of both dotfiles and chezmoi
-dot update
+# DANGER - Full removal of both dotfiles and chezmoi
+dot purge
 
 # NOTE: `dot` is an alias for `chezmoi`
 ```

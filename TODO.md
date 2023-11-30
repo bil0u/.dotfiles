@@ -51,7 +51,6 @@ Resources:
   - [ ] microsoft-excel
   - [ ] microsoft-powerpoint
   - [ ] microsoft-teams
-  - [ ] nordvpn
   - [ ] notion
   - [ ] nzbget
   - [ ] oracle-jdk

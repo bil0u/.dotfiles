@@ -10,7 +10,6 @@
 # action "Lepton"
 # action "Lunar"
 # action "MS Office"
-# action "NordVPN"
 # action "NZBGet"
 # action "ProtonMail Bridge"
 # action "The Unarchiver"

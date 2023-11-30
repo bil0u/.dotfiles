@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # Constants and functions for terminal colors.
 # Author: Max Tsepkov <max@yogi.pw>
 
