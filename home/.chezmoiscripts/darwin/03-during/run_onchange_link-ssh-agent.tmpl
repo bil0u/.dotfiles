@@ -4,7 +4,6 @@
 
 set -euo pipefail
 
-export SSH_AUTH_SOCK=~/.ssh/agent.sock
 if [[ ! -L ~/.ssh/agent.sock ]]; then
 	action "Linking 1password ssh agent socket"
 	ln -s {{ $config | quote }} ~/.ssh/agent.sock
